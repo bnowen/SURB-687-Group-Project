@@ -1,0 +1,975 @@
+---
+title: "SURV 617 Religion Data"
+output: html_document
+date: "2024-11-10"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE,cache=TRUE, 
+                      autodep=TRUE, cache.comments=FALSE,
+                      message=FALSE, warning=FALSE,
+                      fig.width=4.5, fig.height=3)
+```
+
+#1. PREP
+##a. Packages
+```{r }
+library(dplyr)
+library(readxl)
+library(tidyverse)
+library(gtsummary)
+library(ggplot2)
+library(lme4)
+library(nlme)
+library(lmerTest)
+library(knitr)
+library(kableExtra)
+library(janitor)
+library(gridExtra)
+library(geepack)
+```
+
+##b. Custom Function
+```{r }
+lrt.pvalue <- function(fit1, fit2) {
+  lrtstat <-
+    (-2 * as.numeric(summary(fit2)$logLik)) - (-2 * as.numeric(summary(fit1)$logLik))
+  pvalue = 0.5 * (1 - pchisq(lrtstat, 2)) + 0.5 * (1 - pchisq(lrtstat, 1))
+  return(pvalue)
+}
+```
+
+##c. Variables
+
+VARS TO ADD TO IMPORT...
+
+WEIGHTS:
+RWEIGHT1 - 2) Wave 1 Raw Weight: Adjusts for Unequal Probability of Sample Selection Only (RWEIGHT1)
+RWEIGHT 2 - 3) Wave 1 Raw Weight: For Nationally Representative Sample (RWEIGHT2)
+NWEIGHT2 - 4) Wave 1 Normalized Weight for Nationally Representative Sample (NWEIGHT2)
+INWAVE2 (not sure what this means?) - 6) Participated in Wave 2 Phone Survey (INWAVE2)
+
+PARENT Qs:
+PLIVE - 13) P2C. What is your CURRENT living arrangement? Are you married or living with a partner, divorced, separated, or widowed and NOT living with a partner, or have you never been married? (UNMARRIED PARTNER MEANS ROMANTIC PARTNER, NOT JUST A ROOMMATE. IF ANSWER IS OTHER THAN MARRIED OR LIVING WITH A PARTNER, BE SURE THAT THEY ARE NOT LIVING WITH A PARTNER IN THE HOUSEHOLD) (PLIVE)
+PSPRELAT - 14) P2D. What is your spouse's relationship to (your teen)? Are they the parent, step-parent, or something else? (PSPRELAT)
+PPARTPAR - 15) P2E. (If parent respondent is biological parent AND parent respondent is living with an unmarried partner) [IF(P2A=1 OR P2B=1) AND P2C=2] Is the partner (your teen)'s biological parent, or not? (PPARTPAR)
+PCHLDNUM - 59) P35. Not including [your teen], how many other children UNDER the age of 18 live in your household? [CLARIFICATION: INCLUDE ALL CHILDREN THAT LIVE IN THE HOUSE AT LEAST 6 MONTHS OUT OF THE YEAR] [RANGE=0-15; 15=15 OR MORE, 98=DK, 99=REF] (PCHLDNUM)
+PSEXMAR - 99) P55. Do you think that people should wait to have sex until they are married, or not necessarily? (PSEXMAR)
+PSCHTYP - 101) P57. Okay, now I have a few questions about [your teen]'s school situation. (In the last school year, was [your teen]/Is [your teen] currently) attending public school, private school, is [your teen] home-schooled, or has [your teen] stopped going to school? [PROBE: IF THEY REPORT A COMBINATION OF MORE THAN ONE SCHOOL TYPE, ASK, 'Which was the primary or most important place of education?'] (PSCHTYP)
+PSCHREL - 102) P60. [If teen attends private school] [If P57=2] (Was/Is) that a religious school or not? (PSCHREL)
+PSCHCHR - 103) P60A. [If teen attends a private religious school] [IF P60=1] (Was/Is) it a Catholic, Lutheran, or Baptist school, another type of Christian school, or something else? [PROBE: If they say 'something else' check to see if Jewish, or Muslim] (PSCHCHR)
+PIMPREL - 118) P79. TEXT: Thanks, Now I have some questions about religion. How important is your religious faith in providing guidance in your own day-to-day living?: [READ LIST] (PIMPREL)
+PATTEND - 119) P80. In the last 12 MONTHS, how often have you been attending religious services, not including weddings, baptisms, and funerals? [READ LIST] (PATTEND)
+PIDREL - 120) P81. NON ATTENDERS SECTION: P81 THROUGH P88A [If parent respondent has not been attending religious services in the last 12 months, or answered 'don't know' or 'refused'][IF 80 greater than 6] [IF P80 greater than 6] Regardless of whether you now attend any religious services, do you identify with any particular religious tradition, denomination, or church? (PIDREL)
+  PATHEIST - 121) P82. [If parent respondent does not identify with a religious tradition/denomination/church or answered 'don't know' or 'refused'][IF P81 not equal to 1] Do you consider yourself to be an atheist, an agnostic, just not religious, or something else? [IV INSTRUCTION: MAKE SURE RESPONSE IS NOT PROTESTANT, CATHOLIC, JEWISH, OR MUSLIM; IF SO, SNAP BACK TO P81] (PATHEIST)
+  PRELIGN1 - 122) P83. [If parent respondent does identify with a particular religious tradition/denomination/church] [IF P81=1] Do you consider yourself to be a Protestant, a Catholic, Jewish, Muslim, or something else? [IF MORE THAN 1 OFFERED, SAY: 'Which one do you consider yourself to be most?'] (PRELIGN1)
+PRLSPATT - 174) P102. [If parent respondent has been attending religious services at least a few times a year AND parent respondent is married or living with a parent] Does your spouse/partner normally attend religious services [if Catholic insert 'or Mass'] more, less, about the same as you, or do they not attend religious services? (PRLSPATT)
+PRLSPCHU - 175) P104. [If parent respondent has been attending religious services at least a few times a year AND parent respondent is married AND their spouse/partner also attends religious services at least sometimes][IF P102 less than 4] Does your spouse/partner attend the same [PARENT CHURCH] as you, or do they attend a different religious congregation? (PRLSPCHU)
+PRLTNCH1 - 176) P107. [If parent respondent has been attending religious services at least a few times a year] [IF P80 less than 7] Does [your teen] attend the same [PARENT CHURCH] as you, a different religious congregation, or does [your teen] not attend religious services? (PRLTNCH1)
+  PRLTNCH2 - 177) P108A. [If teen attends religious services but not at the same congregation as parent respondent (or 'don't know' or 'refused') and parent respondent's spouse/partner attends religious services but not at the same congregation as parent respondent (or 'don't know' or 'refused') OR if teen attends religious services but not at the same congregation as parent respondent (or 'don't know' or 'refused') and there is another adult that lives in the household] [IF P107=2, 4, 5 AND (P104 greater than 1 OR 0 less than P26 less than 99)] Does [your teen] attend the same religious congregation as your spouse/partner [or as another adult in your household], or not? (PRLTNCH2)
+PRLFAMAT - 182) P113. [If teen attends religious services][IF P107 not equal to 3 OR P106=1] How many, if any, members of [your teen]'s extended family who are NOT part of your household also go to the same religious congregation as [your teen] does? [RECORD N, RANGE=0-80, 98=DK, 99=REF] (PRLFAMAT)
+PRLCHPOL - 185) P117. [IF P80 less than 7] How politically involved is your [PARENT CHURCH]? Is it: [READ LIST] (PRLCHPOL)
+PRLMINTN - 186) P118. [IF P80 less than 7] Would you say that at your [PARENT CHURCH], ministry to teenagers is a very important priority, a fairly important priority, a somewhat important priority, a low priority, or not a priority at all? (PRLMINTN)
+PRLYTHGP - 187) P121. [Does your [PARENT CHURCH] have an organized YOUTH GROUP for teenagers? [PROMPT: 'By youth group we mean an organized group of young people that meets regularly for social time together and to learn more about their religious faith.'] (PRLYTHGP)
+PARENT EDUCATION - PEDUC1, PEDUC2, PEDUC3 (series of Qs to narrow down answer, recode into single var college or not)
+  Same for spouse PSPEDUC1, PSPEDUC2, PSPEDUC3 - 
+PARENT HOUSEHOLD INCOME - PINCOME1, PINCOME2, PINCOME3 (series of Qs to narrow down answer) - all reported as categorical LT 10k to GT 100k - 
+MOMCLOSE - 253) Y1. [INTERVIEWER NOTE: 'MOTHER,' 'FATHER,' AND 'PARENTS' ARE IN REFERENCE TO THE PARENTS WITH WHOM THE YOUTH LIVES IN HOUSEHOLD] Y1 TEXT: I'd like to begin with some questions about your relationships with people who live in your household. First, I have some questions about your [MOTHER NAME 2]. [If parent respondent is female OR if the parent respondent is male and is married or living with a partner][P1A=1 OR (P1A=0 AND P2C less than 3)] First, how close or not close do you feel to your [MOTHER NAME]? [READ LIST] (MOMCLOSE)
+DADCLOSE - 262) Y10. [If parent respondent is male OR if parent respondent is female and is married or living with a partner][P1A=0 OR (P1A=1 AND P2C less than 3)] Y10 TEXT: And now some questions about your [FATHER NAME 2]. How close or not close do you feel to your [FATHER NAME]? [READ LIST] (DADCLOSE)
+
+YOUTH Qs:
+EATADULT - 280) Y30. About how many NIGHTS PER WEEK do you usually eat dinner together with at least one of your parents or adult guardians? [RECORD NUMBER, RANGE=0-7, 98=DK, 99=REF][PROBE: 'JUST GIVE ME YOUR BEST GUESS.'] (EATADULT)
+XRATED - 286) Y36. About how many, if any, X-RATED, pornographic movies, videos, or cable programs have you watched in the last year? [RECORD NUMBER, RANGE=0-300, 300=300 OR MORE, 998=DK, 999=REF][PROBE: 'YOUR BEST GUESS IS FINE'] (XRATED)
+ETHRACE - 298) Y46. What race or ethnic group do you consider yourself? [PROMPT: 'That is, are you white, black, Hispanic, Asian American, Pacific Islander, American Indian, or of mixed race?'(IF THEY SAY 'HUMAN,' ASK: 'WOULD YOU MIND TELLING US YOUR ETHNICITY?)]: (ETHRACE)
+FAITH1 - 324) P57. TEXT: Next, I have some questions about religion. There may be some that don't directly apply to you, but just answer them as well as you can. How important or unimportant is religious faith in shaping [INSERT A-B]?: [READ LIST] How you live your daily life. (FAITH1)
+ATTREG (already included) - 330) Y60. Do you attend religious services more than once or twice a year, NOT counting weddings, baptisms, and funerals [INSERT 'or religious services during school' IF teen attends a private religious school]?[DOES NOT INCLUDE RELIGIOUS YOUTH GROUP MEETINGS] (ATTREG)
+ATTEND1 - 332) Y60B. [IF Y60 greater than 0] About how often do you usually attend religious services there? (ATTEND1)
+DOUBTS1 - 369) Y81. [If teen identifies with a religion or answers 'don't know'][IF Y62 less than 8 OR Y62=9] In the last year, how much, if at all, have you had doubts about whether your religious beliefs are true? Have you had: [READ LIST] (DOUBTS1)
+WISHATT1 - 373) P84. [If teen doesn't attend religious services more than once or twice a year][IF Y60=0] If it was totally up to you, how often would you attend religious services? Would you attend: [READ LIST] (WISHATT1)
+WISHZCONG - 374) Y84A. [If teen attends religious services more than once or twice a year or answered 'don't know' or 'refused'][IF Y60 greater than 0] If it was totally up to you, would you go to the same [CHURCH TYPE 2) that you go to now, a different religious congregation, or would you not go to religious services at all? (WISHCONG)
+EDGOAL1 - 376) Y85A. [If teen is not home-schooled][IF P57 not equal to 3] Ideally, how far in school would you LIKE to go? [READ LIST IF NECESSARY] (EDGOAL1)
+EDGOAL 3 - 379) Y85B. [If teen is home-schooled] [IF P57=3] Ideally, how much education would you LIKE to complete? [READ LIST IF NECESSARY] (EDGOAL3)
+GRADES - 385) Y91. [If teen is not home-schooled and has not stopped going to school][IF P57 not equal to 3,4] What kind of grades (did you get in school last year/do you usually get in school)?[Prompt:(Was/Is) it mostly As, Bs, Cs, Ds, or Fs?] (GRADES) --- recalc to approx GPA scores?
+MEANLESS - 387) Y94. How often, if ever, does life feel meaningless to you? (MEANLESS)
+ABSTAIN1 - 395) Y99. Do you think that people should wait to have sex until they are married, or not necessarily? (ABSTAIN1)
+DIVCEOK - 397) Y101. Do you think that, in general, a couple without children should end their marriage if it is empty and unfulfilling, or should they stick with it even if they are not happy?: (DIVCEOK)
+CRRACE - 399) Y104. How much do you personally care or not about [INSERT LIST A-C]? Do you care: [READ LIST]: Equality between different racial groups. (CRRACE)
+POLACT - 531) Y113. In the last TWO years, have you been involved in any political activities, not including student government, such as signing a political petition, attending a political meeting, or contacting an elected official, or not? (POLACT)
+VOLUNTER - 532) Y114. In the last year, how much, if at all, have you done organized volunteer work or community service?[READ LIST] (VOLUNTER)
+AFTRLIFE - 543) Y125. Do you believe [INSERT LIST A-H], definitely, maybe, or not at all: That there is life after death? (AFTRLIFE)
+VIEWREL - 570) Y141. Which of the following statements comes closest to your own views about religion: (VIEWREL)
+TOUCH - 597) Y169. [If teen has been physically involved with at least one person since turning 13][IF Y152 greater than 0] Have you ever willingly touched another person's private areas or willingly been touched by another person in you private areas under you clothes, or not? [NOT INCLUDING A PHYSICIAN] (TOUCH)
+SEXEVER - 606) Y173. [If teen has engaged in touching of private areas with another person][IF Y169=1] Have you ever had sexual intercourse, or not? (SEXEVER)
+YTHGRP2 - 630) Y207. Are you CURRENTLY involved in ANY religious youth group? [PROMPT: 'Youth group means an organized group of young people that meets regularly for social time together, prayer, or to learn more about their religious faith.'] (YTHGRP2)
+BODY - 642) Y219. In general, how happy or unhappy are you with your body and physical appearance? [READ LIST] (BODY)
+SAD - 643) Y220. How often do you feel very sad or depressed?[READ LIST] (SAD)
+ACCEPTED - 644) Y221. In general, how much do you [INSERT LIST A-D]: Feel loved and accepted for who you are? (ACCEPTED)
+GUILT1 - 648) Y223. In the last year, how often, if ever, have you found yourself feeling guilty about things in your life? Was it: [READ LIST] (GUILT1)
+GUILT2 - 649) Y224. How much, if any, of those feelings of guilt do you think were caused by RELIGIOUS influences?[READ LIST] (GUILT2)
+GUILT3 - 650) Y225. [If teen ever feels guilty][IF Y223 less than 6] How much, if at all, would you say that religion has helped to relieve your feelings of guilt by providing you love, mercy, grace, or forgiveness?[READ LIST] (GUILT3)
+PRAYALON - 670) Y230. How often, if ever, do you pray by yourself alone?[READ LIST] (PRAYALON)
+READBIBL - 671) Y231. How often, if ever, do you read from [SCRIPTURES C] to yourself alone? [READ LIST] (READBIBL)
+
+CHWELCOM - 709) Y265. [IF (1 less than Y60B less than 8)] Does your [CHURCH TYPE 1] feel like a warm and welcoming place for you usually, sometimes, rarely, or never? (CHWELCOM)
+ATTEND25 - 723) Y278.[If teen doesn't attend religious services more than twice a year or answered 'refused')][IF Y60=0,3] When you are 25, do you think you will be attending religious services, yes, maybe, or no? (ATTEND25)
+
+PINCOME (RECODED INCOME) - 725) Household income merged into a single scale. (PINCOME)
+TEENRACE (RECODED TEEN RACE) 726) Merged and collapsed teen race. (TEENRACE)
+SEXFREQ - 731) Frequency of teen sexual intercourse (SEXFREQ)
+PRACEOLD - 733) What race or ethnic group are you? (PRACEOLD)
+
+PDADEDUC (father edu recode) - 735) Education of resident father figure (PDADEDUC)
+PMOMEDUC (mother edu recode) - 736) Education of resident mother figure (PMOMEDUC)
+PWKMOMFT (mom work recode) - 737) Mom working full-time (PWKMOMFT)
+  739) Mom working part-time (PWKMOMPT)
+PWKDADFT (dad work recode) - 738) Dad working full-time (PWKDADFT)
+  740) Dad working part-time (PWKDADPT)
+
+746) First reason for why stopped attending church (STOPATT1)
+747) Second reason for why stopped attending church (STOPATT2)
+
+TEENNUM (recode) - 759) Total number of teens in household, including respondent (TEENNUM)
+
+PSPFAITH (recode of spousal religions) - 784) Parent/spouse religion (PSPFAITH)
+PSPCONG (recode of attendance) - 785) Parent/spouse attendance (PSPCONG)
+WISHATT (recode) - 792) Combined variable for how often teen would attend if up to them (WISHATT)
+XCHLDNUM (recode - 803) Number less than 18 year olds in house, excluding teen, (pchldnum) without the DK/REF (XCHLDNUM)
+
+CENREG - 901) Census Region (CENREG)
+CENDIV - 902) Census Division (CENDIV)
+
+##d. Load Data
+```{r, eval=FALSE}
+wave1 <- read_xlsx("~/Downloads/National Study of Youth and Religion, Wave 1 (2003).XLSX")
+wave1$year <- 0
+
+wave2 <- read_xlsx("~/Downloads/National Study of Youth and Religion, Wave 2 (2005).XLSX")
+wave2$year <- 2
+
+wave3 <- read_xlsx("~/Downloads/National Study of Youth and Religion, Wave 3 (2007-2008).XLSX")
+wave3$year <- 4
+
+wave3$NA_total <- rowSums(is.na(wave3))
+tabyl(wave3$NA_total) #838 missing 465 or 570 values. 
+
+wave4 <- read_xlsx("~/Downloads/National Study of Youth and Religion Wave 4 (2013).XLSX")
+wave4$year <- 10
+
+names <- names(wave4)
+```
+
+###d. Review vars
+```{r, eval=FALSE}
+#WEIGHTS:
+#RWEIGHT1 - 2) Wave 1 Raw Weight: Adjusts for Unequal Probability of Sample Selection Only (RWEIGHT1)
+#RWEIGHT 2 - 3) Wave 1 Raw Weight: For Nationally Representative Sample (RWEIGHT2)
+#NWEIGHT2 - 4) Wave 1 Normalized Weight for Nationally Representative Sample (NWEIGHT2)
+#INWAVE2 (not sure what this means?) - 6) Participated in Wave 2 Phone Survey (INWAVE2)
+
+#PLIVE - 13) P2C. What is your CURRENT living arrangement? Are you married or living with a partner, divorced, separated, or widowed and NOT living with a partner, or have you never been married?
+
+#FAITH1 - 324) P57. TEXT: Next, I have some questions about religion. There may be some that don't directly apply to you, but just answer them as well as you can. How important or unimportant is religious faith in shaping [INSERT A-B]?: [READ LIST] How you live your daily life. (FAITH1)
+
+#PIMPREL - 118) P79. TEXT: Thanks, Now I have some questions about religion. How important is your religious faith in providing guidance in your own day-to-day living?: [READ LIST] (PIMPREL)
+
+#PSCHREL - 102) P60. [If teen attends private school] [If P57=2] (Was/Is) that a religious school or not? (PSCHREL)
+
+#PATTEND - 119) P80. In the last 12 MONTHS, how often have you been attending religious services, not including weddings, baptisms, and funerals? [READ LIST] (PATTEND)
+
+#PARENT EDUCATION - PEDUC1, PEDUC2, PEDUC3 (series of Qs to narrow down answer, recode into single var college or not)
+  #Same for spouse PSPEDUC1, PSPEDUC2, PSPEDUC3 - 
+
+#PARENT HOUSEHOLD INCOME - PINCOME1, PINCOME2, PINCOME3 (series of Qs to narrow down answer) - all reported as categorical LT 10k to GT 100k - 
+
+####### CHILD VARS ######
+
+#EATADULT - 280) Y30. About how many NIGHTS PER WEEK do you usually eat dinner together with at least one of your parents or adult guardians? [RECORD NUMBER, RANGE=0-7, 98=DK, 99=REF][PROBE: 'JUST GIVE ME YOUR BEST GUESS.'] (EATADULT)
+
+#ETHRACE - 298) Y46. What race or ethnic group do you consider yourself? [PROMPT: 'That is, are you white, black, Hispanic, Asian American, Pacific Islander, American Indian, or of mixed race?'(IF THEY SAY 'HUMAN,' ASK: 'WOULD YOU MIND TELLING US YOUR ETHNICITY?)]: (ETHRACE)
+
+#FAITH1 - 324) P57. TEXT: Next, I have some questions about religion. There may be some that don't directly apply to you, but just answer them as well as you can. How important or unimportant is religious faith in shaping [INSERT A-B]?: [READ LIST] How you live your daily life. (FAITH1)
+
+#ATTREG (already included) - 330) Y60. Do you attend religious services more than once or twice a year, NOT counting weddings, baptisms, and funerals [INSERT 'or religious services during school' IF teen attends a private religious school]?[DOES NOT INCLUDE RELIGIOUS YOUTH GROUP MEETINGS] (ATTREG)
+#ATTEND1 - 332) Y60B. [IF Y60 greater than 0] About how often do you usually attend religious services there? (ATTEND1)
+
+#DOUBTS1 - 369) Y81. [If teen identifies with a religion or answers 'don't know'][IF Y62 less than 8 OR Y62=9] In the last year, how much, if at all, have you had doubts about whether your religious beliefs are true? Have you had: [READ LIST] (DOUBTS1)
+
+#WISHATT1 - 373) P84. [If teen doesn't attend religious services more than once or twice a year][IF Y60=0] If it was totally up to you, how often would you attend religious services? Would you attend: [READ LIST] (WISHATT1)
+
+#EDGOAL1 - 376) Y85A. [If teen is not home-schooled][IF P57 not equal to 3] Ideally, how far in school would you LIKE to go? [READ LIST IF NECESSARY] (EDGOAL1)
+#EDGOAL 3 - 379) Y85B. [If teen is home-schooled] [IF P57=3] Ideally, how much education would you LIKE to complete? [READ LIST IF NECESSARY] (EDGOAL3)
+
+#GRADES - 385) Y91. [If teen is not home-schooled and has not stopped going to school][IF P57 not equal to 3,4] What kind of grades (did you get in school last year/do you usually get in school)?[Prompt:(Was/Is) it mostly As, Bs, Cs, Ds, or Fs?] (GRADES) --- recalc to approx GPA scores?
+
+#MEANLESS - 387) Y94. How often, if ever, does life feel meaningless to you? (MEANLESS)
+#ABSTAIN1 - 395) Y99. Do you think that people should wait to have sex until they are married, or not necessarily? (ABSTAIN1)
+
+#DIVCEOK - 397) Y101. Do you think that, in general, a couple without children should end their marriage if it is empty and unfulfilling, or should they stick with it even if they are not happy?: (DIVCEOK)
+
+#CRRACE - 399) Y104. How much do you personally care or not about [INSERT LIST A-C]? Do you care: [READ LIST]: Equality between different racial groups. (CRRACE)
+
+#POLACT - 531) Y113. In the last TWO years, have you been involved in any political activities, not including student government, such as signing a political petition, attending a political meeting, or contacting an elected official, or not? (POLACT)
+
+#AFTRLIFE - 543) Y125. Do you believe [INSERT LIST A-H], definitely, maybe, or not at all: That there is life after death? (AFTRLIFE)
+
+#VIEWREL - 570) Y141. Which of the following statements comes closest to your own views about religion: (VIEWREL)
+#SEXEVER - 606) Y173. [If teen has engaged in touching of private areas with another person][IF Y169=1] Have you ever had sexual intercourse, or not? (SEXEVER)
+#BODY - 642) Y219. In general, how happy or unhappy are you with your body and physical appearance? [READ LIST] (BODY)
+#SAD - 643) Y220. How often do you feel very sad or depressed?[READ LIST] (SAD)
+#ACCEPTED - 644) Y221. In general, how much do you [INSERT LIST A-D]: Feel loved and accepted for who you are? (ACCEPTED)
+
+#GUILT1 - 648) Y223. In the last year, how often, if ever, have you found yourself feeling guilty about things in your life? Was it: [READ LIST] (GUILT1)
+#GUILT2 - 649) Y224. How much, if any, of those feelings of guilt do you think were caused by RELIGIOUS influences?[READ LIST] (GUILT2)
+#GUILT3 - 650) Y225. [If teen ever feels guilty][IF Y223 less than 6] How much, if at all, would you say that religion has helped to relieve your feelings of guilt by providing you love, mercy, grace, or forgiveness?[READ LIST] (GUILT3)
+
+#PRAYALON - 670) Y230. How often, if ever, do you pray by yourself alone?[READ LIST] (PRAYALON)
+#READBIBL - 671) Y231. How often, if ever, do you read from [SCRIPTURES C] to yourself alone? [READ LIST] (READBIBL)
+#GRACE - 700) Y255. Does your family regularly pray to give thanks before or after mealtimes, or not? (GRACE)
+#CHWELCOM - 709) Y265. [IF (1 less than Y60B less than 8)] Does your [CHURCH TYPE 1] feel like a warm and welcoming place for you usually, sometimes, rarely, or never? (CHWELCOM)
+
+#CLEANED VARS
+#PINCOME (RECODED INCOME) - 725) Household income merged into a single scale. (PINCOME)
+#TEENRACE (RECODED TEEN RACE) 726) Merged and collapsed teen race. (TEENRACE)
+#PRACEOLD - 733) What race or ethnic group are you? (PRACEOLD)
+
+#PDADEDUC (father edu recode) - 735) Education of resident father figure (PDADEDUC)
+#PMOMEDUC (mother edu recode) - 736) Education of resident mother figure (PMOMEDUC)
+#PWKMOMFT (mom work recode) - 737) Mom working full-time (PWKMOMFT)
+  #739) Mom working part-time (PWKMOMPT)
+#PWKDADFT (dad work recode) - 738) Dad working full-time (PWKDADFT)
+  #740) Dad working part-time (PWKDADPT)
+
+#746) First reason for why stopped attending church (STOPATT1)
+#747) Second reason for why stopped attending church (STOPATT2)
+
+#TEENNUM (recode) - 759) Total number of teens in household, including respondent (TEENNUM)
+
+#WISHATT (recode) - 792) Combined variable for how often teen would attend if up to them (WISHATT)
+#XCHLDNUM (recode - 803) Number less than 18 year olds in house, excluding teen, (pchldnum) without the DK/REF (XCHLDNUM)
+
+#CENREG - 901) Census Region (CENREG)
+#CENDIV - 902) Census Division (CENDIV)
+
+```
+
+##e. Review vars across years
+```{r, eval=FALSE}
+wave1_r <- wave1 %>% dplyr::select(c("IDS", "year", "RWEIGHT1", "RWEIGHT2", "NWEIGHT2", "INWAVE2", "PLIVE", "FAITH1", "PIMPREL", "PSCHREL", "PATTEND", "PDADEDUC", "PMOMEDUC", "PINCOME","EATADULT", "ETHRACE", "ATTREG", "ATTEND1", "DOUBTS1", "WISHATT1", "EDGOAL1", "EDGOAL3", "GRADES", "MEANLESS", "ABSTAIN1", "DIVCEOK", "CRRACE", "POLACT", "AFTRLIFE", "VIEWREL", "SEXEVER", "BODY", "SAD", "ACCEPTED", "GUILT1", "GUILT2", "GUILT3", "PRAYALON", "READBIBL", "GRACE", "CHWELCOM", "TEENRACE", "TEENSEX", "AGECATS", "PRACEOLD", "PWKMOMFT", "PWKMOMPT", "PWKDADFT", "PWKDADPT", "STOPATT1", "STOPATT2", "TEENNUM", "WISHATT", "XCHLDNUM", "CENREG", "CENDIV"))
+wave1_r <- wave1_r %>% rename("GENDER"="TEENSEX")
+
+names(wave2)
+wave2_r <- wave2 %>% dplyr::select(c("IDS", "year", 
+ #"RWEIGHT1", #"RWEIGHT2", #"NWEIGHT2", #"INWAVE2", #"PLIVE", 
+  "FAITH1", 
+  #"PIMPREL", #"PSCHREL", #"PATTEND", #"PDADEDUC", #"PMOMEDUC", #"PINCOME",
+  "EATADULT", 
+  #"ETHRACE", 
+  "ATTREG", "ATTEND1", "DOUBTS1", "WISHATT1", "EDGOAL1", "EDGOAL3", "GRADES", "MEANLESS",   "ABSTAIN1", 
+  #"DIVCEOK", #"CRRACE", #"POLACT", 
+  "AFTRLIFE", "VIEWREL", "SEXEVER", "BODY", "SAD", "ACCEPTED", "GUILT1", 
+  #"GUILT2", #"GUILT3", 
+  "PRAYALON", "READBIBL", "GRACE", "CHWELCOM", 
+  #"TEENRACE", #"TEENSEX", 
+  "AGECATS", 
+  #"PRACEOLD",#"PWKMOMFT", #"PWKMOMPT", #"PWKDADFT", #"PWKDADPT", #"STOPATT1", #"STOPATT2", #"TEENNUM", #"WISHATT", #"XCHLDNUM", #"CENREG", #"CENDIV"
+                                     ))
+#wave2_r <- wave2_r %>% rename("GENDER"="TEENSEX")
+
+names(wave3)
+wave3_r <- wave3 %>% dplyr::select(c("IDS", "year", 
+  #"RWEIGHT1", #"RWEIGHT2", #"NWEIGHT2", #"INWAVE2", #"PLIVE", 
+  "FAITH1", 
+  #"PIMPREL", #"PSCHREL", #"PATTEND", #"PDADEDUC", #"PMOMEDUC", #"PINCOME",#"EATADULT", #"ETHRACE",
+  "ATTREG", "ATTEND1", "DOUBTS1", 
+  #"WISHATT1", #"EDGOAL1", #"EDGOAL3", #"GRADES", 
+  "MEANLESS", "ABSTAIN1", 
+  #"DIVCEOK", 
+  "CRRACE", 
+  #"POLACT", 
+  "AFTRLIFE", "VIEWREL", "SEXEVER", "BODY", "SAD", "ACCEPTED", 
+  #"GUILT1", #"GUILT2",#"GUILT3", 
+  "PRAYALON", "READBIBL", "GRACE", 
+  #"CHWELCOM", #"TEENRACE", #"TEENSEX", 
+  "AGECATS", 
+  #"PRACEOLD", #"PWKMOMFT", #"PWKMOMPT", #"PWKDADFT", #"PWKDADPT", #"STOPATT1", #"STOPATT2", #"TEENNUM", #"WISHATT", #"XCHLDNUM", #"CENREG", 
+  "CENDIV"))
+#wave3_r <- wave3_r %>% rename("GENDER"="TEENSEX")
+
+names(wave4)
+wave4_r <- wave4 %>% dplyr::select(c("IDS", "year", 
+  #"RWEIGHT1", #"RWEIGHT2", #"NWEIGHT2", #"INWAVE2", 
+  #"PLIVE_W4", 
+  "FAITH1_W4", 
+  #"PIMPREL_W4", "PSCHREL_W4", "PATTEND_W4", "PDADEDUC_W4", #"PMOMEDUC_W4", "PINCOME_W4","EATADULT_W4", #"ETHRACE_W4",
+  "ATTREG_W4", 
+  "ATTEND1_W4", 
+  "DOUBTS1_W4", 
+  #"WISHATT1_W4", "EDGOAL1_W4", "EDGOAL3_W4", "GRADES_W4", 
+  "MEANLESS_W4", 
+  "ABSTAIN1_W4", 
+  #"DIVCEOK_W4", "CRRACE_W4", "POLACT_W4", "AFTRLIFE_W4", 
+  "VIEWREL_W4", 
+  #"SEXEVER_W4", 
+  "BODY_W4", 
+  #"SAD_W4", 
+  #"ACCEPTED_W4", "GUILT1_W4", "GUILT2_W4", "GUILT3_W4", 
+  "PRAYALON_W4", 
+  #"READBIBL_W4", 
+  "GRACE_W4", 
+  #"CHWELCOM_W4", "TEENRACE_W4", "TEENSEX_W4", 
+  "AGECATS_W4", 
+  #"PRACEOLD_W4", "PWKMOMFT_W4", "PWKMOMPT_W4", "PWKDADFT_W4", "PWKDADPT_W4", "STOPATT1_W4", "STOPATT2_W4", "TEENNUM_W4", "WISHATT_W4", "XCHLDNUM_W4", 
+  "CENREG_W4", "CENDIV_W4"
+  ))
+
+wave4_r <- wave4_r %>% rename("FAITH1"="FAITH1_W4",
+                              "ATTREG"="ATTREG_W4",
+                              "ATTEND1"="ATTEND1_W4", 
+                              "DOUBTS1"="DOUBTS1_W4", 
+                              "MEANLESS"="MEANLESS_W4",
+                              "ABSTAIN1"="ABSTAIN1_W4",
+                              "VIEWREL"="VIEWREL_W4",
+                              "BODY"="BODY_W4",
+                              "PRAYALON"="PRAYALON_W4",
+                              "GRACE"="GRACE_W4",
+                              "AGECATS"="AGECATS_W4",
+                              "CENREG"="CENREG_W4",
+                              "CENDIV"="CENDIV_W4"
+                              )
+
+#DOESN'T WORK
+#waves <- rbind(wave1_r, wave2_r, wave3_r, wave4_r)
+```
+
+##f. Impute Baseline Vars
+```{r, eval=FALSE }
+#BASELINE TEEN RACE
+wave1$TEENRACE_bl <- wave1$TEENRACE
+wave2$TEENRACE_bl <- wave1$TEENRACE[match(wave2$IDS, wave1$IDS)]
+wave3$TEENRACE_bl <- wave1$TEENRACE[match(wave3$IDS, wave1$IDS)]
+wave4$TEENRACE_bl <- wave1$TEENRACE[match(wave4$IDS, wave1$IDS)]
+
+#BASELINE TEEN SEX
+wave1$TEENSEX_bl <- wave1$TEENSEX
+wave2$TEENSEX_bl <- wave1$TEENSEX[match(wave2$IDS, wave1$IDS)]
+wave3$TEENSEX_bl <- wave1$TEENSEX[match(wave3$IDS, wave1$IDS)]
+wave4$TEENSEX_bl <- wave1$TEENSEX[match(wave4$IDS, wave1$IDS)]
+
+#AGE IS IN ALL 4 - but wave3 is missing a lot
+wave1$AGECATS_bl <- wave1$AGECATS
+wave2$AGECATS_bl <- wave1$AGECATS[match(wave2$IDS, wave1$IDS)]
+wave3$AGECATS_bl <- wave1$AGECATS[match(wave3$IDS, wave1$IDS)]
+wave4$AGECATS_bl <- wave1$AGECATS[match(wave4$IDS, wave1$IDS)]
+
+#PIMPREL - 118) P79. TEXT: Thanks, Now I have some questions about religion. How important is your religious faith in providing guidance in your own day-to-day living?: [READ LIST] (PIMPREL)
+wave1$PIMPREL_bl <- wave1$PIMPREL
+wave2$PIMPREL_bl <- wave1$PIMPREL[match(wave2$IDS, wave1$IDS)]
+wave3$PIMPREL_bl <- wave1$PIMPREL[match(wave3$IDS, wave1$IDS)]
+wave4$PIMPREL_bl <- wave1$PIMPREL[match(wave4$IDS, wave1$IDS)]
+
+#Baseline religion
+tabyl(wave1$RELIG62)
+tabyl(wave2$RELIG62)
+#tabyl(wave3$RELIG62) #Not in wave
+#tabyl(wave4$RELIG62) #Not in wave
+
+wave1$RELIG62_bl <- wave1$RELIG62
+wave2$RELIG62_bl <- wave1$RELIG62[match(wave2$IDS, wave1$IDS)]
+wave3$RELIG62_bl <- wave1$RELIG62[match(wave3$IDS, wave1$IDS)]
+wave4$RELIG62_bl <- wave1$RELIG62[match(wave4$IDS, wave1$IDS)]
+```
+
+###f. Continued
+```{r, eval=FALSE }
+#Baseline pray alone
+wave1$PRAYALON_bl <- wave1$PRAYALON
+wave2$PRAYALON_bl <- wave1$PRAYALON[match(wave2$IDS, wave1$IDS)]
+wave3$PRAYALON_bl <- wave1$PRAYALON[match(wave3$IDS, wave1$IDS)]
+wave4$PRAYALON_bl <- wave1$PRAYALON[match(wave4$IDS, wave1$IDS)]
+
+wave2 %>% gtsummary::select(PRAYALON, PRAYALON_bl) %>%
+  tbl_summary(by = PRAYALON,
+              missing = "always")
+#1 Never
+#2 Less than once a month
+#3 One to twice times a month
+#4 Less than once a month
+#5 About once a week
+#6 About once a day
+#7 Many times a day
+#777 DK
+#888 Refused
+
+#Baseline family says grace at dinner
+wave1$GRACE_bl <- wave1$GRACE
+wave2$GRACE_bl <- wave1$GRACE[match(wave2$IDS, wave1$IDS)]
+wave3$GRACE_bl <- wave1$GRACE[match(wave3$IDS, wave1$IDS)]
+wave4$GRACE_bl <- wave1$GRACE[match(wave4$IDS, wave1$IDS)]
+
+#Read Bible - wave 4 has different vars, not sure why?
+tabyl(wave4$READBIBL1_W4)
+tabyl(wave4$READBIBL2_W4)
+tabyl(wave4$READBIBL3_W4)
+tabyl(wave4$READBIBL2_W4)
+
+#Read Bible - baseline
+wave1$READBIBL_bl <- wave1$READBIBL
+wave2$READBIBL_bl <- wave1$READBIBL[match(wave2$IDS, wave1$IDS)]
+wave3$READBIBL_bl <- wave1$READBIBL[match(wave3$IDS, wave1$IDS)]
+wave4$READBIBL_bl <- wave1$READBIBL[match(wave4$IDS, wave1$IDS)]
+
+#ATTREG baseline
+wave1$ATTREG_bl <- wave1$ATTREG
+wave2$ATTREG_bl <- wave1$ATTREG[match(wave2$IDS, wave1$IDS)]
+wave3$ATTREG_bl <- wave1$ATTREG[match(wave3$IDS, wave1$IDS)]
+wave4$ATTREG_bl <- wave1$ATTREG[match(wave4$IDS, wave1$IDS)]
+
+#RELTARD - not in all years - set baseline
+wave1$RELTRAD_bl <- wave1$RELTRAD
+wave2$RELTRAD_bl <- wave1$RELTRAD[match(wave2$IDS, wave1$IDS)]
+wave3$RELTRAD_bl <- wave1$RELTRAD[match(wave3$IDS, wave1$IDS)]
+wave4$RELTRAD_bl <- wave1$RELTRAD[match(wave4$IDS, wave1$IDS)]
+
+tabyl(wave1$RELTRAD_bl)
+tabyl(wave2$RELTRAD_bl)
+tabyl(wave3$RELTRAD_bl)
+tabyl(wave4$RELTRAD_bl)
+```
+
+##g. Combine Waves
+```{r, eval=FALSE }
+wave1_r <- wave1 %>% dplyr::select(c("IDS", "year", "ATTREG", "ATTREG_bl", "PIMPREL_bl", "RELIG62_bl", "RELTRAD_bl", "FAITH1", "PRAYALON_bl", "GRACE_bl", "READBIBL_bl", "TEENRACE_bl", "TEENSEX_bl", "AGECATS_bl", "AGECATS"))
+
+wave2_r <- wave2 %>% dplyr::select(c("IDS", "year", "ATTREG", "ATTREG_bl", "PIMPREL_bl", "RELIG62_bl", "RELTRAD_bl", "FAITH1", "PRAYALON_bl", "GRACE_bl", "READBIBL_bl", "TEENRACE_bl", "TEENSEX_bl", "AGECATS_bl", "AGECATS"))
+
+wave3_r <- wave3 %>% dplyr::select(c("IDS", "year","ATTREG", "ATTREG_bl", "PIMPREL_bl", "RELIG62_bl", "RELTRAD_bl", "FAITH1", "PRAYALON_bl", "GRACE_bl", "READBIBL_bl", "TEENRACE_bl", "TEENSEX_bl", "AGECATS_bl", "AGECATS"))
+
+wave4_r <- wave4 %>% dplyr::select(c("IDS", "year","ATTREG_W4", "ATTREG_bl", "PIMPREL_bl", "RELIG62_bl", "RELTRAD_bl", "FAITH1_W4", "PRAYALON_bl", "GRACE_bl", "READBIBL_bl", "TEENRACE_bl", "TEENSEX_bl", "AGECATS_bl", "AGECATS_W4"))
+
+wave4_r <- wave4_r %>% rename("ATTREG" = "ATTREG_W4",
+                              "FAITH1" = "FAITH1_W4",
+                              "AGECATS" = "AGECATS_W4")
+
+#Combine Waves into single DF
+waves <- rbind(wave1_r, wave2_r, wave3_r, wave4_r)
+
+#save(waves, file = "~/Desktop/JPSM - Masters Program/JPSM Classes/03_Fall 2024/SURV 617 - Statistical Applications/Group Project/NSYR data/Combined Data.RData")
+```
+
+
+#2. LOAD AND REVIEW PARTIALLY CLEANED DATA
+```{r, eval=FALSE }
+#load("~/Downloads/Combined Data_clean (1).RData")
+
+waves$NA_total <- rowSums(is.na(waves))
+tabyl(waves, NA_total, year) # missing 3
+
+#11,488 total cases - 838 missing 4 in year 3 = 10,650
+waves <- subset(waves, year != 3 & NA_total != 3)
+tabyl(waves, NA_total, year)
+```
+
+```{r , eval=FALSE}
+waves %>% gtsummary::select(year, RELIG62_bl, RELTRAD_bl, ATTREG, ATTREG_bl, PIMPREL_bl, RELIG62_bl, RELTRAD_bl, FAITH1, PRAYALON_bl, GRACE_bl, READBIBL_bl, TEENRACE_bl, TEENSEX_bl, AGECATS_bl, AGECATS) %>%
+  tbl_summary(by = year,
+              type = list(TEENRACE_bl ~ "categorical",
+                          TEENSEX_bl ~ "categorical", 
+                          AGECATS ~ "categorical",
+                          RELIG62_bl ~ "categorical"),
+              missing = "always")
+```
+
+##a. Cleaning
+```{r , eval=FALSE}
+#Set Refuse/DK/etc to NA
+tabyl(waves$RELIG62_bl)
+tabyl(waves$RELTRAD_bl)
+
+tabyl(waves$ATTREG)
+waves$ATTREG[waves$ATTREG == 666] <- NA
+waves$ATTREG[waves$ATTREG == 777] <- NA
+waves$ATTREG[waves$ATTREG == 888] <- NA
+tabyl(waves$ATTREG)
+
+tabyl(waves$ATTREG_bl)
+waves$ATTREG_bl[waves$ATTREG_bl == 777] <- NA
+waves$ATTREG_bl[waves$ATTREG_bl == 888] <- NA
+tabyl(waves$ATTREG_bl)
+
+tabyl(waves$PIMPREL_bl)
+waves$PIMPREL_bl[waves$PIMPREL_bl == 777] <- NA
+waves$PIMPREL_bl[waves$PIMPREL_bl == 888] <- NA
+tabyl(waves$PIMPREL_bl)
+
+tabyl(waves$RELIG62_bl)
+waves$RELIG62_bl[waves$RELIG62_bl == 777] <- NA
+waves$RELIG62_bl[waves$RELIG62_bl == 888] <- NA
+tabyl(waves$RELIG62_bl)
+
+tabyl(waves$FAITH1)
+waves$FAITH1[waves$FAITH1 == 666] <- NA
+waves$FAITH1[waves$FAITH1 == 777] <- NA
+waves$FAITH1[waves$FAITH1 == 888] <- NA
+tabyl(waves$FAITH1)
+
+tabyl(waves$PRAYALON_bl)
+waves$PRAYALON_bl[waves$PRAYALON_bl == 777] <- NA
+waves$PRAYALON_bl[waves$PRAYALON_bl == 888] <- NA
+tabyl(waves$PRAYALON_bl)
+
+tabyl(waves$GRACE_bl)
+waves$GRACE_bl[waves$GRACE_bl == 777] <- NA
+waves$GRACE_bl[waves$GRACE_bl == 888] <- NA
+tabyl(waves$GRACE_bl)
+
+tabyl(waves$READBIBL_bl)
+waves$READBIBL_bl[waves$READBIBL_bl == 777] <- NA
+waves$READBIBL_bl[waves$READBIBL_bl == 888] <- NA
+tabyl(waves$READBIBL_bl)
+
+tabyl(waves$TEENRACE_bl)
+waves$TEENRACE_bl[waves$TEENRACE_bl == 777] <- NA
+waves$TEENRACE_bl[waves$TEENRACE_bl == 888] <- NA
+tabyl(waves$TEENRACE_bl)
+
+tabyl(waves$AGECATS_bl)
+waves$AGECATS_bl[waves$AGECATS_bl == 888] <- NA
+tabyl(waves$AGECATS_bl)
+
+tabyl(waves$AGECATS)
+waves$AGECATS[waves$AGECATS == 888] <- NA
+tabyl(waves$AGECATS)
+```
+
+##b. Review Vars (again)
+```{r, eval=FALSE }
+waves %>% gtsummary::select(year, RELIG62_bl, RELTRAD_bl, ATTREG, ATTREG_bl, PIMPREL_bl, RELIG62_bl, RELTRAD_bl, FAITH1, PRAYALON_bl, GRACE_bl, READBIBL_bl, TEENRACE_bl, TEENSEX_bl, AGECATS_bl, AGECATS) %>%
+  tbl_summary(by = year,
+              type = list(ATTREG ~ "categorical",
+                          ATTREG_bl ~ "categorical",
+                          GRACE_bl ~ "categorical",
+                          TEENRACE_bl ~ "categorical",
+                          TEENSEX_bl ~ "categorical", 
+                          AGECATS ~ "categorical",
+                          RELIG62_bl ~ "categorical"),
+              missing = "always")
+```
+
+##c. Review Cases with missing data
+```{r, eval=FALSE }
+waves$NA_total <- rowSums(is.na(waves))
+
+tabyl(waves$NA_total) #97.3% have no missing data
+
+tabyl(waves, NA_total, year) 
+```
+
+
+##d. Recodes
+```{r , eval=FALSE}
+tabyl(waves$RELIG62_bl)
+
+waves$RELIG62_bl_r[waves$RELIG62_bl == 1 ] <- "1 Catholic"
+waves$RELIG62_bl_r[waves$RELIG62_bl == 2 ] <- "2 Protestant"
+waves$RELIG62_bl_r[waves$RELIG62_bl == 3 ] <- "2 Protestant"
+waves$RELIG62_bl_r[waves$RELIG62_bl == 4 ] <- "3 Jewish"
+waves$RELIG62_bl_r[waves$RELIG62_bl == 5 ] <- "4 Other"
+waves$RELIG62_bl_r[waves$RELIG62_bl == 6 ] <- "4 Other"
+waves$RELIG62_bl_r[waves$RELIG62_bl == 7 ] <- "4 Other"
+waves$RELIG62_bl_r[waves$RELIG62_bl == 8 ] <- "5 Not religious"
+tabyl(waves$RELIG62_bl_r)
+
+waves$RELIG62_bl[waves$RELIG62_bl == 1 ] <- "1 Catholic"
+waves$RELIG62_bl[waves$RELIG62_bl == 2 ] <- "2 Protestant"
+waves$RELIG62_bl[waves$RELIG62_bl == 3 ] <- "3 Christian"
+waves$RELIG62_bl[waves$RELIG62_bl == 4 ] <- "4 Jewish"
+waves$RELIG62_bl[waves$RELIG62_bl == 5 ] <- "5 Muslim/Islamic"
+waves$RELIG62_bl[waves$RELIG62_bl == 6 ] <- "6 Another religion"
+waves$RELIG62_bl[waves$RELIG62_bl == 7 ] <- "7 Half one religiion and hafl another"
+waves$RELIG62_bl[waves$RELIG62_bl == 8 ] <- "8 Not religious"
+tabyl(waves$RELIG62_bl)
+
+tabyl(waves$RELTRAD_bl)
+waves$RELTRAD_bl[waves$RELTRAD_bl == 1 ] <- "1 Conservative Protestant"
+waves$RELTRAD_bl[waves$RELTRAD_bl == 2 ] <- "2 Mainline Protestant"
+waves$RELTRAD_bl[waves$RELTRAD_bl == 3 ] <- "3 Black Protestant"
+waves$RELTRAD_bl[waves$RELTRAD_bl == 4 ] <- "4 Catholic"
+waves$RELTRAD_bl[waves$RELTRAD_bl == 5 ] <- "5 Jewish"
+waves$RELTRAD_bl[waves$RELTRAD_bl == 6 ] <- "6 Mormon/LDS"
+waves$RELTRAD_bl[waves$RELTRAD_bl == 7 ] <- "7 Unaffiliated "
+waves$RELTRAD_bl[waves$RELTRAD_bl == 8 ] <- "8 Other religion"
+waves$RELTRAD_bl[waves$RELTRAD_bl == 9 ] <- "9 Indeterminate"
+tabyl(waves$RELTRAD_bl)
+
+tabyl(waves$ATTREG) #1 = yes
+tabyl(waves$ATTREG_bl) #1 = yes
+
+tabyl(waves$PIMPREL_bl)
+waves$PIMPREL_bl_r[waves$PIMPREL_bl == 1] <- "1 Extremely or very important"
+waves$PIMPREL_bl_r[waves$PIMPREL_bl == 2] <- "1 Extremely or very important"
+waves$PIMPREL_bl_r[waves$PIMPREL_bl == 3] <- "2 Fairly or somewhat important"
+waves$PIMPREL_bl_r[waves$PIMPREL_bl == 4] <- "2 Fairly or somewhat important"
+waves$PIMPREL_bl_r[waves$PIMPREL_bl == 5] <- "3 Not very or not at all important"
+waves$PIMPREL_bl_r[waves$PIMPREL_bl == 6] <- "3 Not very or not at all important"
+tabyl(waves$PIMPREL_bl_r)
+
+tabyl(waves$PIMPREL_bl)
+waves$PIMPREL_bl[waves$PIMPREL_bl == 1 ] <- "1 Extremely important"
+waves$PIMPREL_bl[waves$PIMPREL_bl == 2 ] <- "2 Very important"
+waves$PIMPREL_bl[waves$PIMPREL_bl == 3 ] <- "3 Fairly important"
+waves$PIMPREL_bl[waves$PIMPREL_bl == 4 ] <- "4 Somewhat important"
+waves$PIMPREL_bl[waves$PIMPREL_bl == 5 ] <- "5 Not very important"
+waves$PIMPREL_bl[waves$PIMPREL_bl == 6 ] <- "6 Not important at all"
+tabyl(waves$PIMPREL_bl)
+
+tabyl(waves$GRACE_bl)#1 = yes
+
+tabyl(waves$READBIBL_bl)
+#Set binary for models
+waves$READBIBL_bl_binary[waves$READBIBL_bl == 1]  <- 0 #never
+waves$READBIBL_bl_binary[waves$READBIBL_bl == 2] <- 1
+waves$READBIBL_bl_binary[waves$READBIBL_bl == 3] <- 1
+waves$READBIBL_bl_binary[waves$READBIBL_bl == 4] <- 1
+waves$READBIBL_bl_binary[waves$READBIBL_bl == 5]  <- 1
+waves$READBIBL_bl_binary[waves$READBIBL_bl == 6] <- 1
+waves$READBIBL_bl_binary[waves$READBIBL_bl == 7] <- 1
+tabyl(waves$READBIBL_bl_binary)
+
+waves$READBIBL_bl[waves$READBIBL_bl == 1 ] <- "1 Never"
+waves$READBIBL_bl[waves$READBIBL_bl == 2 ] <- "2 Less than once a month"
+waves$READBIBL_bl[waves$READBIBL_bl == 3 ] <- "3 One to two times a month"
+waves$READBIBL_bl[waves$READBIBL_bl == 4 ] <- "4 About once a week"
+waves$READBIBL_bl[waves$READBIBL_bl == 5 ] <- "5 A few times a week"
+waves$READBIBL_bl[waves$READBIBL_bl == 6 ] <- "6 About once a day"
+waves$READBIBL_bl[waves$READBIBL_bl == 7 ] <- "7 Many times a day"
+tabyl(waves$READBIBL_bl)
+
+tabyl(waves$FAITH1)
+waves$FAITH1_r[waves$FAITH1 == 1] <- "1 Extremely or very important"
+waves$FAITH1_r[waves$FAITH1 == 2] <- "1 Extremely or very important"
+waves$FAITH1_r[waves$FAITH1 == 3] <- "2 Somewhat important"
+waves$FAITH1_r[waves$FAITH1 == 4] <- "3 Not very or not at all important"
+waves$FAITH1_r[waves$FAITH1 == 5] <- "3 Not very or not at all important"
+tabyl(waves$FAITH1_r)
+
+tabyl(waves$FAITH1)
+waves$FAITH1[waves$FAITH1 == 1] <- "1 Extremely important"
+waves$FAITH1[waves$FAITH1 == 2] <- "2 Very important"
+waves$FAITH1[waves$FAITH1 == 3] <- "3 Somewhat important"
+waves$FAITH1[waves$FAITH1 == 4] <- "4 Not very important"
+waves$FAITH1[waves$FAITH1 == 5] <- "5 Not important at all"
+tabyl(waves$FAITH1)
+
+tabyl(waves$PRAYALON_bl)
+
+waves$PRAYALON_bl_binary[waves$PRAYALON_bl == 1] <- 0 #never
+waves$PRAYALON_bl_binary[waves$PRAYALON_bl != 1] <- 1 #does pray
+tabyl(waves$PRAYALON_bl_binary)
+
+waves$PRAYALON_bl[waves$PRAYALON_bl == 1] <- "1 Never"
+waves$PRAYALON_bl[waves$PRAYALON_bl == 2] <- "2 Less than once a month"
+waves$PRAYALON_bl[waves$PRAYALON_bl == 3] <- "3 One to two times a month"
+waves$PRAYALON_bl[waves$PRAYALON_bl == 4] <- "4 About once a week"
+waves$PRAYALON_bl[waves$PRAYALON_bl == 5] <- "5 A few times a week"
+waves$PRAYALON_bl[waves$PRAYALON_bl == 6] <- "6 About once a day"
+waves$PRAYALON_bl[waves$PRAYALON_bl == 7] <- "7 Many times a day"
+tabyl(waves$PRAYALON_bl)
+
+tabyl(waves$TEENRACE_bl)
+#White binary
+waves$TEENRACE_bl_white[waves$TEENRACE_bl == 1]  <- 1 #Yes, white
+waves$TEENRACE_bl_white[waves$TEENRACE_bl == 2]  <- 0
+waves$TEENRACE_bl_white[waves$TEENRACE_bl == 3]  <- 0
+waves$TEENRACE_bl_white[waves$TEENRACE_bl == 4]  <- 0
+waves$TEENRACE_bl_white[waves$TEENRACE_bl == 5]  <- 0
+waves$TEENRACE_bl_white[waves$TEENRACE_bl == 6]  <- 0
+waves$TEENRACE_bl_white[waves$TEENRACE_bl == 7]  <- 0
+waves$TEENRACE_bl_white[waves$TEENRACE_bl == 8]  <- 0
+tabyl(waves$TEENRACE_bl_white)
+
+tabyl(waves$TEENRACE_bl)
+waves$TEENRACE_bl_r[waves$TEENRACE_bl == 1] <- "1 White"
+waves$TEENRACE_bl_r[waves$TEENRACE_bl == 2] <- "2 Black"
+waves$TEENRACE_bl_r[waves$TEENRACE_bl == 3] <- "3 Hispanic"
+waves$TEENRACE_bl_r[waves$TEENRACE_bl == 4] <- "4 Mixed or other"
+waves$TEENRACE_bl_r[waves$TEENRACE_bl == 5] <- "4 Mixed or other"
+waves$TEENRACE_bl_r[waves$TEENRACE_bl == 6] <- "4 Mixed or other"
+waves$TEENRACE_bl_r[waves$TEENRACE_bl == 7] <- "4 Mixed or other"
+waves$TEENRACE_bl_r[waves$TEENRACE_bl == 8] <- "4 Mixed or other"
+tabyl(waves$TEENRACE_bl_r)
+
+waves$TEENRACE_bl[waves$TEENRACE_bl == 1]  <- "1 White"
+waves$TEENRACE_bl[waves$TEENRACE_bl == 2]  <- "2 Black"
+waves$TEENRACE_bl[waves$TEENRACE_bl == 3]  <- "3 Hispanic"
+waves$TEENRACE_bl[waves$TEENRACE_bl == 4]  <- "4 Asian"
+waves$TEENRACE_bl[waves$TEENRACE_bl == 5]  <- "5 Islander"
+waves$TEENRACE_bl[waves$TEENRACE_bl == 6]  <- "6 Native American"
+waves$TEENRACE_bl[waves$TEENRACE_bl == 7]  <- "7 Mixed"
+waves$TEENRACE_bl[waves$TEENRACE_bl == 8]  <- "8 Other"
+tabyl(waves$TEENRACE_bl)
+
+tabyl(waves$TEENSEX_bl)
+waves$TEENSEX_bl[waves$TEENSEX_bl == 0]  <- "1 Male"
+waves$TEENSEX_bl[waves$TEENSEX_bl == 1]  <- "2 Female"
+tabyl(waves$TEENSEX_bl)
+
+tabyl(waves$AGECATS)
+
+#20+ binary
+waves$AGECATS_20plus[waves$AGECATS >= 20]  <- 1
+waves$AGECATS_20plus[waves$AGECATS < 20]  <- 0
+tabyl(waves$AGECATS_20plus) #37.5% above 20
+```
+
+##e. Save fully cleaned data
+```{r , eval=FALSE}
+save(waves, file = "~/Downloads/Combined Data_clean (2).RData")
+```
+
+#3. FULLY CLEANED DATA
+
+##a. Load Fully Cleaned Data
+```{r }
+load("~/Downloads/Combined Data_clean (2).RData")
+
+tabyl(waves$NA_total)
+```
+
+
+##b. Review data
+```{r }
+waves %>% gtsummary::select(year, RELIG62_bl, RELIG62_bl_r, RELTRAD_bl, ATTREG, ATTREG_bl, PIMPREL_bl, PIMPREL_bl_r, FAITH1, FAITH1_r, PRAYALON_bl, PRAYALON_bl_binary, GRACE_bl, READBIBL_bl, READBIBL_bl_binary, TEENRACE_bl, TEENRACE_bl_r, TEENRACE_bl_white, TEENSEX_bl, AGECATS_bl, AGECATS, AGECATS_20plus) %>%
+  tbl_summary(by = year,
+              type = list(ATTREG ~ "categorical",
+                          ATTREG_bl ~ "categorical",
+                          GRACE_bl ~ "categorical",
+                          PRAYALON_bl_binary ~ "categorical",
+                          TEENRACE_bl_white ~ "categorical",
+                          READBIBL_bl_binary ~ "categorical",
+                          AGECATS ~ "categorical",
+                          AGECATS_20plus ~ "categorical"),
+              missing = "always")
+
+#Doubts1 has lots of missing due to display condition
+```
+
+
+#MODELS NOT UPDATED 
+#TO USE NEW RECODES
+
+#4. MODELS with FULL DATA
+
+##a. Random Slope and Intercept
+``` {r}
+random_slope_int <- glmer(ATTREG ~ year + (year|IDS), 
+                          family=binomial, 
+                          data=waves)
+summary(random_slope_int)
+```
+
+##b. ONLY Random Intercept
+``` {r}
+random_int <- glmer(ATTREG ~ year + (1|IDS), 
+                    family=binomial, 
+                    data=waves)
+summary(random_int)
+```
+
+##c. Compare A and B
+``` {r}
+#random slope+int has lower AIC and BIC, pvalue <0.05 --> model with random slope+int is preferred.
+anova(random_slope_int, random_int)
+
+#Less than 0.05 = significant difference in models?
+lrt.pvalue(random_slope_int, random_int)
+```
+
+##d. How do demographics impact attendance (ATTREG)?
+``` {r}
+#                data=waves)
+# summary(demos_agefact)
+
+demos_over_time <- glmer(ATTREG ~ year + RELIG62_bl_r + TEENRACE_bl_white + 
+                 TEENSEX_bl + factor(AGECATS_bl) +
+                   RELIG62_bl_r*year + TEENRACE_bl_white*year + TEENSEX_bl*year +
+                   factor(AGECATS_bl)*year +
+                    (year|IDS),
+                 family=binomial,
+                 data=waves)
+summary(demos_over_time)
+```
+
+significant fixed effects -- religion, race
+not significant fixed effects -- sex, age
+
+##e. What about religious predictors?
+```{r }
+relfact <- glmer(ATTREG ~ year + RELIG62_bl_r + PIMPREL_bl_r + 
+                   FAITH1_r + PRAYALON_bl_binary + GRACE_bl +
+                   READBIBL_bl_binary + 
+                   RELIG62_bl_r*year + PIMPREL_bl_r*year + 
+                   FAITH1_r*year + PRAYALON_bl_binary*year + GRACE_bl*year +
+                   READBIBL_bl_binary*year + (year|IDS), 
+                 family=binomial, 
+                 data=waves)
+summary(relfact) #most religious affil not sig - 
+```
+
+all fixed effects significant 
+##z. Final Model? 
+```{r }
+#summary(demos) #lots of race vars not sig, try binary?
+#summary(relfact) #PRAYALON not sig - 
+              #just use FAITH1 instead since it is a similar measure
+
+#tabyl(waves$RELIG62_bl)
+#tabyl(waves$RELTRAD_bl)
+#tabyl(waves$TEENRACE_bl_white)
+#tabyl(waves$PIMPREL_bl)
+#tabyl(waves$PRAYALON_bl_binary)
+
+final_mod <- glmer (ATTREG ~ year + 
+                      #demographics
+                      RELIG62_bl_r + TEENRACE_bl_white + 
+                 TEENSEX_bl + AGECATS_bl +
+                      #religion practice vars
+                      PIMPREL_bl_r + 
+                   FAITH1_r + PRAYALON_bl_binary + GRACE_bl +
+                   READBIBL_bl_binary +
+                      (year| IDS),
+                    family=binomial,
+                    data=waves) 
+summary(final_mod) #lots of significance
+
+final_mod_only_sig <- glmer (ATTREG ~ year + 
+                      #demographics
+                      RELIG62_bl_r + TEENRACE_bl_white + 
+                      #religion practice vars
+                      PIMPREL_bl_r + 
+                   FAITH1_r + PRAYALON_bl_binary + GRACE_bl +
+                   READBIBL_bl_binary +
+                      (year| IDS),
+                    family=binomial,
+                    data=waves) 
+summary(final_mod_only_sig)
+```
+
+
+#5. MODELS only when ATTREG_bl=1 and 
+
+##subset data
+```{r }
+tabyl(waves$ATTREG_bl)
+waves_attreg <- subset(waves, ATTREG_bl == 1)
+
+#Still lots of missing
+#tabyl(waves_attreg, DOUBTS1, year)
+```
+
+##a. Random Slope and Intercept
+``` {r}
+random_slope_int_attreg <- glmer(ATTREG ~ year + (year|IDS), 
+                          family=binomial, 
+                          data=waves_attreg)
+summary(random_slope_int_attreg)
+```
+
+##b. ONLY Random Intercept
+``` {r}
+random_int_attreg <- glmer(ATTREG ~ year + (1|IDS), 
+                    family=binomial, 
+                    data=waves_attreg)
+summary(random_int_attreg)
+```
+
+##c. Compare A and B
+``` {r}
+#random slope+int has lower AIC and BIC, pvalue <0.05 --> model with random slope+int is preferred.
+anova(random_slope_int_attreg, random_int_attreg)
+
+# is = 0???
+lrt.pvalue(random_slope_int_attreg, random_int_attreg)
+```
+
+##d. How do demographics impact attendance (ATTREG)?
+``` {r}
+demos_attreg <- glmer(ATTREG ~ year + RELIG62_bl_r + TEENRACE_bl_white + 
+                 TEENSEX_bl + AGECATS_bl + (year|IDS), 
+               family=binomial, 
+               #nAGQ = 5, #slows down time to calculate
+               data=waves_attreg)
+summary(demos_attreg)
+```
+only relig62 significant
+
+##e. What about religious predictors?
+```{r }
+relfact_attreg <- glmer(ATTREG ~ year + RELIG62_bl_r + PIMPREL_bl_r +
+                   FAITH1_r+ PRAYALON_bl_binary + GRACE_bl +
+                   READBIBL_bl_binary + (year|IDS), 
+                 family=binomial, 
+                 data=waves_attreg)
+summary(relfact_attreg) #most religious affil not sig - 
+```
+
+##z. Final Model? 
+```{r }
+#summary(demos) #many race and REL categories not sig - 
+#summary(relfact) #prayalon not sig
+
+#tabyl(waves$RELIG62_bl)
+#tabyl(waves$RELTRAD_bl)
+#tabyl(waves$TEENRACE_bl_white)
+#tabyl(waves$PIMPREL_bl)
+
+final_mod_attreg <- glmer (ATTREG ~ year + 
+                      #demographics
+                     RELIG62_bl_r + TEENRACE_bl_white + 
+                 TEENSEX_bl + AGECATS_bl +
+                      #religion practice vars
+                      PIMPREL_bl_r +
+                   FAITH1_r+ PRAYALON_bl_binary + GRACE_bl +
+                   READBIBL_bl_binary + 
+                      (1 + year | IDS),
+                    family=binomial,
+                    data=waves_attreg) 
+summary(final_mod_attreg) #lots of significance
+
+final_mod_attreg_only_sig <- glmer (ATTREG ~ year + 
+                      #demographics
+                     RELIG62_bl_r +
+                      #religion practice vars
+                      PIMPREL_bl_r +
+                   FAITH1_r+ GRACE_bl +
+                   READBIBL_bl_binary + 
+                      (1 + year | IDS),
+                    family=binomial,
+                    data=waves_attreg) 
+summary(final_mod_attreg_only_sig)
+```
+## marginal model
+
+``` {r}
+wavesdata <- waves
+marginal <- geeglm(ATTREG ~ year + RELIG62_bl_r + PIMPREL_bl_r + 
+                   FAITH1_r + PRAYALON_bl_binary + GRACE_bl +
+                   READBIBL_bl_binary + 
+                   RELIG62_bl_r*year + PIMPREL_bl_r*year + 
+                   FAITH1_r*year + PRAYALON_bl_binary*year + GRACE_bl*year +
+                   READBIBL_bl_binary*year + TEENRACE_bl_white + 
+                 TEENSEX_bl + factor(AGECATS_bl) +
+                   TEENRACE_bl_white*year + TEENSEX_bl*year +
+                   factor(AGECATS_bl)*year,
+                 id=IDS,
+                 waves=year,
+                 family=binomial("logit"),
+                 data=wavesdata,
+                 corstr = "exchangeable")
+
+marginal <- geeglm(ATTREG ~ year + factor(AGECATS_bl),
+                    id=IDS,
+                 waves=year,
+                 family=binomial("logit"),
+                 data=wavesdata,
+                 corstr = "independence")
+```

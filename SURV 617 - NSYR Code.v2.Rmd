@@ -55,7 +55,7 @@ PINCOME (RECODED INCOME) - 725) Household income merged into a single scale. (PI
 TEENRACE (RECODED TEEN RACE) 726) Merged and collapsed teen race. (TEENRACE)
 
 ##d. Load Data
-```{r }
+```{r, eval=FALSE }
 wave1 <- read_xlsx("~/Desktop/JPSM - Masters Program/JPSM Classes/03_Fall 2024/SURV 617 - Statistical Applications/Group Project/NSYR data/National Study of Youth and Religion, Wave 1 (2003).XLSX")
 wave1$year <- 0
 
@@ -76,7 +76,7 @@ wave4$year <- 10
 ```
 
 ##e. Reduce vars in files across years
-```{r }
+```{r, eval=FALSE }
 wave1_r <- wave1 %>% dplyr::select(c("IDS", "year", "RWEIGHT1", "RWEIGHT2", "NWEIGHT2", "INWAVE2", "PLIVE", "FAITH1", "PIMPREL", "PSCHREL", "PATTEND", "PDADEDUC", "PMOMEDUC", "PINCOME","EATADULT", "ETHRACE", "ATTREG", "ATTEND1", "DOUBTS1", "WISHATT1", "EDGOAL1", "EDGOAL3", "GRADES", "MEANLESS", "ABSTAIN1", "DIVCEOK", "CRRACE", "POLACT", "AFTRLIFE", "VIEWREL", "SEXEVER", "BODY", "SAD", "ACCEPTED", "GUILT1", "GUILT2", "GUILT3", "PRAYALON", "READBIBL", "GRACE", "CHWELCOM", "TEENRACE", "TEENSEX", "AGECATS", "PRACEOLD", "PWKMOMFT", "PWKMOMPT", "PWKDADFT", "PWKDADPT", "STOPATT1", "STOPATT2", "TEENNUM", "WISHATT", "XCHLDNUM", "CENREG", "CENDIV"))
 wave1_r <- wave1_r %>% rename("GENDER"="TEENSEX")
 
@@ -110,7 +110,7 @@ wave4_r <- wave4_r %>% rename("FAITH1"="FAITH1_W4",
 ```
 
 ##f. Impute Baseline Vars
-```{r }
+```{r, eval=FALSE }
 #BASELINE TEEN RACE
 wave1$TEENRACE_bl <- wave1$TEENRACE
 wave2$TEENRACE_bl <- wave1$TEENRACE[match(wave2$IDS, wave1$IDS)]
@@ -148,7 +148,7 @@ wave4$RELIG62_bl <- wave1$PIMPREL[match(wave4$IDS, wave1$IDS)]
 ```
 
 ###f. Continued
-```{r }
+```{r, eval=FALSE }
 #Baseline pray alone
 wave1$PRAYALON_bl <- wave1$PRAYALON
 wave2$PRAYALON_bl <- wave1$PRAYALON[match(wave2$IDS, wave1$IDS)]
@@ -205,7 +205,7 @@ tabyl(wave4$RELTRAD_bl)
 ```
 
 ##g. Combine Waves
-```{r }
+```{r, eval=FALSE }
 wave1_r <- wave1 %>% dplyr::select(c("IDS", "year", "ATTREG", "ATTREG_bl", "PIMPREL_bl", "RELIG62_bl", "RELTRAD_bl", "FAITH1", "PRAYALON_bl", "GRACE_bl", "READBIBL_bl", "TEENRACE_bl", "TEENSEX_bl", "AGECATS_bl", "AGECATS"))
 
 wave2_r <- wave2 %>% dplyr::select(c("IDS", "year", "ATTREG", "ATTREG_bl", "PIMPREL_bl", "RELIG62_bl", "RELTRAD_bl", "FAITH1", "PRAYALON_bl", "GRACE_bl", "READBIBL_bl", "TEENRACE_bl", "TEENSEX_bl", "AGECATS_bl", "AGECATS"))
@@ -225,7 +225,7 @@ save(waves, file = "~/Desktop/JPSM - Masters Program/JPSM Classes/03_Fall 2024/S
 ```
 
 #2. LOAD AND REVIEW PARTIALLY CLEANED DATA
-```{r }
+```{r, eval=FALSE }
 load("~/Desktop/JPSM - Masters Program/JPSM Classes/03_Fall 2024/SURV 617 - Statistical Applications/Group Project/NSYR data/Combined Data.RData")
 
 waves$NA_total <- rowSums(is.na(waves))
@@ -236,7 +236,7 @@ waves <- subset(waves, year != 3 & NA_total != 3)
 tabyl(waves, NA_total, year)
 ```
 
-```{r }
+```{r, eval=FALSE }
 waves %>% gtsummary::select(year, RELIG62_bl, RELTRAD_bl, ATTREG, ATTREG_bl, PIMPREL_bl, RELIG62_bl, RELTRAD_bl, FAITH1, PRAYALON_bl, GRACE_bl, READBIBL_bl, TEENRACE_bl, TEENSEX_bl, AGECATS_bl, AGECATS) %>%
   tbl_summary(by = year,
               type = list(TEENRACE_bl ~ "categorical",
@@ -247,7 +247,7 @@ waves %>% gtsummary::select(year, RELIG62_bl, RELTRAD_bl, ATTREG, ATTREG_bl, PIM
 ```
 
 ##a. Cleaning
-```{r }
+```{r, eval=FALSE }
 #Set Refuse/DK/etc to NA
 tabyl(waves$RELIG62_bl)
 tabyl(waves$RELTRAD_bl)
@@ -309,7 +309,7 @@ tabyl(waves$AGECATS)
 ```
 
 ##b. Review Vars (again)
-```{r }
+```{r, eval=FALSE }
 waves %>% gtsummary::select(year, RELIG62_bl, RELTRAD_bl, ATTREG, ATTREG_bl, PIMPREL_bl, RELIG62_bl, RELTRAD_bl, FAITH1, PRAYALON_bl, GRACE_bl, READBIBL_bl, TEENRACE_bl, TEENSEX_bl, AGECATS_bl, AGECATS) %>%
   tbl_summary(by = year,
               type = list(ATTREG ~ "categorical",
@@ -323,7 +323,7 @@ waves %>% gtsummary::select(year, RELIG62_bl, RELTRAD_bl, ATTREG, ATTREG_bl, PIM
 ```
 
 ##c. Review Cases with missing data
-```{r }
+```{r, eval=FALSE }
 waves$NA_total <- rowSums(is.na(waves))
 
 tabyl(waves$NA_total) #97.3% have no missing data
@@ -331,7 +331,7 @@ tabyl(waves, NA_total, year)
 ```
 
 ##d. Recodes
-```{r }
+```{r, eval=FALSE }
 tabyl(waves$RELIG62_bl)
 waves$RELIG62_bl_r[waves$RELIG62_bl == 1 ] <- "1 Catholic"
 waves$RELIG62_bl_r[waves$RELIG62_bl == 2 ] <- "2 Protestant"
@@ -476,7 +476,7 @@ waves$AGECATS_20plus[waves$AGECATS < 20]  <- "2 Under 20"
 tabyl(waves$AGECATS_20plus) #37.5% above 20
 ```
 
-```{r }
+```{r, eval=FALSE }
 waves %>% gtsummary::select(year, RELIG62_bl, RELTRAD_bl, ATTREG, ATTREG_bl, PIMPREL_bl, PIMPREL_bl_r, RELIG62_bl, RELIG62_bl_r, RELTRAD_bl, FAITH1, FAITH1_r, PRAYALON_bl, PRAYALON_bl_binary, GRACE_bl, READBIBL_bl, READBIBL_bl_binary, TEENRACE_bl, TEENRACE_bl_r, TEENRACE_bl_white, TEENSEX_bl, AGECATS_bl, AGECATS, AGECATS_20plus) %>%
   tbl_summary(by = year,
               type = list(ATTREG ~ "categorical",
@@ -490,7 +490,7 @@ waves %>% gtsummary::select(year, RELIG62_bl, RELTRAD_bl, ATTREG, ATTREG_bl, PIM
 ```
 
 ##e. Save fully cleaned data
-```{r }
+```{r, eval=FALSE }
 save(waves, file = "~/Desktop/JPSM - Masters Program/JPSM Classes/03_Fall 2024/SURV 617 - Statistical Applications/Group Project/NSYR data/Combined Data_clean.RData")
 
 tabyl(waves$NA_total) #97.34 not missing any data
@@ -513,7 +513,7 @@ save(waves_attreg_nomissing_234, file = "~/Desktop/JPSM - Masters Program/JPSM C
 ```
 
 ##f. Review vars, attreg=1, no missing data
-```{r }
+```{r, eval=FALSE }
 waves_attreg_nomissing_all %>% gtsummary::select(year, RELIG62_bl, RELTRAD_bl, ATTREG, ATTREG_bl, PIMPREL_bl, PIMPREL_bl_r, RELIG62_bl, RELIG62_bl_r, RELTRAD_bl, FAITH1, FAITH1_r, PRAYALON_bl, PRAYALON_bl_binary, GRACE_bl, READBIBL_bl, READBIBL_bl_binary, TEENRACE_bl, TEENRACE_bl_r, TEENRACE_bl_white, TEENSEX_bl, AGECATS_bl, AGECATS, AGECATS_20plus) %>%
   tbl_summary(by = year,
               type = list(ATTREG ~ "categorical",
@@ -603,7 +603,7 @@ summary(marginal_relig)
 #4. MODELS with FULL DATA
 
 ##a. Random Slope and Intercept
-``` {r}
+```{r, eval=FALSE }
 random_slope_int <- glmer(ATTREG ~ year + (year|IDS), 
                           family=binomial, 
                           data=waves)
@@ -611,7 +611,7 @@ summary(random_slope_int)
 ```
 
 ##b. ONLY Random Intercept
-``` {r}
+```{r, eval=FALSE }
 random_int <- glmer(ATTREG ~ year + (1|IDS), 
                     family=binomial, 
                     data=waves)
@@ -619,7 +619,7 @@ summary(random_int)
 ```
 
 ##c. Compare A and B
-``` {r}
+```{r, eval=FALSE }
 #random slope+int has lower AIC and BIC, pvalue <0.05 --> model with random slope+int is preferred.
 anova(random_slope_int, random_int)
 
@@ -628,7 +628,7 @@ lrt.pvalue(random_slope_int, random_int)
 ```
 
 ##d. How do demographics impact attendance (ATTREG)?
-``` {r}
+```{r, eval=FALSE }
 #                data=waves)
 # summary(demos_agefact)
 
@@ -646,7 +646,7 @@ significant fixed effects -- religion, race
 not significant fixed effects -- sex, age
 
 ##e. What about religious predictors?
-```{r }
+```{r, eval=FALSE }
 relfact <- glmer(ATTREG ~ year + RELIG62_bl_r + PIMPREL_bl_r + 
                    FAITH1_r + PRAYALON_bl_binary + GRACE_bl +
                    READBIBL_bl_binary + 
@@ -660,7 +660,7 @@ summary(relfact) #most religious affil not sig -
 
 all fixed effects significant 
 ##z. Final Model? 
-```{r }
+```{r, eval=FALSE }
 #summary(demos) #lots of race vars not sig, try binary?
 #summary(relfact) #PRAYALON not sig - 
               #just use FAITH1 instead since it is a similar measure
@@ -698,125 +698,3 @@ summary(final_mod_only_sig)
 ```
 
 
-
-##a. Random Slope and Intercept
-``` {r}
-random_slope_int_attreg <- glmer(ATTREG ~ year + (year|IDS), 
-                          family=binomial, 
-                          data=waves_attreg)
-summary(random_slope_int_attreg)
-```
-
-##b. ONLY Random Intercept
-``` {r}
-random_int_attreg <- glmer(ATTREG ~ year + (1|IDS), 
-                    family=binomial, 
-                    data=waves_attreg)
-summary(random_int_attreg)
-```
-
-##c. Compare A and B
-``` {r}
-#random slope+int has lower AIC and BIC, pvalue <0.05 --> model with random slope+int is preferred.
-anova(random_slope_int_attreg, random_int_attreg)
-
-# is = 0???
-lrt.pvalue(random_slope_int_attreg, random_int_attreg)
-```
-
-##d. How do demographics impact attendance (ATTREG)?
-``` {r}
-demos_attreg <- glmer(ATTREG ~ year + RELIG62_bl_r + TEENRACE_bl_white + 
-                 TEENSEX_bl + AGECATS_bl + (year|IDS), 
-               family=binomial, 
-               #nAGQ = 5, #slows down time to calculate
-               data=waves_attreg)
-summary(demos_attreg)
-```
-only relig62 significant
-
-##e. What about religious predictors?
-```{r }
-relfact_attreg <- glmer(ATTREG ~ year + RELIG62_bl_r + PIMPREL_bl_r +
-                   FAITH1_r+ PRAYALON_bl_binary + GRACE_bl +
-                   READBIBL_bl_binary + (year|IDS), 
-                 family=binomial, 
-                 data=waves_attreg)
-summary(relfact_attreg) #most religious affil not sig - 
-```
-
-##z. Final Model? 
-```{r }
-#summary(demos) #many race and REL categories not sig - 
-#summary(relfact) #prayalon not sig
-
-#tabyl(waves$RELIG62_bl)
-#tabyl(waves$RELTRAD_bl)
-#tabyl(waves$TEENRACE_bl_white)
-#tabyl(waves$PIMPREL_bl)
-
-final_mod_attreg <- glmer (ATTREG ~ year + 
-                      #demographics
-                     RELIG62_bl_r + TEENRACE_bl_white + 
-                 TEENSEX_bl + AGECATS_bl +
-                      #religion practice vars
-                      PIMPREL_bl_r +
-                   FAITH1_r+ PRAYALON_bl_binary + GRACE_bl +
-                   READBIBL_bl_binary + 
-                      (1 + year | IDS),
-                    family=binomial,
-                    data=waves_attreg) 
-summary(final_mod_attreg) #lots of significance
-
-final_mod_attreg_only_sig <- glmer (ATTREG ~ year + 
-                      #demographics
-                     RELIG62_bl_r +
-                      #religion practice vars
-                      PIMPREL_bl_r +
-                   FAITH1_r+ GRACE_bl +
-                   READBIBL_bl_binary + 
-                      (1 + year | IDS),
-                    family=binomial,
-                    data=waves_attreg) 
-summary(final_mod_attreg_only_sig)
-```
-## marginal model
-
-``` {r}
-wavesdata <- waves
-
-subsample <- sample_n(waves, 100)
-table(subsample$year)
-save(subsample, file = "~/Downloads/ATTREG_100_cases.RData")
-
-
-marginal <- geeglm(ATTREG ~ year + RELIG62_bl_r + PIMPREL_bl_r + 
-                   FAITH1_r + PRAYALON_bl_binary + GRACE_bl +
-                   READBIBL_bl_binary + 
-                   RELIG62_bl_r*year + PIMPREL_bl_r*year + 
-                   FAITH1_r*year + PRAYALON_bl_binary*year + GRACE_bl*year +
-                   READBIBL_bl_binary*year + TEENRACE_bl_white + 
-                 TEENSEX_bl + factor(AGECATS_bl) +
-                   TEENRACE_bl_white*year + TEENSEX_bl*year +
-                   factor(AGECATS_bl)*year,
-                 id=IDS,
-                 waves=year,
-                 family=binomial("logit"),
-                 data=wavesdata,
-                 corstr = "exchangeable",
-                 na.action=na.omit)
-
-wavesdata$year[wavesdata$year==0] <- 1
-wavesdata$year[wavesdata$year==2] <- 2
-wavesdata$year[wavesdata$year==4] <- 3
-wavesdata$year[wavesdata$year==10] <- 4
-
-marginal <- geeglm(ATTREG ~ year + RELIG62_bl,
-                   data=waves,
-                    id=IDS,
-                 family=binomial("logit"),
-                 corstr = "exchangeable",
-                 na.action=na.omit)
-
-model <- glm(ATTREG ~ year, data=wavesdata, family=binomial("logit"))
-```

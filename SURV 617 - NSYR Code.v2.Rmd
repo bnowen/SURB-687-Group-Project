@@ -142,9 +142,9 @@ tabyl(wave2$RELIG62)
 #tabyl(wave4$RELIG62) #Not in wave
 
 wave1$RELIG62_bl <- wave1$RELIG62
-wave2$RELIG62_bl <- wave1$PIMPREL[match(wave2$IDS, wave1$IDS)]
-wave3$RELIG62_bl <- wave1$PIMPREL[match(wave3$IDS, wave1$IDS)]
-wave4$RELIG62_bl <- wave1$PIMPREL[match(wave4$IDS, wave1$IDS)]
+wave2$RELIG62_bl <- wave1$RELIG62[match(wave2$IDS, wave1$IDS)]
+wave3$RELIG62_bl <- wave1$RELIG62[match(wave3$IDS, wave1$IDS)]
+wave4$RELIG62_bl <- wave1$RELIG62[match(wave4$IDS, wave1$IDS)]
 ```
 
 ###f. Continued
@@ -530,7 +530,7 @@ waves_attreg_nomissing_all %>% gtsummary::select(year, RELIG62_bl, RELTRAD_bl, A
 
 ##a. Load Fully Cleaned Data
 ```{r }
-load("~/Downloads/Combined Data_clean_updated.RData")
+load("~/Downloads/Combined Data_clean.RData")
 
 load("~/Downloads/Combined Data_clean_attreg1_all.RData")
 
@@ -559,7 +559,7 @@ waves %>% gtsummary::select(year, RELIG62_bl, RELIG62_bl_r, RELTRAD_bl, ATTREG, 
 
 ```{r }
 data <- waves_attreg_nomissing_234
-table(data$year)
+table(data$year, data$ATTREG)
 
 marginal_model <- geeglm(ATTREG ~ year,
                    data=data,
@@ -567,134 +567,45 @@ marginal_model <- geeglm(ATTREG ~ year,
                  family=binomial("logit"),
                  corstr = "exchangeable",
                  na.action=na.omit)
-summary(marginal_model)
 
-marginal_demos <- geeglm(ATTREG ~ year + RELIG62_bl_r + year*RELIG62_bl_r +
+summary(marginal_model)
+marginal_model %>% tbl_regression()
+marginal_model %>% tbl_regression(exponentiate = T)
+
+marginal_all <- geeglm(ATTREG ~ year + RELIG62_bl_r + year*RELIG62_bl_r +
                            TEENRACE_bl_white + year*TEENRACE_bl_white + 
-                 TEENSEX_bl + year*TEENSEX_bl + AGECATS_bl + year*AGECATS_bl,
+                 TEENSEX_bl + year*TEENSEX_bl + AGECATS_bl + year*AGECATS_bl +
+                   PIMPREL_bl_r + 
+                   FAITH1_r + PRAYALON_bl_binary + GRACE_bl +
+                   READBIBL_bl_binary + 
+                    PIMPREL_bl_r*year + 
+                   FAITH1_r*year + PRAYALON_bl_binary*year +
+                     GRACE_bl*year +
+                   READBIBL_bl_binary*year,
                  data=data,
                     id=IDS,
                  family=binomial("logit"),
                  corstr = "exchangeable",
                  na.action=na.omit)
-summary(marginal_demos)
+summary(marginal_all)
+marginal_all %>% tbl_regression()
+marginal_all %>% tbl_regression(exponentiate = T)
 
-marginal_relig <- geeglm(ATTREG ~ year + PIMPREL_bl_r + 
-                   FAITH1_r + PRAYALON_bl_binary + GRACE_bl +
+marginal_sig <- geeglm(ATTREG ~ year + RELIG62_bl_r + 
+                           TEENRACE_bl_white +
+                         TEENSEX_bl + AGECATS_bl +
+                   PIMPREL_bl_r + 
+                   FAITH1_r + GRACE_bl +
                    READBIBL_bl_binary + 
-                    PIMPREL_bl_r*year + 
-                   FAITH1_r*year + PRAYALON_bl_binary*year + GRACE_bl*year +
-                   READBIBL_bl_binary*year,
-                  data=data,
+                   FAITH1_r*year,
+                 data=data,
                     id=IDS,
                  family=binomial("logit"),
                  corstr = "exchangeable",
                  na.action=na.omit)
-summary(marginal_relig)
-
-```
-
-
-
-## IGNORE AFTER HERE
-
-
-
-#4. MODELS with FULL DATA
-
-##a. Random Slope and Intercept
-```{r, eval=FALSE }
-random_slope_int <- glmer(ATTREG ~ year + (year|IDS), 
-                          family=binomial, 
-                          data=waves)
-summary(random_slope_int)
-```
-
-##b. ONLY Random Intercept
-```{r, eval=FALSE }
-random_int <- glmer(ATTREG ~ year + (1|IDS), 
-                    family=binomial, 
-                    data=waves)
-summary(random_int)
-```
-
-##c. Compare A and B
-```{r, eval=FALSE }
-#random slope+int has lower AIC and BIC, pvalue <0.05 --> model with random slope+int is preferred.
-anova(random_slope_int, random_int)
-
-#Less than 0.05 = significant difference in models?
-lrt.pvalue(random_slope_int, random_int)
-```
-
-##d. How do demographics impact attendance (ATTREG)?
-```{r, eval=FALSE }
-#                data=waves)
-# summary(demos_agefact)
-
-demos_over_time <- glmer(ATTREG ~ year + RELIG62_bl_r + TEENRACE_bl_white + 
-                 TEENSEX_bl + factor(AGECATS_bl) +
-                   RELIG62_bl_r*year + TEENRACE_bl_white*year + TEENSEX_bl*year +
-                   factor(AGECATS_bl)*year +
-                    (year|IDS),
-                 family=binomial,
-                 data=waves)
-summary(demos_over_time)
-```
-
-significant fixed effects -- religion, race
-not significant fixed effects -- sex, age
-
-##e. What about religious predictors?
-```{r, eval=FALSE }
-relfact <- glmer(ATTREG ~ year + RELIG62_bl_r + PIMPREL_bl_r + 
-                   FAITH1_r + PRAYALON_bl_binary + GRACE_bl +
-                   READBIBL_bl_binary + 
-                   RELIG62_bl_r*year + PIMPREL_bl_r*year + 
-                   FAITH1_r*year + PRAYALON_bl_binary*year + GRACE_bl*year +
-                   READBIBL_bl_binary*year + (year|IDS), 
-                 family=binomial, 
-                 data=waves)
-summary(relfact) #most religious affil not sig - 
-```
-
-all fixed effects significant 
-##z. Final Model? 
-```{r, eval=FALSE }
-#summary(demos) #lots of race vars not sig, try binary?
-#summary(relfact) #PRAYALON not sig - 
-              #just use FAITH1 instead since it is a similar measure
-
-#tabyl(waves$RELIG62_bl)
-#tabyl(waves$RELTRAD_bl)
-#tabyl(waves$TEENRACE_bl_white)
-#tabyl(waves$PIMPREL_bl)
-#tabyl(waves$PRAYALON_bl_binary)
-
-final_mod <- glmer (ATTREG ~ year + 
-                      #demographics
-                      RELIG62_bl_r + TEENRACE_bl_white + 
-                 TEENSEX_bl + AGECATS_bl +
-                      #religion practice vars
-                      PIMPREL_bl_r + 
-                   FAITH1_r + PRAYALON_bl_binary + GRACE_bl +
-                   READBIBL_bl_binary +
-                      (year| IDS),
-                    family=binomial,
-                    data=waves) 
-summary(final_mod) #lots of significance
-
-final_mod_only_sig <- glmer (ATTREG ~ year + 
-                      #demographics
-                      RELIG62_bl_r + TEENRACE_bl_white + 
-                      #religion practice vars
-                      PIMPREL_bl_r + 
-                   FAITH1_r + PRAYALON_bl_binary + GRACE_bl +
-                   READBIBL_bl_binary +
-                      (year| IDS),
-                    family=binomial,
-                    data=waves) 
-summary(final_mod_only_sig)
+summary(marginal_sig)
+marginal_sig %>% tbl_regression()
+marginal_sig %>% tbl_regression(exponentiate = T)
 ```
 
 

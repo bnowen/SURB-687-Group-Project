@@ -477,9 +477,9 @@ tabyl(wave2$RELIG62)
 #tabyl(wave4$RELIG62) #Not in wave
 
 wave1$RELIG62_bl &lt;- wave1$RELIG62
-wave2$RELIG62_bl &lt;- wave1$PIMPREL[match(wave2$IDS, wave1$IDS)]
-wave3$RELIG62_bl &lt;- wave1$PIMPREL[match(wave3$IDS, wave1$IDS)]
-wave4$RELIG62_bl &lt;- wave1$PIMPREL[match(wave4$IDS, wave1$IDS)]</code></pre>
+wave2$RELIG62_bl &lt;- wave1$RELIG62[match(wave2$IDS, wave1$IDS)]
+wave3$RELIG62_bl &lt;- wave1$RELIG62[match(wave3$IDS, wave1$IDS)]
+wave4$RELIG62_bl &lt;- wave1$RELIG62[match(wave4$IDS, wave1$IDS)]</code></pre>
 <p>###f. Continued</p>
 <pre class="r"><code>#Baseline pray alone
 wave1$PRAYALON_bl &lt;- wave1$PRAYALON
@@ -828,7 +828,7 @@ save(waves_attreg_nomissing_234, file = &quot;~/Desktop/JPSM - Masters Program/J
               missing = &quot;always&quot;)</code></pre>
 <p>#3. FULLY CLEANED DATA</p>
 <p>##a. Load Fully Cleaned Data</p>
-<pre class="r"><code>load(&quot;~/Downloads/Combined Data_clean_updated.RData&quot;)
+<pre class="r"><code>load(&quot;~/Downloads/Combined Data_clean.RData&quot;)
 
 load(&quot;~/Downloads/Combined Data_clean_attreg1_all.RData&quot;)
 
@@ -845,20 +845,20 @@ load(&quot;~/Downloads/Combined Data_clean_attreg1_234.RData&quot;)</code></pre>
                           AGECATS ~ &quot;categorical&quot;,
                           AGECATS_20plus ~ &quot;categorical&quot;),
               missing = &quot;always&quot;)</code></pre>
-<div id="fopshtgftg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fopshtgftg table {
+<div id="wesvuktkdb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wesvuktkdb table {
 font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 }
-#fopshtgftg thead, #fopshtgftg tbody, #fopshtgftg tfoot, #fopshtgftg tr, #fopshtgftg td, #fopshtgftg th {
+#wesvuktkdb thead, #wesvuktkdb tbody, #wesvuktkdb tfoot, #wesvuktkdb tr, #wesvuktkdb td, #wesvuktkdb th {
 border-style: none;
 }
-#fopshtgftg p {
+#wesvuktkdb p {
 margin: 0;
 padding: 0;
 }
-#fopshtgftg .gt_table {
+#wesvuktkdb .gt_table {
 display: table;
 border-collapse: collapse;
 line-height: normal;
@@ -883,11 +883,11 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-#fopshtgftg .gt_caption {
+#wesvuktkdb .gt_caption {
 padding-top: 4px;
 padding-bottom: 4px;
 }
-#fopshtgftg .gt_title {
+#wesvuktkdb .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
@@ -898,7 +898,7 @@ padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-#fopshtgftg .gt_subtitle {
+#wesvuktkdb .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
@@ -909,7 +909,7 @@ padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-#fopshtgftg .gt_heading {
+#wesvuktkdb .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -920,12 +920,12 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#fopshtgftg .gt_bottom_border {
+#wesvuktkdb .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#fopshtgftg .gt_col_headings {
+#wesvuktkdb .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -939,7 +939,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#fopshtgftg .gt_col_heading {
+#wesvuktkdb .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -958,7 +958,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-#fopshtgftg .gt_column_spanner_outer {
+#wesvuktkdb .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -969,13 +969,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-#fopshtgftg .gt_column_spanner_outer:first-child {
+#wesvuktkdb .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-#fopshtgftg .gt_column_spanner_outer:last-child {
+#wesvuktkdb .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-#fopshtgftg .gt_column_spanner {
+#wesvuktkdb .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -986,10 +986,10 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-#fopshtgftg .gt_spanner_row {
+#wesvuktkdb .gt_spanner_row {
 border-bottom-style: hidden;
 }
-#fopshtgftg .gt_group_heading {
+#wesvuktkdb .gt_group_heading {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -1014,7 +1014,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 text-align: left;
 }
-#fopshtgftg .gt_empty_group_heading {
+#wesvuktkdb .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -1028,13 +1028,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-#fopshtgftg .gt_from_md > :first-child {
+#wesvuktkdb .gt_from_md > :first-child {
 margin-top: 0;
 }
-#fopshtgftg .gt_from_md > :last-child {
+#wesvuktkdb .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-#fopshtgftg .gt_row {
+#wesvuktkdb .gt_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -1052,7 +1052,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-#fopshtgftg .gt_stub {
+#wesvuktkdb .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -1064,7 +1064,7 @@ border-right-color: #D3D3D3;
 padding-left: 5px;
 padding-right: 5px;
 }
-#fopshtgftg .gt_stub_row_group {
+#wesvuktkdb .gt_stub_row_group {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -1077,13 +1077,13 @@ padding-left: 5px;
 padding-right: 5px;
 vertical-align: top;
 }
-#fopshtgftg .gt_row_group_first td {
+#wesvuktkdb .gt_row_group_first td {
 border-top-width: 2px;
 }
-#fopshtgftg .gt_row_group_first th {
+#wesvuktkdb .gt_row_group_first th {
 border-top-width: 2px;
 }
-#fopshtgftg .gt_summary_row {
+#wesvuktkdb .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -1092,14 +1092,14 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#fopshtgftg .gt_first_summary_row {
+#wesvuktkdb .gt_first_summary_row {
 border-top-style: solid;
 border-top-color: #D3D3D3;
 }
-#fopshtgftg .gt_first_summary_row.thick {
+#wesvuktkdb .gt_first_summary_row.thick {
 border-top-width: 2px;
 }
-#fopshtgftg .gt_last_summary_row {
+#wesvuktkdb .gt_last_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -1108,7 +1108,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#fopshtgftg .gt_grand_summary_row {
+#wesvuktkdb .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -1117,7 +1117,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#fopshtgftg .gt_first_grand_summary_row {
+#wesvuktkdb .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -1126,7 +1126,7 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-#fopshtgftg .gt_last_grand_summary_row_top {
+#wesvuktkdb .gt_last_grand_summary_row_top {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -1135,10 +1135,10 @@ border-bottom-style: double;
 border-bottom-width: 6px;
 border-bottom-color: #D3D3D3;
 }
-#fopshtgftg .gt_striped {
+#wesvuktkdb .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-#fopshtgftg .gt_table_body {
+#wesvuktkdb .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -1146,7 +1146,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#fopshtgftg .gt_footnotes {
+#wesvuktkdb .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -1159,7 +1159,7 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#fopshtgftg .gt_footnote {
+#wesvuktkdb .gt_footnote {
 margin: 0px;
 font-size: 90%;
 padding-top: 4px;
@@ -1167,7 +1167,7 @@ padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#fopshtgftg .gt_sourcenotes {
+#wesvuktkdb .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -1180,64 +1180,64 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#fopshtgftg .gt_sourcenote {
+#wesvuktkdb .gt_sourcenote {
 font-size: 90%;
 padding-top: 4px;
 padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#fopshtgftg .gt_left {
+#wesvuktkdb .gt_left {
 text-align: left;
 }
-#fopshtgftg .gt_center {
+#wesvuktkdb .gt_center {
 text-align: center;
 }
-#fopshtgftg .gt_right {
+#wesvuktkdb .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-#fopshtgftg .gt_font_normal {
+#wesvuktkdb .gt_font_normal {
 font-weight: normal;
 }
-#fopshtgftg .gt_font_bold {
+#wesvuktkdb .gt_font_bold {
 font-weight: bold;
 }
-#fopshtgftg .gt_font_italic {
+#wesvuktkdb .gt_font_italic {
 font-style: italic;
 }
-#fopshtgftg .gt_super {
+#wesvuktkdb .gt_super {
 font-size: 65%;
 }
-#fopshtgftg .gt_footnote_marks {
+#wesvuktkdb .gt_footnote_marks {
 font-size: 75%;
 vertical-align: 0.4em;
 position: initial;
 }
-#fopshtgftg .gt_asterisk {
+#wesvuktkdb .gt_asterisk {
 font-size: 100%;
 vertical-align: 0;
 }
-#fopshtgftg .gt_indent_1 {
+#wesvuktkdb .gt_indent_1 {
 text-indent: 5px;
 }
-#fopshtgftg .gt_indent_2 {
+#wesvuktkdb .gt_indent_2 {
 text-indent: 10px;
 }
-#fopshtgftg .gt_indent_3 {
+#wesvuktkdb .gt_indent_3 {
 text-indent: 15px;
 }
-#fopshtgftg .gt_indent_4 {
+#wesvuktkdb .gt_indent_4 {
 text-indent: 20px;
 }
-#fopshtgftg .gt_indent_5 {
+#wesvuktkdb .gt_indent_5 {
 text-indent: 25px;
 }
-#fopshtgftg .katex-display {
+#wesvuktkdb .katex-display {
 display: inline-flex !important;
 margin-bottom: 0.75em !important;
 }
-#fopshtgftg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wesvuktkdb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
 height: 0px !important;
 }
 </style>
@@ -1263,49 +1263,49 @@ N = 2,144</span><span class="gt_footnote_marks" style="white-space:nowrap;font-s
 <td headers="stat_4" class="gt_row gt_center"><br /></td></tr>
     <tr><td headers="label" class="gt_row gt_left">    1 Catholic</td>
 <td headers="stat_1" class="gt_row gt_center">618 (19%)</td>
-<td headers="stat_2" class="gt_row gt_center">1,256 (48%)</td>
-<td headers="stat_3" class="gt_row gt_center">1,217 (48%)</td>
-<td headers="stat_4" class="gt_row gt_center">1,001 (47%)</td></tr>
+<td headers="stat_2" class="gt_row gt_center">461 (18%)</td>
+<td headers="stat_3" class="gt_row gt_center">468 (19%)</td>
+<td headers="stat_4" class="gt_row gt_center">381 (18%)</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    2 Protestant</td>
 <td headers="stat_1" class="gt_row gt_center">19 (0.6%)</td>
-<td headers="stat_2" class="gt_row gt_center">622 (24%)</td>
-<td headers="stat_3" class="gt_row gt_center">616 (24%)</td>
-<td headers="stat_4" class="gt_row gt_center">517 (24%)</td></tr>
+<td headers="stat_2" class="gt_row gt_center">15 (0.6%)</td>
+<td headers="stat_3" class="gt_row gt_center">15 (0.6%)</td>
+<td headers="stat_4" class="gt_row gt_center">11 (0.5%)</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    3 Christian</td>
 <td headers="stat_1" class="gt_row gt_center">1,925 (58%)</td>
-<td headers="stat_2" class="gt_row gt_center">354 (14%)</td>
-<td headers="stat_3" class="gt_row gt_center">337 (13%)</td>
-<td headers="stat_4" class="gt_row gt_center">299 (14%)</td></tr>
+<td headers="stat_2" class="gt_row gt_center">1,528 (60%)</td>
+<td headers="stat_3" class="gt_row gt_center">1,466 (59%)</td>
+<td headers="stat_4" class="gt_row gt_center">1,238 (58%)</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    4 Jewish</td>
 <td headers="stat_1" class="gt_row gt_center">102 (3.1%)</td>
-<td headers="stat_2" class="gt_row gt_center">200 (7.7%)</td>
-<td headers="stat_3" class="gt_row gt_center">197 (7.8%)</td>
-<td headers="stat_4" class="gt_row gt_center">178 (8.3%)</td></tr>
+<td headers="stat_2" class="gt_row gt_center">92 (3.6%)</td>
+<td headers="stat_3" class="gt_row gt_center">92 (3.7%)</td>
+<td headers="stat_4" class="gt_row gt_center">89 (4.2%)</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    5 Muslim/Islamic</td>
 <td headers="stat_1" class="gt_row gt_center">14 (0.4%)</td>
-<td headers="stat_2" class="gt_row gt_center">109 (4.2%)</td>
-<td headers="stat_3" class="gt_row gt_center">107 (4.2%)</td>
-<td headers="stat_4" class="gt_row gt_center">97 (4.5%)</td></tr>
+<td headers="stat_2" class="gt_row gt_center">8 (0.3%)</td>
+<td headers="stat_3" class="gt_row gt_center">6 (0.2%)</td>
+<td headers="stat_4" class="gt_row gt_center">8 (0.4%)</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    6 Another religion</td>
 <td headers="stat_1" class="gt_row gt_center">63 (1.9%)</td>
-<td headers="stat_2" class="gt_row gt_center">56 (2.2%)</td>
-<td headers="stat_3" class="gt_row gt_center">50 (2.0%)</td>
-<td headers="stat_4" class="gt_row gt_center">46 (2.2%)</td></tr>
+<td headers="stat_2" class="gt_row gt_center">53 (2.1%)</td>
+<td headers="stat_3" class="gt_row gt_center">46 (1.8%)</td>
+<td headers="stat_4" class="gt_row gt_center">44 (2.1%)</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    7 Half one religiion and hafl another</td>
 <td headers="stat_1" class="gt_row gt_center">12 (0.4%)</td>
-<td headers="stat_2" class="gt_row gt_center">0 (0%)</td>
-<td headers="stat_3" class="gt_row gt_center">0 (0%)</td>
-<td headers="stat_4" class="gt_row gt_center">0 (0%)</td></tr>
+<td headers="stat_2" class="gt_row gt_center">9 (0.4%)</td>
+<td headers="stat_3" class="gt_row gt_center">10 (0.4%)</td>
+<td headers="stat_4" class="gt_row gt_center">8 (0.4%)</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    8 Not religious</td>
 <td headers="stat_1" class="gt_row gt_center">556 (17%)</td>
-<td headers="stat_2" class="gt_row gt_center">0 (0%)</td>
-<td headers="stat_3" class="gt_row gt_center">0 (0%)</td>
-<td headers="stat_4" class="gt_row gt_center">0 (0%)</td></tr>
+<td headers="stat_2" class="gt_row gt_center">401 (16%)</td>
+<td headers="stat_3" class="gt_row gt_center">389 (16%)</td>
+<td headers="stat_4" class="gt_row gt_center">340 (16%)</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    Unknown</td>
 <td headers="stat_1" class="gt_row gt_center">61</td>
-<td headers="stat_2" class="gt_row gt_center">7</td>
-<td headers="stat_3" class="gt_row gt_center">8</td>
-<td headers="stat_4" class="gt_row gt_center">6</td></tr>
+<td headers="stat_2" class="gt_row gt_center">37</td>
+<td headers="stat_3" class="gt_row gt_center">40</td>
+<td headers="stat_4" class="gt_row gt_center">25</td></tr>
     <tr><td headers="label" class="gt_row gt_left">RELIG62_bl_r</td>
 <td headers="stat_1" class="gt_row gt_center"><br /></td>
 <td headers="stat_2" class="gt_row gt_center"><br /></td>
@@ -1313,34 +1313,34 @@ N = 2,144</span><span class="gt_footnote_marks" style="white-space:nowrap;font-s
 <td headers="stat_4" class="gt_row gt_center"><br /></td></tr>
     <tr><td headers="label" class="gt_row gt_left">    1 Catholic</td>
 <td headers="stat_1" class="gt_row gt_center">618 (19%)</td>
-<td headers="stat_2" class="gt_row gt_center">1,256 (48%)</td>
-<td headers="stat_3" class="gt_row gt_center">1,217 (48%)</td>
-<td headers="stat_4" class="gt_row gt_center">1,001 (47%)</td></tr>
+<td headers="stat_2" class="gt_row gt_center">461 (18%)</td>
+<td headers="stat_3" class="gt_row gt_center">468 (19%)</td>
+<td headers="stat_4" class="gt_row gt_center">381 (18%)</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    2 Protestant</td>
 <td headers="stat_1" class="gt_row gt_center">1,944 (59%)</td>
-<td headers="stat_2" class="gt_row gt_center">976 (38%)</td>
-<td headers="stat_3" class="gt_row gt_center">953 (38%)</td>
-<td headers="stat_4" class="gt_row gt_center">816 (38%)</td></tr>
+<td headers="stat_2" class="gt_row gt_center">1,543 (60%)</td>
+<td headers="stat_3" class="gt_row gt_center">1,481 (59%)</td>
+<td headers="stat_4" class="gt_row gt_center">1,249 (59%)</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    3 Jewish</td>
 <td headers="stat_1" class="gt_row gt_center">102 (3.1%)</td>
-<td headers="stat_2" class="gt_row gt_center">200 (7.7%)</td>
-<td headers="stat_3" class="gt_row gt_center">197 (7.8%)</td>
-<td headers="stat_4" class="gt_row gt_center">178 (8.3%)</td></tr>
+<td headers="stat_2" class="gt_row gt_center">92 (3.6%)</td>
+<td headers="stat_3" class="gt_row gt_center">92 (3.7%)</td>
+<td headers="stat_4" class="gt_row gt_center">89 (4.2%)</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    4 Other</td>
 <td headers="stat_1" class="gt_row gt_center">89 (2.7%)</td>
-<td headers="stat_2" class="gt_row gt_center">165 (6.4%)</td>
-<td headers="stat_3" class="gt_row gt_center">157 (6.2%)</td>
-<td headers="stat_4" class="gt_row gt_center">143 (6.7%)</td></tr>
+<td headers="stat_2" class="gt_row gt_center">70 (2.7%)</td>
+<td headers="stat_3" class="gt_row gt_center">62 (2.5%)</td>
+<td headers="stat_4" class="gt_row gt_center">60 (2.8%)</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    5 Not religious</td>
 <td headers="stat_1" class="gt_row gt_center">556 (17%)</td>
-<td headers="stat_2" class="gt_row gt_center">0 (0%)</td>
-<td headers="stat_3" class="gt_row gt_center">0 (0%)</td>
-<td headers="stat_4" class="gt_row gt_center">0 (0%)</td></tr>
+<td headers="stat_2" class="gt_row gt_center">401 (16%)</td>
+<td headers="stat_3" class="gt_row gt_center">389 (16%)</td>
+<td headers="stat_4" class="gt_row gt_center">340 (16%)</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    Unknown</td>
 <td headers="stat_1" class="gt_row gt_center">61</td>
-<td headers="stat_2" class="gt_row gt_center">7</td>
-<td headers="stat_3" class="gt_row gt_center">8</td>
-<td headers="stat_4" class="gt_row gt_center">6</td></tr>
+<td headers="stat_2" class="gt_row gt_center">37</td>
+<td headers="stat_3" class="gt_row gt_center">40</td>
+<td headers="stat_4" class="gt_row gt_center">25</td></tr>
     <tr><td headers="label" class="gt_row gt_left">RELTRAD_bl</td>
 <td headers="stat_1" class="gt_row gt_center"><br /></td>
 <td headers="stat_2" class="gt_row gt_center"><br /></td>
@@ -2003,16 +2003,19 @@ N = 2,144</span><span class="gt_footnote_marks" style="white-space:nowrap;font-s
 <pre class="r"><code>#Doubts1 has lots of missing due to display condition</code></pre>
 <p>#5. MODELS only when ATTREG_bl=1 and</p>
 <pre class="r"><code>data &lt;- waves_attreg_nomissing_234
-table(data$year)</code></pre>
-<pre><code>## 
-##    2    4   10 
-## 2094 2061 1734</code></pre>
+table(data$year, data$ATTREG)</code></pre>
+<pre><code>##     
+##         0    1
+##   2   377 1693
+##   4   577 1458
+##   10  791  926</code></pre>
 <pre class="r"><code>marginal_model &lt;- geeglm(ATTREG ~ year,
                    data=data,
                     id=IDS,
                  family=binomial(&quot;logit&quot;),
                  corstr = &quot;exchangeable&quot;,
                  na.action=na.omit)
+
 summary(marginal_model)</code></pre>
 <pre><code>## 
 ## Call:
@@ -2021,8 +2024,8 @@ summary(marginal_model)</code></pre>
 ## 
 ##  Coefficients:
 ##              Estimate   Std.err  Wald Pr(&gt;|W|)    
-## (Intercept)  1.673971  0.055603 906.4   &lt;2e-16 ***
-## year        -0.154947  0.008436 337.3   &lt;2e-16 ***
+## (Intercept)  1.687177  0.056079 905.2   &lt;2e-16 ***
+## year        -0.156144  0.008493 338.0   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -2030,45 +2033,942 @@ summary(marginal_model)</code></pre>
 ## Estimated Scale Parameters:
 ## 
 ##             Estimate Std.err
-## (Intercept)   0.9973 0.01909
+## (Intercept)   0.9973 0.01948
 ##   Link = identity 
 ## 
 ## Estimated Correlation Parameters:
 ##       Estimate Std.err
 ## alpha        0       0
-## Number of clusters:   5889  Maximum cluster size: 1</code></pre>
-<pre class="r"><code>marginal_demos &lt;- geeglm(ATTREG ~ year + RELIG62_bl_r + year*RELIG62_bl_r +
+## Number of clusters:   5822  Maximum cluster size: 1</code></pre>
+<pre class="r"><code>marginal_model %&gt;% tbl_regression()</code></pre>
+<div id="whnpfzasdv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#whnpfzasdv table {
+font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+#whnpfzasdv thead, #whnpfzasdv tbody, #whnpfzasdv tfoot, #whnpfzasdv tr, #whnpfzasdv td, #whnpfzasdv th {
+border-style: none;
+}
+#whnpfzasdv p {
+margin: 0;
+padding: 0;
+}
+#whnpfzasdv .gt_table {
+display: table;
+border-collapse: collapse;
+line-height: normal;
+margin-left: auto;
+margin-right: auto;
+color: #333333;
+font-size: 16px;
+font-weight: normal;
+font-style: normal;
+background-color: #FFFFFF;
+width: auto;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #A8A8A8;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #A8A8A8;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+}
+#whnpfzasdv .gt_caption {
+padding-top: 4px;
+padding-bottom: 4px;
+}
+#whnpfzasdv .gt_title {
+color: #333333;
+font-size: 125%;
+font-weight: initial;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-color: #FFFFFF;
+border-bottom-width: 0;
+}
+#whnpfzasdv .gt_subtitle {
+color: #333333;
+font-size: 85%;
+font-weight: initial;
+padding-top: 3px;
+padding-bottom: 5px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-color: #FFFFFF;
+border-top-width: 0;
+}
+#whnpfzasdv .gt_heading {
+background-color: #FFFFFF;
+text-align: center;
+border-bottom-color: #FFFFFF;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#whnpfzasdv .gt_bottom_border {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#whnpfzasdv .gt_col_headings {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#whnpfzasdv .gt_col_heading {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 6px;
+padding-left: 5px;
+padding-right: 5px;
+overflow-x: hidden;
+}
+#whnpfzasdv .gt_column_spanner_outer {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+padding-top: 0;
+padding-bottom: 0;
+padding-left: 4px;
+padding-right: 4px;
+}
+#whnpfzasdv .gt_column_spanner_outer:first-child {
+padding-left: 0;
+}
+#whnpfzasdv .gt_column_spanner_outer:last-child {
+padding-right: 0;
+}
+#whnpfzasdv .gt_column_spanner {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 5px;
+overflow-x: hidden;
+display: inline-block;
+width: 100%;
+}
+#whnpfzasdv .gt_spanner_row {
+border-bottom-style: hidden;
+}
+#whnpfzasdv .gt_group_heading {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+text-align: left;
+}
+#whnpfzasdv .gt_empty_group_heading {
+padding: 0.5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: middle;
+}
+#whnpfzasdv .gt_from_md > :first-child {
+margin-top: 0;
+}
+#whnpfzasdv .gt_from_md > :last-child {
+margin-bottom: 0;
+}
+#whnpfzasdv .gt_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+margin: 10px;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+overflow-x: hidden;
+}
+#whnpfzasdv .gt_stub {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+}
+#whnpfzasdv .gt_stub_row_group {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+vertical-align: top;
+}
+#whnpfzasdv .gt_row_group_first td {
+border-top-width: 2px;
+}
+#whnpfzasdv .gt_row_group_first th {
+border-top-width: 2px;
+}
+#whnpfzasdv .gt_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#whnpfzasdv .gt_first_summary_row {
+border-top-style: solid;
+border-top-color: #D3D3D3;
+}
+#whnpfzasdv .gt_first_summary_row.thick {
+border-top-width: 2px;
+}
+#whnpfzasdv .gt_last_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#whnpfzasdv .gt_grand_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#whnpfzasdv .gt_first_grand_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-style: double;
+border-top-width: 6px;
+border-top-color: #D3D3D3;
+}
+#whnpfzasdv .gt_last_grand_summary_row_top {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: double;
+border-bottom-width: 6px;
+border-bottom-color: #D3D3D3;
+}
+#whnpfzasdv .gt_striped {
+background-color: rgba(128, 128, 128, 0.05);
+}
+#whnpfzasdv .gt_table_body {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#whnpfzasdv .gt_footnotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#whnpfzasdv .gt_footnote {
+margin: 0px;
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#whnpfzasdv .gt_sourcenotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#whnpfzasdv .gt_sourcenote {
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#whnpfzasdv .gt_left {
+text-align: left;
+}
+#whnpfzasdv .gt_center {
+text-align: center;
+}
+#whnpfzasdv .gt_right {
+text-align: right;
+font-variant-numeric: tabular-nums;
+}
+#whnpfzasdv .gt_font_normal {
+font-weight: normal;
+}
+#whnpfzasdv .gt_font_bold {
+font-weight: bold;
+}
+#whnpfzasdv .gt_font_italic {
+font-style: italic;
+}
+#whnpfzasdv .gt_super {
+font-size: 65%;
+}
+#whnpfzasdv .gt_footnote_marks {
+font-size: 75%;
+vertical-align: 0.4em;
+position: initial;
+}
+#whnpfzasdv .gt_asterisk {
+font-size: 100%;
+vertical-align: 0;
+}
+#whnpfzasdv .gt_indent_1 {
+text-indent: 5px;
+}
+#whnpfzasdv .gt_indent_2 {
+text-indent: 10px;
+}
+#whnpfzasdv .gt_indent_3 {
+text-indent: 15px;
+}
+#whnpfzasdv .gt_indent_4 {
+text-indent: 20px;
+}
+#whnpfzasdv .gt_indent_5 {
+text-indent: 25px;
+}
+#whnpfzasdv .katex-display {
+display: inline-flex !important;
+margin-bottom: 0.75em !important;
+}
+#whnpfzasdv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>log(OR)</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span class="gt_from_md"><strong>p-value</strong></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">year</td>
+<td headers="estimate" class="gt_row gt_center">-0.16</td>
+<td headers="conf.low" class="gt_row gt_center">-0.17, -0.14</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">OR = Odds Ratio, CI = Confidence Interval</span></td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+<pre class="r"><code>marginal_model %&gt;% tbl_regression(exponentiate = T)</code></pre>
+<div id="fpufuqgjce" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fpufuqgjce table {
+font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+#fpufuqgjce thead, #fpufuqgjce tbody, #fpufuqgjce tfoot, #fpufuqgjce tr, #fpufuqgjce td, #fpufuqgjce th {
+border-style: none;
+}
+#fpufuqgjce p {
+margin: 0;
+padding: 0;
+}
+#fpufuqgjce .gt_table {
+display: table;
+border-collapse: collapse;
+line-height: normal;
+margin-left: auto;
+margin-right: auto;
+color: #333333;
+font-size: 16px;
+font-weight: normal;
+font-style: normal;
+background-color: #FFFFFF;
+width: auto;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #A8A8A8;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #A8A8A8;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+}
+#fpufuqgjce .gt_caption {
+padding-top: 4px;
+padding-bottom: 4px;
+}
+#fpufuqgjce .gt_title {
+color: #333333;
+font-size: 125%;
+font-weight: initial;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-color: #FFFFFF;
+border-bottom-width: 0;
+}
+#fpufuqgjce .gt_subtitle {
+color: #333333;
+font-size: 85%;
+font-weight: initial;
+padding-top: 3px;
+padding-bottom: 5px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-color: #FFFFFF;
+border-top-width: 0;
+}
+#fpufuqgjce .gt_heading {
+background-color: #FFFFFF;
+text-align: center;
+border-bottom-color: #FFFFFF;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#fpufuqgjce .gt_bottom_border {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#fpufuqgjce .gt_col_headings {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#fpufuqgjce .gt_col_heading {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 6px;
+padding-left: 5px;
+padding-right: 5px;
+overflow-x: hidden;
+}
+#fpufuqgjce .gt_column_spanner_outer {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+padding-top: 0;
+padding-bottom: 0;
+padding-left: 4px;
+padding-right: 4px;
+}
+#fpufuqgjce .gt_column_spanner_outer:first-child {
+padding-left: 0;
+}
+#fpufuqgjce .gt_column_spanner_outer:last-child {
+padding-right: 0;
+}
+#fpufuqgjce .gt_column_spanner {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 5px;
+overflow-x: hidden;
+display: inline-block;
+width: 100%;
+}
+#fpufuqgjce .gt_spanner_row {
+border-bottom-style: hidden;
+}
+#fpufuqgjce .gt_group_heading {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+text-align: left;
+}
+#fpufuqgjce .gt_empty_group_heading {
+padding: 0.5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: middle;
+}
+#fpufuqgjce .gt_from_md > :first-child {
+margin-top: 0;
+}
+#fpufuqgjce .gt_from_md > :last-child {
+margin-bottom: 0;
+}
+#fpufuqgjce .gt_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+margin: 10px;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+overflow-x: hidden;
+}
+#fpufuqgjce .gt_stub {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+}
+#fpufuqgjce .gt_stub_row_group {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+vertical-align: top;
+}
+#fpufuqgjce .gt_row_group_first td {
+border-top-width: 2px;
+}
+#fpufuqgjce .gt_row_group_first th {
+border-top-width: 2px;
+}
+#fpufuqgjce .gt_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#fpufuqgjce .gt_first_summary_row {
+border-top-style: solid;
+border-top-color: #D3D3D3;
+}
+#fpufuqgjce .gt_first_summary_row.thick {
+border-top-width: 2px;
+}
+#fpufuqgjce .gt_last_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#fpufuqgjce .gt_grand_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#fpufuqgjce .gt_first_grand_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-style: double;
+border-top-width: 6px;
+border-top-color: #D3D3D3;
+}
+#fpufuqgjce .gt_last_grand_summary_row_top {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: double;
+border-bottom-width: 6px;
+border-bottom-color: #D3D3D3;
+}
+#fpufuqgjce .gt_striped {
+background-color: rgba(128, 128, 128, 0.05);
+}
+#fpufuqgjce .gt_table_body {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#fpufuqgjce .gt_footnotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#fpufuqgjce .gt_footnote {
+margin: 0px;
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#fpufuqgjce .gt_sourcenotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#fpufuqgjce .gt_sourcenote {
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#fpufuqgjce .gt_left {
+text-align: left;
+}
+#fpufuqgjce .gt_center {
+text-align: center;
+}
+#fpufuqgjce .gt_right {
+text-align: right;
+font-variant-numeric: tabular-nums;
+}
+#fpufuqgjce .gt_font_normal {
+font-weight: normal;
+}
+#fpufuqgjce .gt_font_bold {
+font-weight: bold;
+}
+#fpufuqgjce .gt_font_italic {
+font-style: italic;
+}
+#fpufuqgjce .gt_super {
+font-size: 65%;
+}
+#fpufuqgjce .gt_footnote_marks {
+font-size: 75%;
+vertical-align: 0.4em;
+position: initial;
+}
+#fpufuqgjce .gt_asterisk {
+font-size: 100%;
+vertical-align: 0;
+}
+#fpufuqgjce .gt_indent_1 {
+text-indent: 5px;
+}
+#fpufuqgjce .gt_indent_2 {
+text-indent: 10px;
+}
+#fpufuqgjce .gt_indent_3 {
+text-indent: 15px;
+}
+#fpufuqgjce .gt_indent_4 {
+text-indent: 20px;
+}
+#fpufuqgjce .gt_indent_5 {
+text-indent: 25px;
+}
+#fpufuqgjce .katex-display {
+display: inline-flex !important;
+margin-bottom: 0.75em !important;
+}
+#fpufuqgjce div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>OR</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span class="gt_from_md"><strong>p-value</strong></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">year</td>
+<td headers="estimate" class="gt_row gt_center">0.86</td>
+<td headers="conf.low" class="gt_row gt_center">0.84, 0.87</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">OR = Odds Ratio, CI = Confidence Interval</span></td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+<pre class="r"><code>marginal_all &lt;- geeglm(ATTREG ~ year + RELIG62_bl_r + year*RELIG62_bl_r +
                            TEENRACE_bl_white + year*TEENRACE_bl_white + 
-                 TEENSEX_bl + year*TEENSEX_bl + AGECATS_bl + year*AGECATS_bl,
+                 TEENSEX_bl + year*TEENSEX_bl + AGECATS_bl + year*AGECATS_bl +
+                   PIMPREL_bl_r + 
+                   FAITH1_r + PRAYALON_bl_binary + GRACE_bl +
+                   READBIBL_bl_binary + 
+                    PIMPREL_bl_r*year + 
+                   FAITH1_r*year + PRAYALON_bl_binary*year +
+                     GRACE_bl*year +
+                   READBIBL_bl_binary*year,
                  data=data,
                     id=IDS,
                  family=binomial(&quot;logit&quot;),
                  corstr = &quot;exchangeable&quot;,
                  na.action=na.omit)
-summary(marginal_demos)</code></pre>
+summary(marginal_all)</code></pre>
 <pre><code>## 
 ## Call:
 ## geeglm(formula = ATTREG ~ year + RELIG62_bl_r + year * RELIG62_bl_r + 
 ##     TEENRACE_bl_white + year * TEENRACE_bl_white + TEENSEX_bl + 
-##     year * TEENSEX_bl + AGECATS_bl + year * AGECATS_bl, family = binomial(&quot;logit&quot;), 
+##     year * TEENSEX_bl + AGECATS_bl + year * AGECATS_bl + PIMPREL_bl_r + 
+##     FAITH1_r + PRAYALON_bl_binary + GRACE_bl + READBIBL_bl_binary + 
+##     PIMPREL_bl_r * year + FAITH1_r * year + PRAYALON_bl_binary * 
+##     year + GRACE_bl * year + READBIBL_bl_binary * year, family = binomial(&quot;logit&quot;), 
 ##     data = data, na.action = na.omit, id = IDS, corstr = &quot;exchangeable&quot;)
 ## 
 ##  Coefficients:
-##                                   Estimate  Std.err  Wald Pr(&gt;|W|)    
-## (Intercept)                        3.22694  0.63051 26.19  3.1e-07 ***
-## year                              -0.33768  0.09706 12.10   0.0005 ***
-## RELIG62_bl_r2 Protestant          -0.99010  0.12469 63.05  2.0e-15 ***
-## RELIG62_bl_r3 Jewish              -1.60313  0.21279 56.76  4.9e-14 ***
-## RELIG62_bl_r4 Other               -1.89649  0.25944 53.43  2.7e-13 ***
-## TEENRACE_bl_white2 Not white      -0.09321  0.12909  0.52   0.4702    
-## TEENSEX_bl2 Female                 0.11686  0.11536  1.03   0.3111    
-## AGECATS_bl                        -0.06248  0.04164  2.25   0.1335    
-## year:RELIG62_bl_r2 Protestant      0.01244  0.01882  0.44   0.5086    
-## year:RELIG62_bl_r3 Jewish          0.00187  0.03631  0.00   0.9590    
-## year:RELIG62_bl_r4 Other           0.04630  0.04413  1.10   0.2941    
-## year:TEENRACE_bl_white2 Not white  0.04694  0.01985  5.59   0.0181 *  
-## year:TEENSEX_bl2 Female            0.01487  0.01759  0.71   0.3979    
-## year:AGECATS_bl                    0.00959  0.00639  2.25   0.1337    
+##                                                     Estimate  Std.err  Wald
+## (Intercept)                                          4.73857  0.76307 38.56
+## year                                                -0.18870  0.12609  2.24
+## RELIG62_bl_r2 Protestant                            -0.39772  0.17509  5.16
+## RELIG62_bl_r3 Jewish                                 0.17887  0.36865  0.24
+## RELIG62_bl_r4 Other                                 -0.79538  0.44157  3.24
+## RELIG62_bl_r5 Not religious                         -1.09441  0.29161 14.08
+## TEENRACE_bl_white2 Not white                        -0.41484  0.15275  7.38
+## TEENSEX_bl2 Female                                  -0.03445  0.13643  0.06
+## AGECATS_bl                                          -0.06815  0.04813  2.01
+## PIMPREL_bl_r2 Fairly or somewhat important          -0.43990  0.17287  6.48
+## PIMPREL_bl_r3 Not very or not at all important      -0.63306  0.30324  4.36
+## FAITH1_r2 Somewhat important                        -0.76066  0.17245 19.46
+## FAITH1_r3 Not very or not at all important          -1.81938  0.20257 80.67
+## PRAYALON_bl_binary2 Never pray                      -0.07519  0.25027  0.09
+## GRACE_bl2 No, don&#39;t say grace                       -0.50521  0.14646 11.90
+## READBIBL_bl_binary2 Never read text                 -0.56379  0.15544 13.16
+## year:RELIG62_bl_r2 Protestant                        0.01975  0.02921  0.46
+## year:RELIG62_bl_r3 Jewish                           -0.01476  0.06232  0.06
+## year:RELIG62_bl_r4 Other                             0.02384  0.06905  0.12
+## year:RELIG62_bl_r5 Not religious                     0.04003  0.05364  0.56
+## year:TEENRACE_bl_white2 Not white                    0.03888  0.02519  2.38
+## year:TEENSEX_bl2 Female                             -0.01194  0.02241  0.28
+## year:AGECATS_bl                                      0.00375  0.00794  0.22
+## year:PIMPREL_bl_r2 Fairly or somewhat important     -0.00319  0.03037  0.01
+## year:PIMPREL_bl_r3 Not very or not at all important  0.04560  0.05588  0.67
+## year:FAITH1_r2 Somewhat important                   -0.12262  0.02604 22.18
+## year:FAITH1_r3 Not very or not at all important     -0.26304  0.03742 49.41
+## year:PRAYALON_bl_binary2 Never pray                 -0.01141  0.04398  0.07
+## year:GRACE_bl2 No, don&#39;t say grace                   0.02811  0.02393  1.38
+## year:READBIBL_bl_binary2 Never read text             0.03627  0.02558  2.01
+##                                                     Pr(&gt;|W|)    
+## (Intercept)                                          5.3e-10 ***
+## year                                                 0.13450    
+## RELIG62_bl_r2 Protestant                             0.02311 *  
+## RELIG62_bl_r3 Jewish                                 0.62754    
+## RELIG62_bl_r4 Other                                  0.07166 .  
+## RELIG62_bl_r5 Not religious                          0.00017 ***
+## TEENRACE_bl_white2 Not white                         0.00661 ** 
+## TEENSEX_bl2 Female                                   0.80063    
+## AGECATS_bl                                           0.15674    
+## PIMPREL_bl_r2 Fairly or somewhat important           0.01094 *  
+## PIMPREL_bl_r3 Not very or not at all important       0.03683 *  
+## FAITH1_r2 Somewhat important                         1.0e-05 ***
+## FAITH1_r3 Not very or not at all important           &lt; 2e-16 ***
+## PRAYALON_bl_binary2 Never pray                       0.76383    
+## GRACE_bl2 No, don&#39;t say grace                        0.00056 ***
+## READBIBL_bl_binary2 Never read text                  0.00029 ***
+## year:RELIG62_bl_r2 Protestant                        0.49892    
+## year:RELIG62_bl_r3 Jewish                            0.81277    
+## year:RELIG62_bl_r4 Other                             0.72995    
+## year:RELIG62_bl_r5 Not religious                     0.45558    
+## year:TEENRACE_bl_white2 Not white                    0.12270    
+## year:TEENSEX_bl2 Female                              0.59424    
+## year:AGECATS_bl                                      0.63685    
+## year:PIMPREL_bl_r2 Fairly or somewhat important      0.91625    
+## year:PIMPREL_bl_r3 Not very or not at all important  0.41455    
+## year:FAITH1_r2 Somewhat important                    2.5e-06 ***
+## year:FAITH1_r3 Not very or not at all important      2.1e-12 ***
+## year:PRAYALON_bl_binary2 Never pray                  0.79534    
+## year:GRACE_bl2 No, don&#39;t say grace                   0.24019    
+## year:READBIBL_bl_binary2 Never read text             0.15617    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -2076,68 +2976,1326 @@ summary(marginal_demos)</code></pre>
 ## Estimated Scale Parameters:
 ## 
 ##             Estimate Std.err
-## (Intercept)    0.996   0.033
+## (Intercept)     0.98  0.0928
 ##   Link = identity 
 ## 
 ## Estimated Correlation Parameters:
 ##       Estimate Std.err
 ## alpha        0       0
-## Number of clusters:   5889  Maximum cluster size: 1</code></pre>
-<pre class="r"><code>marginal_relig &lt;- geeglm(ATTREG ~ year + PIMPREL_bl_r + 
-                   FAITH1_r + PRAYALON_bl_binary + GRACE_bl +
+## Number of clusters:   5822  Maximum cluster size: 1</code></pre>
+<pre class="r"><code>marginal_all %&gt;% tbl_regression()</code></pre>
+<div id="oxmxbkzrhs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#oxmxbkzrhs table {
+font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+#oxmxbkzrhs thead, #oxmxbkzrhs tbody, #oxmxbkzrhs tfoot, #oxmxbkzrhs tr, #oxmxbkzrhs td, #oxmxbkzrhs th {
+border-style: none;
+}
+#oxmxbkzrhs p {
+margin: 0;
+padding: 0;
+}
+#oxmxbkzrhs .gt_table {
+display: table;
+border-collapse: collapse;
+line-height: normal;
+margin-left: auto;
+margin-right: auto;
+color: #333333;
+font-size: 16px;
+font-weight: normal;
+font-style: normal;
+background-color: #FFFFFF;
+width: auto;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #A8A8A8;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #A8A8A8;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+}
+#oxmxbkzrhs .gt_caption {
+padding-top: 4px;
+padding-bottom: 4px;
+}
+#oxmxbkzrhs .gt_title {
+color: #333333;
+font-size: 125%;
+font-weight: initial;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-color: #FFFFFF;
+border-bottom-width: 0;
+}
+#oxmxbkzrhs .gt_subtitle {
+color: #333333;
+font-size: 85%;
+font-weight: initial;
+padding-top: 3px;
+padding-bottom: 5px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-color: #FFFFFF;
+border-top-width: 0;
+}
+#oxmxbkzrhs .gt_heading {
+background-color: #FFFFFF;
+text-align: center;
+border-bottom-color: #FFFFFF;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#oxmxbkzrhs .gt_bottom_border {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#oxmxbkzrhs .gt_col_headings {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#oxmxbkzrhs .gt_col_heading {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 6px;
+padding-left: 5px;
+padding-right: 5px;
+overflow-x: hidden;
+}
+#oxmxbkzrhs .gt_column_spanner_outer {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+padding-top: 0;
+padding-bottom: 0;
+padding-left: 4px;
+padding-right: 4px;
+}
+#oxmxbkzrhs .gt_column_spanner_outer:first-child {
+padding-left: 0;
+}
+#oxmxbkzrhs .gt_column_spanner_outer:last-child {
+padding-right: 0;
+}
+#oxmxbkzrhs .gt_column_spanner {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 5px;
+overflow-x: hidden;
+display: inline-block;
+width: 100%;
+}
+#oxmxbkzrhs .gt_spanner_row {
+border-bottom-style: hidden;
+}
+#oxmxbkzrhs .gt_group_heading {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+text-align: left;
+}
+#oxmxbkzrhs .gt_empty_group_heading {
+padding: 0.5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: middle;
+}
+#oxmxbkzrhs .gt_from_md > :first-child {
+margin-top: 0;
+}
+#oxmxbkzrhs .gt_from_md > :last-child {
+margin-bottom: 0;
+}
+#oxmxbkzrhs .gt_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+margin: 10px;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+overflow-x: hidden;
+}
+#oxmxbkzrhs .gt_stub {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+}
+#oxmxbkzrhs .gt_stub_row_group {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+vertical-align: top;
+}
+#oxmxbkzrhs .gt_row_group_first td {
+border-top-width: 2px;
+}
+#oxmxbkzrhs .gt_row_group_first th {
+border-top-width: 2px;
+}
+#oxmxbkzrhs .gt_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#oxmxbkzrhs .gt_first_summary_row {
+border-top-style: solid;
+border-top-color: #D3D3D3;
+}
+#oxmxbkzrhs .gt_first_summary_row.thick {
+border-top-width: 2px;
+}
+#oxmxbkzrhs .gt_last_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#oxmxbkzrhs .gt_grand_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#oxmxbkzrhs .gt_first_grand_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-style: double;
+border-top-width: 6px;
+border-top-color: #D3D3D3;
+}
+#oxmxbkzrhs .gt_last_grand_summary_row_top {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: double;
+border-bottom-width: 6px;
+border-bottom-color: #D3D3D3;
+}
+#oxmxbkzrhs .gt_striped {
+background-color: rgba(128, 128, 128, 0.05);
+}
+#oxmxbkzrhs .gt_table_body {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#oxmxbkzrhs .gt_footnotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#oxmxbkzrhs .gt_footnote {
+margin: 0px;
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#oxmxbkzrhs .gt_sourcenotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#oxmxbkzrhs .gt_sourcenote {
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#oxmxbkzrhs .gt_left {
+text-align: left;
+}
+#oxmxbkzrhs .gt_center {
+text-align: center;
+}
+#oxmxbkzrhs .gt_right {
+text-align: right;
+font-variant-numeric: tabular-nums;
+}
+#oxmxbkzrhs .gt_font_normal {
+font-weight: normal;
+}
+#oxmxbkzrhs .gt_font_bold {
+font-weight: bold;
+}
+#oxmxbkzrhs .gt_font_italic {
+font-style: italic;
+}
+#oxmxbkzrhs .gt_super {
+font-size: 65%;
+}
+#oxmxbkzrhs .gt_footnote_marks {
+font-size: 75%;
+vertical-align: 0.4em;
+position: initial;
+}
+#oxmxbkzrhs .gt_asterisk {
+font-size: 100%;
+vertical-align: 0;
+}
+#oxmxbkzrhs .gt_indent_1 {
+text-indent: 5px;
+}
+#oxmxbkzrhs .gt_indent_2 {
+text-indent: 10px;
+}
+#oxmxbkzrhs .gt_indent_3 {
+text-indent: 15px;
+}
+#oxmxbkzrhs .gt_indent_4 {
+text-indent: 20px;
+}
+#oxmxbkzrhs .gt_indent_5 {
+text-indent: 25px;
+}
+#oxmxbkzrhs .katex-display {
+display: inline-flex !important;
+margin-bottom: 0.75em !important;
+}
+#oxmxbkzrhs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>log(OR)</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span class="gt_from_md"><strong>p-value</strong></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">year</td>
+<td headers="estimate" class="gt_row gt_center">-0.19</td>
+<td headers="conf.low" class="gt_row gt_center">-0.44, 0.06</td>
+<td headers="p.value" class="gt_row gt_center">0.13</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">RELIG62_bl_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Catholic</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Protestant</td>
+<td headers="estimate" class="gt_row gt_center">-0.40</td>
+<td headers="conf.low" class="gt_row gt_center">-0.74, -0.05</td>
+<td headers="p.value" class="gt_row gt_center">0.023</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    3 Jewish</td>
+<td headers="estimate" class="gt_row gt_center">0.18</td>
+<td headers="conf.low" class="gt_row gt_center">-0.54, 0.90</td>
+<td headers="p.value" class="gt_row gt_center">0.6</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    4 Other</td>
+<td headers="estimate" class="gt_row gt_center">-0.80</td>
+<td headers="conf.low" class="gt_row gt_center">-1.7, 0.07</td>
+<td headers="p.value" class="gt_row gt_center">0.072</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    5 Not religious</td>
+<td headers="estimate" class="gt_row gt_center">-1.1</td>
+<td headers="conf.low" class="gt_row gt_center">-1.7, -0.52</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">TEENRACE_bl_white</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 White</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Not white</td>
+<td headers="estimate" class="gt_row gt_center">-0.41</td>
+<td headers="conf.low" class="gt_row gt_center">-0.71, -0.12</td>
+<td headers="p.value" class="gt_row gt_center">0.007</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">TEENSEX_bl</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Male</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Female</td>
+<td headers="estimate" class="gt_row gt_center">-0.03</td>
+<td headers="conf.low" class="gt_row gt_center">-0.30, 0.23</td>
+<td headers="p.value" class="gt_row gt_center">0.8</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">AGECATS_bl</td>
+<td headers="estimate" class="gt_row gt_center">-0.07</td>
+<td headers="conf.low" class="gt_row gt_center">-0.16, 0.03</td>
+<td headers="p.value" class="gt_row gt_center">0.2</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PIMPREL_bl_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Extremely or very important</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Fairly or somewhat important</td>
+<td headers="estimate" class="gt_row gt_center">-0.44</td>
+<td headers="conf.low" class="gt_row gt_center">-0.78, -0.10</td>
+<td headers="p.value" class="gt_row gt_center">0.011</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    3 Not very or not at all important</td>
+<td headers="estimate" class="gt_row gt_center">-0.63</td>
+<td headers="conf.low" class="gt_row gt_center">-1.2, -0.04</td>
+<td headers="p.value" class="gt_row gt_center">0.037</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">FAITH1_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Extremely or very important</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Somewhat important</td>
+<td headers="estimate" class="gt_row gt_center">-0.76</td>
+<td headers="conf.low" class="gt_row gt_center">-1.1, -0.42</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    3 Not very or not at all important</td>
+<td headers="estimate" class="gt_row gt_center">-1.8</td>
+<td headers="conf.low" class="gt_row gt_center">-2.2, -1.4</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PRAYALON_bl_binary</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Prays</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Never pray</td>
+<td headers="estimate" class="gt_row gt_center">-0.08</td>
+<td headers="conf.low" class="gt_row gt_center">-0.57, 0.42</td>
+<td headers="p.value" class="gt_row gt_center">0.8</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">GRACE_bl</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Yes, say grace</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 No, don&#39;t say grace</td>
+<td headers="estimate" class="gt_row gt_center">-0.51</td>
+<td headers="conf.low" class="gt_row gt_center">-0.79, -0.22</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">READBIBL_bl_binary</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Read text</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Never read text</td>
+<td headers="estimate" class="gt_row gt_center">-0.56</td>
+<td headers="conf.low" class="gt_row gt_center">-0.87, -0.26</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">year * RELIG62_bl_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 2 Protestant</td>
+<td headers="estimate" class="gt_row gt_center">0.02</td>
+<td headers="conf.low" class="gt_row gt_center">-0.04, 0.08</td>
+<td headers="p.value" class="gt_row gt_center">0.5</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 3 Jewish</td>
+<td headers="estimate" class="gt_row gt_center">-0.01</td>
+<td headers="conf.low" class="gt_row gt_center">-0.14, 0.11</td>
+<td headers="p.value" class="gt_row gt_center">0.8</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 4 Other</td>
+<td headers="estimate" class="gt_row gt_center">0.02</td>
+<td headers="conf.low" class="gt_row gt_center">-0.11, 0.16</td>
+<td headers="p.value" class="gt_row gt_center">0.7</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 5 Not religious</td>
+<td headers="estimate" class="gt_row gt_center">0.04</td>
+<td headers="conf.low" class="gt_row gt_center">-0.07, 0.15</td>
+<td headers="p.value" class="gt_row gt_center">0.5</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">year * TEENRACE_bl_white</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 2 Not white</td>
+<td headers="estimate" class="gt_row gt_center">0.04</td>
+<td headers="conf.low" class="gt_row gt_center">-0.01, 0.09</td>
+<td headers="p.value" class="gt_row gt_center">0.12</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">year * TEENSEX_bl</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 2 Female</td>
+<td headers="estimate" class="gt_row gt_center">-0.01</td>
+<td headers="conf.low" class="gt_row gt_center">-0.06, 0.03</td>
+<td headers="p.value" class="gt_row gt_center">0.6</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">year * AGECATS_bl</td>
+<td headers="estimate" class="gt_row gt_center">0.00</td>
+<td headers="conf.low" class="gt_row gt_center">-0.01, 0.02</td>
+<td headers="p.value" class="gt_row gt_center">0.6</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">year * PIMPREL_bl_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 2 Fairly or somewhat important</td>
+<td headers="estimate" class="gt_row gt_center">0.00</td>
+<td headers="conf.low" class="gt_row gt_center">-0.06, 0.06</td>
+<td headers="p.value" class="gt_row gt_center">&gt;0.9</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 3 Not very or not at all important</td>
+<td headers="estimate" class="gt_row gt_center">0.05</td>
+<td headers="conf.low" class="gt_row gt_center">-0.06, 0.16</td>
+<td headers="p.value" class="gt_row gt_center">0.4</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">year * FAITH1_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 2 Somewhat important</td>
+<td headers="estimate" class="gt_row gt_center">-0.12</td>
+<td headers="conf.low" class="gt_row gt_center">-0.17, -0.07</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 3 Not very or not at all important</td>
+<td headers="estimate" class="gt_row gt_center">-0.26</td>
+<td headers="conf.low" class="gt_row gt_center">-0.34, -0.19</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">year * PRAYALON_bl_binary</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 2 Never pray</td>
+<td headers="estimate" class="gt_row gt_center">-0.01</td>
+<td headers="conf.low" class="gt_row gt_center">-0.10, 0.07</td>
+<td headers="p.value" class="gt_row gt_center">0.8</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">year * GRACE_bl</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 2 No, don&#39;t say grace</td>
+<td headers="estimate" class="gt_row gt_center">0.03</td>
+<td headers="conf.low" class="gt_row gt_center">-0.02, 0.08</td>
+<td headers="p.value" class="gt_row gt_center">0.2</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">year * READBIBL_bl_binary</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 2 Never read text</td>
+<td headers="estimate" class="gt_row gt_center">0.04</td>
+<td headers="conf.low" class="gt_row gt_center">-0.01, 0.09</td>
+<td headers="p.value" class="gt_row gt_center">0.2</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">OR = Odds Ratio, CI = Confidence Interval</span></td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+<pre class="r"><code>marginal_all %&gt;% tbl_regression(exponentiate = T)</code></pre>
+<div id="rtgllehgwb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rtgllehgwb table {
+font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+#rtgllehgwb thead, #rtgllehgwb tbody, #rtgllehgwb tfoot, #rtgllehgwb tr, #rtgllehgwb td, #rtgllehgwb th {
+border-style: none;
+}
+#rtgllehgwb p {
+margin: 0;
+padding: 0;
+}
+#rtgllehgwb .gt_table {
+display: table;
+border-collapse: collapse;
+line-height: normal;
+margin-left: auto;
+margin-right: auto;
+color: #333333;
+font-size: 16px;
+font-weight: normal;
+font-style: normal;
+background-color: #FFFFFF;
+width: auto;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #A8A8A8;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #A8A8A8;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+}
+#rtgllehgwb .gt_caption {
+padding-top: 4px;
+padding-bottom: 4px;
+}
+#rtgllehgwb .gt_title {
+color: #333333;
+font-size: 125%;
+font-weight: initial;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-color: #FFFFFF;
+border-bottom-width: 0;
+}
+#rtgllehgwb .gt_subtitle {
+color: #333333;
+font-size: 85%;
+font-weight: initial;
+padding-top: 3px;
+padding-bottom: 5px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-color: #FFFFFF;
+border-top-width: 0;
+}
+#rtgllehgwb .gt_heading {
+background-color: #FFFFFF;
+text-align: center;
+border-bottom-color: #FFFFFF;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#rtgllehgwb .gt_bottom_border {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#rtgllehgwb .gt_col_headings {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#rtgllehgwb .gt_col_heading {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 6px;
+padding-left: 5px;
+padding-right: 5px;
+overflow-x: hidden;
+}
+#rtgllehgwb .gt_column_spanner_outer {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+padding-top: 0;
+padding-bottom: 0;
+padding-left: 4px;
+padding-right: 4px;
+}
+#rtgllehgwb .gt_column_spanner_outer:first-child {
+padding-left: 0;
+}
+#rtgllehgwb .gt_column_spanner_outer:last-child {
+padding-right: 0;
+}
+#rtgllehgwb .gt_column_spanner {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 5px;
+overflow-x: hidden;
+display: inline-block;
+width: 100%;
+}
+#rtgllehgwb .gt_spanner_row {
+border-bottom-style: hidden;
+}
+#rtgllehgwb .gt_group_heading {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+text-align: left;
+}
+#rtgllehgwb .gt_empty_group_heading {
+padding: 0.5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: middle;
+}
+#rtgllehgwb .gt_from_md > :first-child {
+margin-top: 0;
+}
+#rtgllehgwb .gt_from_md > :last-child {
+margin-bottom: 0;
+}
+#rtgllehgwb .gt_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+margin: 10px;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+overflow-x: hidden;
+}
+#rtgllehgwb .gt_stub {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+}
+#rtgllehgwb .gt_stub_row_group {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+vertical-align: top;
+}
+#rtgllehgwb .gt_row_group_first td {
+border-top-width: 2px;
+}
+#rtgllehgwb .gt_row_group_first th {
+border-top-width: 2px;
+}
+#rtgllehgwb .gt_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#rtgllehgwb .gt_first_summary_row {
+border-top-style: solid;
+border-top-color: #D3D3D3;
+}
+#rtgllehgwb .gt_first_summary_row.thick {
+border-top-width: 2px;
+}
+#rtgllehgwb .gt_last_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#rtgllehgwb .gt_grand_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#rtgllehgwb .gt_first_grand_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-style: double;
+border-top-width: 6px;
+border-top-color: #D3D3D3;
+}
+#rtgllehgwb .gt_last_grand_summary_row_top {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: double;
+border-bottom-width: 6px;
+border-bottom-color: #D3D3D3;
+}
+#rtgllehgwb .gt_striped {
+background-color: rgba(128, 128, 128, 0.05);
+}
+#rtgllehgwb .gt_table_body {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#rtgllehgwb .gt_footnotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#rtgllehgwb .gt_footnote {
+margin: 0px;
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#rtgllehgwb .gt_sourcenotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#rtgllehgwb .gt_sourcenote {
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#rtgllehgwb .gt_left {
+text-align: left;
+}
+#rtgllehgwb .gt_center {
+text-align: center;
+}
+#rtgllehgwb .gt_right {
+text-align: right;
+font-variant-numeric: tabular-nums;
+}
+#rtgllehgwb .gt_font_normal {
+font-weight: normal;
+}
+#rtgllehgwb .gt_font_bold {
+font-weight: bold;
+}
+#rtgllehgwb .gt_font_italic {
+font-style: italic;
+}
+#rtgllehgwb .gt_super {
+font-size: 65%;
+}
+#rtgllehgwb .gt_footnote_marks {
+font-size: 75%;
+vertical-align: 0.4em;
+position: initial;
+}
+#rtgllehgwb .gt_asterisk {
+font-size: 100%;
+vertical-align: 0;
+}
+#rtgllehgwb .gt_indent_1 {
+text-indent: 5px;
+}
+#rtgllehgwb .gt_indent_2 {
+text-indent: 10px;
+}
+#rtgllehgwb .gt_indent_3 {
+text-indent: 15px;
+}
+#rtgllehgwb .gt_indent_4 {
+text-indent: 20px;
+}
+#rtgllehgwb .gt_indent_5 {
+text-indent: 25px;
+}
+#rtgllehgwb .katex-display {
+display: inline-flex !important;
+margin-bottom: 0.75em !important;
+}
+#rtgllehgwb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>OR</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span class="gt_from_md"><strong>p-value</strong></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">year</td>
+<td headers="estimate" class="gt_row gt_center">0.83</td>
+<td headers="conf.low" class="gt_row gt_center">0.65, 1.06</td>
+<td headers="p.value" class="gt_row gt_center">0.13</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">RELIG62_bl_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Catholic</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Protestant</td>
+<td headers="estimate" class="gt_row gt_center">0.67</td>
+<td headers="conf.low" class="gt_row gt_center">0.48, 0.95</td>
+<td headers="p.value" class="gt_row gt_center">0.023</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    3 Jewish</td>
+<td headers="estimate" class="gt_row gt_center">1.20</td>
+<td headers="conf.low" class="gt_row gt_center">0.58, 2.46</td>
+<td headers="p.value" class="gt_row gt_center">0.6</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    4 Other</td>
+<td headers="estimate" class="gt_row gt_center">0.45</td>
+<td headers="conf.low" class="gt_row gt_center">0.19, 1.07</td>
+<td headers="p.value" class="gt_row gt_center">0.072</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    5 Not religious</td>
+<td headers="estimate" class="gt_row gt_center">0.33</td>
+<td headers="conf.low" class="gt_row gt_center">0.19, 0.59</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">TEENRACE_bl_white</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 White</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Not white</td>
+<td headers="estimate" class="gt_row gt_center">0.66</td>
+<td headers="conf.low" class="gt_row gt_center">0.49, 0.89</td>
+<td headers="p.value" class="gt_row gt_center">0.007</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">TEENSEX_bl</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Male</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Female</td>
+<td headers="estimate" class="gt_row gt_center">0.97</td>
+<td headers="conf.low" class="gt_row gt_center">0.74, 1.26</td>
+<td headers="p.value" class="gt_row gt_center">0.8</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">AGECATS_bl</td>
+<td headers="estimate" class="gt_row gt_center">0.93</td>
+<td headers="conf.low" class="gt_row gt_center">0.85, 1.03</td>
+<td headers="p.value" class="gt_row gt_center">0.2</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PIMPREL_bl_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Extremely or very important</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Fairly or somewhat important</td>
+<td headers="estimate" class="gt_row gt_center">0.64</td>
+<td headers="conf.low" class="gt_row gt_center">0.46, 0.90</td>
+<td headers="p.value" class="gt_row gt_center">0.011</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    3 Not very or not at all important</td>
+<td headers="estimate" class="gt_row gt_center">0.53</td>
+<td headers="conf.low" class="gt_row gt_center">0.29, 0.96</td>
+<td headers="p.value" class="gt_row gt_center">0.037</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">FAITH1_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Extremely or very important</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Somewhat important</td>
+<td headers="estimate" class="gt_row gt_center">0.47</td>
+<td headers="conf.low" class="gt_row gt_center">0.33, 0.66</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    3 Not very or not at all important</td>
+<td headers="estimate" class="gt_row gt_center">0.16</td>
+<td headers="conf.low" class="gt_row gt_center">0.11, 0.24</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PRAYALON_bl_binary</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Prays</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Never pray</td>
+<td headers="estimate" class="gt_row gt_center">0.93</td>
+<td headers="conf.low" class="gt_row gt_center">0.57, 1.51</td>
+<td headers="p.value" class="gt_row gt_center">0.8</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">GRACE_bl</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Yes, say grace</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 No, don&#39;t say grace</td>
+<td headers="estimate" class="gt_row gt_center">0.60</td>
+<td headers="conf.low" class="gt_row gt_center">0.45, 0.80</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">READBIBL_bl_binary</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Read text</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Never read text</td>
+<td headers="estimate" class="gt_row gt_center">0.57</td>
+<td headers="conf.low" class="gt_row gt_center">0.42, 0.77</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">year * RELIG62_bl_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 2 Protestant</td>
+<td headers="estimate" class="gt_row gt_center">1.02</td>
+<td headers="conf.low" class="gt_row gt_center">0.96, 1.08</td>
+<td headers="p.value" class="gt_row gt_center">0.5</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 3 Jewish</td>
+<td headers="estimate" class="gt_row gt_center">0.99</td>
+<td headers="conf.low" class="gt_row gt_center">0.87, 1.11</td>
+<td headers="p.value" class="gt_row gt_center">0.8</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 4 Other</td>
+<td headers="estimate" class="gt_row gt_center">1.02</td>
+<td headers="conf.low" class="gt_row gt_center">0.89, 1.17</td>
+<td headers="p.value" class="gt_row gt_center">0.7</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 5 Not religious</td>
+<td headers="estimate" class="gt_row gt_center">1.04</td>
+<td headers="conf.low" class="gt_row gt_center">0.94, 1.16</td>
+<td headers="p.value" class="gt_row gt_center">0.5</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">year * TEENRACE_bl_white</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 2 Not white</td>
+<td headers="estimate" class="gt_row gt_center">1.04</td>
+<td headers="conf.low" class="gt_row gt_center">0.99, 1.09</td>
+<td headers="p.value" class="gt_row gt_center">0.12</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">year * TEENSEX_bl</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 2 Female</td>
+<td headers="estimate" class="gt_row gt_center">0.99</td>
+<td headers="conf.low" class="gt_row gt_center">0.95, 1.03</td>
+<td headers="p.value" class="gt_row gt_center">0.6</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">year * AGECATS_bl</td>
+<td headers="estimate" class="gt_row gt_center">1.00</td>
+<td headers="conf.low" class="gt_row gt_center">0.99, 1.02</td>
+<td headers="p.value" class="gt_row gt_center">0.6</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">year * PIMPREL_bl_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 2 Fairly or somewhat important</td>
+<td headers="estimate" class="gt_row gt_center">1.00</td>
+<td headers="conf.low" class="gt_row gt_center">0.94, 1.06</td>
+<td headers="p.value" class="gt_row gt_center">&gt;0.9</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 3 Not very or not at all important</td>
+<td headers="estimate" class="gt_row gt_center">1.05</td>
+<td headers="conf.low" class="gt_row gt_center">0.94, 1.17</td>
+<td headers="p.value" class="gt_row gt_center">0.4</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">year * FAITH1_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 2 Somewhat important</td>
+<td headers="estimate" class="gt_row gt_center">0.88</td>
+<td headers="conf.low" class="gt_row gt_center">0.84, 0.93</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 3 Not very or not at all important</td>
+<td headers="estimate" class="gt_row gt_center">0.77</td>
+<td headers="conf.low" class="gt_row gt_center">0.71, 0.83</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">year * PRAYALON_bl_binary</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 2 Never pray</td>
+<td headers="estimate" class="gt_row gt_center">0.99</td>
+<td headers="conf.low" class="gt_row gt_center">0.91, 1.08</td>
+<td headers="p.value" class="gt_row gt_center">0.8</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">year * GRACE_bl</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 2 No, don&#39;t say grace</td>
+<td headers="estimate" class="gt_row gt_center">1.03</td>
+<td headers="conf.low" class="gt_row gt_center">0.98, 1.08</td>
+<td headers="p.value" class="gt_row gt_center">0.2</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">year * READBIBL_bl_binary</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 2 Never read text</td>
+<td headers="estimate" class="gt_row gt_center">1.04</td>
+<td headers="conf.low" class="gt_row gt_center">0.99, 1.09</td>
+<td headers="p.value" class="gt_row gt_center">0.2</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">OR = Odds Ratio, CI = Confidence Interval</span></td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+<pre class="r"><code>marginal_sig &lt;- geeglm(ATTREG ~ year + RELIG62_bl_r + 
+                           TEENRACE_bl_white +
+                         TEENSEX_bl + AGECATS_bl +
+                   PIMPREL_bl_r + 
+                   FAITH1_r + GRACE_bl +
                    READBIBL_bl_binary + 
-                    PIMPREL_bl_r*year + 
-                   FAITH1_r*year + PRAYALON_bl_binary*year + GRACE_bl*year +
-                   READBIBL_bl_binary*year,
-                  data=data,
+                   FAITH1_r*year,
+                 data=data,
                     id=IDS,
                  family=binomial(&quot;logit&quot;),
                  corstr = &quot;exchangeable&quot;,
                  na.action=na.omit)
-summary(marginal_relig)</code></pre>
+summary(marginal_sig)</code></pre>
 <pre><code>## 
 ## Call:
-## geeglm(formula = ATTREG ~ year + PIMPREL_bl_r + FAITH1_r + PRAYALON_bl_binary + 
-##     GRACE_bl + READBIBL_bl_binary + PIMPREL_bl_r * year + FAITH1_r * 
-##     year + PRAYALON_bl_binary * year + GRACE_bl * year + READBIBL_bl_binary * 
-##     year, family = binomial(&quot;logit&quot;), data = data, na.action = na.omit, 
-##     id = IDS, corstr = &quot;exchangeable&quot;)
+## geeglm(formula = ATTREG ~ year + RELIG62_bl_r + TEENRACE_bl_white + 
+##     TEENSEX_bl + AGECATS_bl + PIMPREL_bl_r + FAITH1_r + GRACE_bl + 
+##     READBIBL_bl_binary + FAITH1_r * year, family = binomial(&quot;logit&quot;), 
+##     data = data, na.action = na.omit, id = IDS, corstr = &quot;exchangeable&quot;)
 ## 
 ##  Coefficients:
-##                                                      Estimate   Std.err   Wald
-## (Intercept)                                          3.088549  0.136051 515.35
-## year                                                -0.099041  0.020506  23.33
-## PIMPREL_bl_r2 Fairly or somewhat important          -0.406427  0.168969   5.79
-## PIMPREL_bl_r3 Not very or not at all important      -0.701414  0.286365   6.00
-## FAITH1_r2 Somewhat important                        -0.665242  0.168668  15.56
-## FAITH1_r3 Not very or not at all important          -1.726074  0.193084  79.91
-## PRAYALON_bl_binary2 Never pray                      -0.231914  0.232072   1.00
-## GRACE_bl2 No, don&#39;t say grace                       -0.435235  0.141868   9.41
-## READBIBL_bl_binary2 Never read text                 -0.497872  0.148628  11.22
-## year:PIMPREL_bl_r2 Fairly or somewhat important     -0.006359  0.029326   0.05
-## year:PIMPREL_bl_r3 Not very or not at all important  0.038641  0.053842   0.52
-## year:FAITH1_r2 Somewhat important                   -0.129414  0.025308  26.15
-## year:FAITH1_r3 Not very or not at all important     -0.261363  0.035430  54.42
-## year:PRAYALON_bl_binary2 Never pray                  0.000786  0.041771   0.00
-## year:GRACE_bl2 No, don&#39;t say grace                   0.020262  0.023166   0.76
-## year:READBIBL_bl_binary2 Never read text             0.032514  0.024618   1.74
-##                                                     Pr(&gt;|W|)    
-## (Intercept)                                          &lt; 2e-16 ***
-## year                                                 1.4e-06 ***
-## PIMPREL_bl_r2 Fairly or somewhat important           0.01616 *  
-## PIMPREL_bl_r3 Not very or not at all important       0.01431 *  
-## FAITH1_r2 Somewhat important                         8.0e-05 ***
-## FAITH1_r3 Not very or not at all important           &lt; 2e-16 ***
-## PRAYALON_bl_binary2 Never pray                       0.31764    
-## GRACE_bl2 No, don&#39;t say grace                        0.00216 ** 
-## READBIBL_bl_binary2 Never read text                  0.00081 ***
-## year:PIMPREL_bl_r2 Fairly or somewhat important      0.82834    
-## year:PIMPREL_bl_r3 Not very or not at all important  0.47296    
-## year:FAITH1_r2 Somewhat important                    3.2e-07 ***
-## year:FAITH1_r3 Not very or not at all important      1.6e-13 ***
-## year:PRAYALON_bl_binary2 Never pray                  0.98499    
-## year:GRACE_bl2 No, don&#39;t say grace                   0.38177    
-## year:READBIBL_bl_binary2 Never read text             0.18659    
+##                                                 Estimate Std.err  Wald Pr(&gt;|W|)
+## (Intercept)                                       4.2253  0.4260 98.38  &lt; 2e-16
+## year                                             -0.0875  0.0196 19.97  7.9e-06
+## RELIG62_bl_r2 Protestant                         -0.2986  0.0956  9.76   0.0018
+## RELIG62_bl_r3 Jewish                              0.0895  0.1975  0.21   0.6504
+## RELIG62_bl_r4 Other                              -0.6784  0.2529  7.20   0.0073
+## RELIG62_bl_r5 Not religious                      -0.9255  0.1594 33.72  6.4e-09
+## TEENRACE_bl_white2 Not white                     -0.2085  0.0835  6.24   0.0125
+## TEENSEX_bl2 Female                               -0.0870  0.0738  1.39   0.2385
+## AGECATS_bl                                       -0.0500  0.0262  3.63   0.0566
+## PIMPREL_bl_r2 Fairly or somewhat important       -0.4512  0.0959 22.15  2.5e-06
+## PIMPREL_bl_r3 Not very or not at all important   -0.4163  0.1717  5.88   0.0153
+## FAITH1_r2 Somewhat important                     -0.7822  0.1680 21.68  3.2e-06
+## FAITH1_r3 Not very or not at all important       -1.8632  0.1904 95.77  &lt; 2e-16
+## GRACE_bl2 No, don&#39;t say grace                    -0.3605  0.0790 20.80  5.1e-06
+## READBIBL_bl_binary2 Never read text              -0.3956  0.0815 23.57  1.2e-06
+## year:FAITH1_r2 Somewhat important                -0.1204  0.0252 22.88  1.7e-06
+## year:FAITH1_r3 Not very or not at all important  -0.2580  0.0351 54.18  1.8e-13
+##                                                    
+## (Intercept)                                     ***
+## year                                            ***
+## RELIG62_bl_r2 Protestant                        ** 
+## RELIG62_bl_r3 Jewish                               
+## RELIG62_bl_r4 Other                             ** 
+## RELIG62_bl_r5 Not religious                     ***
+## TEENRACE_bl_white2 Not white                    *  
+## TEENSEX_bl2 Female                                 
+## AGECATS_bl                                      .  
+## PIMPREL_bl_r2 Fairly or somewhat important      ***
+## PIMPREL_bl_r3 Not very or not at all important  *  
+## FAITH1_r2 Somewhat important                    ***
+## FAITH1_r3 Not very or not at all important      ***
+## GRACE_bl2 No, don&#39;t say grace                   ***
+## READBIBL_bl_binary2 Never read text             ***
+## year:FAITH1_r2 Somewhat important               ***
+## year:FAITH1_r3 Not very or not at all important ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -2145,91 +4303,1092 @@ summary(marginal_relig)</code></pre>
 ## Estimated Scale Parameters:
 ## 
 ##             Estimate Std.err
-## (Intercept)    0.985  0.0856
+## (Intercept)    0.983   0.094
 ##   Link = identity 
 ## 
 ## Estimated Correlation Parameters:
 ##       Estimate Std.err
 ## alpha        0       0
-## Number of clusters:   5889  Maximum cluster size: 1</code></pre>
-<div id="ignore-after-here" class="section level2">
-<h2>IGNORE AFTER HERE</h2>
-<p>#4. MODELS with FULL DATA</p>
-<p>##a. Random Slope and Intercept</p>
-<pre class="r"><code>random_slope_int &lt;- glmer(ATTREG ~ year + (year|IDS), 
-                          family=binomial, 
-                          data=waves)
-summary(random_slope_int)</code></pre>
-<p>##b. ONLY Random Intercept</p>
-<pre class="r"><code>random_int &lt;- glmer(ATTREG ~ year + (1|IDS), 
-                    family=binomial, 
-                    data=waves)
-summary(random_int)</code></pre>
-<p>##c. Compare A and B</p>
-<pre class="r"><code>#random slope+int has lower AIC and BIC, pvalue &lt;0.05 --&gt; model with random slope+int is preferred.
-anova(random_slope_int, random_int)
-
-#Less than 0.05 = significant difference in models?
-lrt.pvalue(random_slope_int, random_int)</code></pre>
-<p>##d. How do demographics impact attendance (ATTREG)?</p>
-<pre class="r"><code>#                data=waves)
-# summary(demos_agefact)
-
-demos_over_time &lt;- glmer(ATTREG ~ year + RELIG62_bl_r + TEENRACE_bl_white + 
-                 TEENSEX_bl + factor(AGECATS_bl) +
-                   RELIG62_bl_r*year + TEENRACE_bl_white*year + TEENSEX_bl*year +
-                   factor(AGECATS_bl)*year +
-                    (year|IDS),
-                 family=binomial,
-                 data=waves)
-summary(demos_over_time)</code></pre>
-<p>significant fixed effects – religion, race not significant fixed
-effects – sex, age</p>
-<p>##e. What about religious predictors?</p>
-<pre class="r"><code>relfact &lt;- glmer(ATTREG ~ year + RELIG62_bl_r + PIMPREL_bl_r + 
-                   FAITH1_r + PRAYALON_bl_binary + GRACE_bl +
-                   READBIBL_bl_binary + 
-                   RELIG62_bl_r*year + PIMPREL_bl_r*year + 
-                   FAITH1_r*year + PRAYALON_bl_binary*year + GRACE_bl*year +
-                   READBIBL_bl_binary*year + (year|IDS), 
-                 family=binomial, 
-                 data=waves)
-summary(relfact) #most religious affil not sig - </code></pre>
-<p>all fixed effects significant ##z. Final Model?</p>
-<pre class="r"><code>#summary(demos) #lots of race vars not sig, try binary?
-#summary(relfact) #PRAYALON not sig - 
-              #just use FAITH1 instead since it is a similar measure
-
-#tabyl(waves$RELIG62_bl)
-#tabyl(waves$RELTRAD_bl)
-#tabyl(waves$TEENRACE_bl_white)
-#tabyl(waves$PIMPREL_bl)
-#tabyl(waves$PRAYALON_bl_binary)
-
-final_mod &lt;- glmer (ATTREG ~ year + 
-                      #demographics
-                      RELIG62_bl_r + TEENRACE_bl_white + 
-                 TEENSEX_bl + AGECATS_bl +
-                      #religion practice vars
-                      PIMPREL_bl_r + 
-                   FAITH1_r + PRAYALON_bl_binary + GRACE_bl +
-                   READBIBL_bl_binary +
-                      (year| IDS),
-                    family=binomial,
-                    data=waves) 
-summary(final_mod) #lots of significance
-
-final_mod_only_sig &lt;- glmer (ATTREG ~ year + 
-                      #demographics
-                      RELIG62_bl_r + TEENRACE_bl_white + 
-                      #religion practice vars
-                      PIMPREL_bl_r + 
-                   FAITH1_r + PRAYALON_bl_binary + GRACE_bl +
-                   READBIBL_bl_binary +
-                      (year| IDS),
-                    family=binomial,
-                    data=waves) 
-summary(final_mod_only_sig)</code></pre>
+## Number of clusters:   5822  Maximum cluster size: 1</code></pre>
+<pre class="r"><code>marginal_sig %&gt;% tbl_regression()</code></pre>
+<div id="ygdtgrjsae" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ygdtgrjsae table {
+font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+#ygdtgrjsae thead, #ygdtgrjsae tbody, #ygdtgrjsae tfoot, #ygdtgrjsae tr, #ygdtgrjsae td, #ygdtgrjsae th {
+border-style: none;
+}
+#ygdtgrjsae p {
+margin: 0;
+padding: 0;
+}
+#ygdtgrjsae .gt_table {
+display: table;
+border-collapse: collapse;
+line-height: normal;
+margin-left: auto;
+margin-right: auto;
+color: #333333;
+font-size: 16px;
+font-weight: normal;
+font-style: normal;
+background-color: #FFFFFF;
+width: auto;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #A8A8A8;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #A8A8A8;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+}
+#ygdtgrjsae .gt_caption {
+padding-top: 4px;
+padding-bottom: 4px;
+}
+#ygdtgrjsae .gt_title {
+color: #333333;
+font-size: 125%;
+font-weight: initial;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-color: #FFFFFF;
+border-bottom-width: 0;
+}
+#ygdtgrjsae .gt_subtitle {
+color: #333333;
+font-size: 85%;
+font-weight: initial;
+padding-top: 3px;
+padding-bottom: 5px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-color: #FFFFFF;
+border-top-width: 0;
+}
+#ygdtgrjsae .gt_heading {
+background-color: #FFFFFF;
+text-align: center;
+border-bottom-color: #FFFFFF;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#ygdtgrjsae .gt_bottom_border {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#ygdtgrjsae .gt_col_headings {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#ygdtgrjsae .gt_col_heading {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 6px;
+padding-left: 5px;
+padding-right: 5px;
+overflow-x: hidden;
+}
+#ygdtgrjsae .gt_column_spanner_outer {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+padding-top: 0;
+padding-bottom: 0;
+padding-left: 4px;
+padding-right: 4px;
+}
+#ygdtgrjsae .gt_column_spanner_outer:first-child {
+padding-left: 0;
+}
+#ygdtgrjsae .gt_column_spanner_outer:last-child {
+padding-right: 0;
+}
+#ygdtgrjsae .gt_column_spanner {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 5px;
+overflow-x: hidden;
+display: inline-block;
+width: 100%;
+}
+#ygdtgrjsae .gt_spanner_row {
+border-bottom-style: hidden;
+}
+#ygdtgrjsae .gt_group_heading {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+text-align: left;
+}
+#ygdtgrjsae .gt_empty_group_heading {
+padding: 0.5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: middle;
+}
+#ygdtgrjsae .gt_from_md > :first-child {
+margin-top: 0;
+}
+#ygdtgrjsae .gt_from_md > :last-child {
+margin-bottom: 0;
+}
+#ygdtgrjsae .gt_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+margin: 10px;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+overflow-x: hidden;
+}
+#ygdtgrjsae .gt_stub {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+}
+#ygdtgrjsae .gt_stub_row_group {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+vertical-align: top;
+}
+#ygdtgrjsae .gt_row_group_first td {
+border-top-width: 2px;
+}
+#ygdtgrjsae .gt_row_group_first th {
+border-top-width: 2px;
+}
+#ygdtgrjsae .gt_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#ygdtgrjsae .gt_first_summary_row {
+border-top-style: solid;
+border-top-color: #D3D3D3;
+}
+#ygdtgrjsae .gt_first_summary_row.thick {
+border-top-width: 2px;
+}
+#ygdtgrjsae .gt_last_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#ygdtgrjsae .gt_grand_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#ygdtgrjsae .gt_first_grand_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-style: double;
+border-top-width: 6px;
+border-top-color: #D3D3D3;
+}
+#ygdtgrjsae .gt_last_grand_summary_row_top {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: double;
+border-bottom-width: 6px;
+border-bottom-color: #D3D3D3;
+}
+#ygdtgrjsae .gt_striped {
+background-color: rgba(128, 128, 128, 0.05);
+}
+#ygdtgrjsae .gt_table_body {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#ygdtgrjsae .gt_footnotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#ygdtgrjsae .gt_footnote {
+margin: 0px;
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#ygdtgrjsae .gt_sourcenotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#ygdtgrjsae .gt_sourcenote {
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#ygdtgrjsae .gt_left {
+text-align: left;
+}
+#ygdtgrjsae .gt_center {
+text-align: center;
+}
+#ygdtgrjsae .gt_right {
+text-align: right;
+font-variant-numeric: tabular-nums;
+}
+#ygdtgrjsae .gt_font_normal {
+font-weight: normal;
+}
+#ygdtgrjsae .gt_font_bold {
+font-weight: bold;
+}
+#ygdtgrjsae .gt_font_italic {
+font-style: italic;
+}
+#ygdtgrjsae .gt_super {
+font-size: 65%;
+}
+#ygdtgrjsae .gt_footnote_marks {
+font-size: 75%;
+vertical-align: 0.4em;
+position: initial;
+}
+#ygdtgrjsae .gt_asterisk {
+font-size: 100%;
+vertical-align: 0;
+}
+#ygdtgrjsae .gt_indent_1 {
+text-indent: 5px;
+}
+#ygdtgrjsae .gt_indent_2 {
+text-indent: 10px;
+}
+#ygdtgrjsae .gt_indent_3 {
+text-indent: 15px;
+}
+#ygdtgrjsae .gt_indent_4 {
+text-indent: 20px;
+}
+#ygdtgrjsae .gt_indent_5 {
+text-indent: 25px;
+}
+#ygdtgrjsae .katex-display {
+display: inline-flex !important;
+margin-bottom: 0.75em !important;
+}
+#ygdtgrjsae div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>log(OR)</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span class="gt_from_md"><strong>p-value</strong></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">year</td>
+<td headers="estimate" class="gt_row gt_center">-0.09</td>
+<td headers="conf.low" class="gt_row gt_center">-0.13, -0.05</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">RELIG62_bl_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Catholic</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Protestant</td>
+<td headers="estimate" class="gt_row gt_center">-0.30</td>
+<td headers="conf.low" class="gt_row gt_center">-0.49, -0.11</td>
+<td headers="p.value" class="gt_row gt_center">0.002</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    3 Jewish</td>
+<td headers="estimate" class="gt_row gt_center">0.09</td>
+<td headers="conf.low" class="gt_row gt_center">-0.30, 0.48</td>
+<td headers="p.value" class="gt_row gt_center">0.7</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    4 Other</td>
+<td headers="estimate" class="gt_row gt_center">-0.68</td>
+<td headers="conf.low" class="gt_row gt_center">-1.2, -0.18</td>
+<td headers="p.value" class="gt_row gt_center">0.007</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    5 Not religious</td>
+<td headers="estimate" class="gt_row gt_center">-0.93</td>
+<td headers="conf.low" class="gt_row gt_center">-1.2, -0.61</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">TEENRACE_bl_white</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 White</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Not white</td>
+<td headers="estimate" class="gt_row gt_center">-0.21</td>
+<td headers="conf.low" class="gt_row gt_center">-0.37, -0.04</td>
+<td headers="p.value" class="gt_row gt_center">0.013</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">TEENSEX_bl</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Male</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Female</td>
+<td headers="estimate" class="gt_row gt_center">-0.09</td>
+<td headers="conf.low" class="gt_row gt_center">-0.23, 0.06</td>
+<td headers="p.value" class="gt_row gt_center">0.2</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">AGECATS_bl</td>
+<td headers="estimate" class="gt_row gt_center">-0.05</td>
+<td headers="conf.low" class="gt_row gt_center">-0.10, 0.00</td>
+<td headers="p.value" class="gt_row gt_center">0.057</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PIMPREL_bl_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Extremely or very important</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Fairly or somewhat important</td>
+<td headers="estimate" class="gt_row gt_center">-0.45</td>
+<td headers="conf.low" class="gt_row gt_center">-0.64, -0.26</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    3 Not very or not at all important</td>
+<td headers="estimate" class="gt_row gt_center">-0.42</td>
+<td headers="conf.low" class="gt_row gt_center">-0.75, -0.08</td>
+<td headers="p.value" class="gt_row gt_center">0.015</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">FAITH1_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Extremely or very important</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Somewhat important</td>
+<td headers="estimate" class="gt_row gt_center">-0.78</td>
+<td headers="conf.low" class="gt_row gt_center">-1.1, -0.45</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    3 Not very or not at all important</td>
+<td headers="estimate" class="gt_row gt_center">-1.9</td>
+<td headers="conf.low" class="gt_row gt_center">-2.2, -1.5</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">GRACE_bl</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Yes, say grace</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 No, don&#39;t say grace</td>
+<td headers="estimate" class="gt_row gt_center">-0.36</td>
+<td headers="conf.low" class="gt_row gt_center">-0.52, -0.21</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">READBIBL_bl_binary</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Read text</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Never read text</td>
+<td headers="estimate" class="gt_row gt_center">-0.40</td>
+<td headers="conf.low" class="gt_row gt_center">-0.56, -0.24</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">year * FAITH1_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 2 Somewhat important</td>
+<td headers="estimate" class="gt_row gt_center">-0.12</td>
+<td headers="conf.low" class="gt_row gt_center">-0.17, -0.07</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 3 Not very or not at all important</td>
+<td headers="estimate" class="gt_row gt_center">-0.26</td>
+<td headers="conf.low" class="gt_row gt_center">-0.33, -0.19</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">OR = Odds Ratio, CI = Confidence Interval</span></td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+<pre class="r"><code>marginal_sig %&gt;% tbl_regression(exponentiate = T)</code></pre>
+<div id="ybvfnrcnjt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ybvfnrcnjt table {
+font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+#ybvfnrcnjt thead, #ybvfnrcnjt tbody, #ybvfnrcnjt tfoot, #ybvfnrcnjt tr, #ybvfnrcnjt td, #ybvfnrcnjt th {
+border-style: none;
+}
+#ybvfnrcnjt p {
+margin: 0;
+padding: 0;
+}
+#ybvfnrcnjt .gt_table {
+display: table;
+border-collapse: collapse;
+line-height: normal;
+margin-left: auto;
+margin-right: auto;
+color: #333333;
+font-size: 16px;
+font-weight: normal;
+font-style: normal;
+background-color: #FFFFFF;
+width: auto;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #A8A8A8;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #A8A8A8;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+}
+#ybvfnrcnjt .gt_caption {
+padding-top: 4px;
+padding-bottom: 4px;
+}
+#ybvfnrcnjt .gt_title {
+color: #333333;
+font-size: 125%;
+font-weight: initial;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-color: #FFFFFF;
+border-bottom-width: 0;
+}
+#ybvfnrcnjt .gt_subtitle {
+color: #333333;
+font-size: 85%;
+font-weight: initial;
+padding-top: 3px;
+padding-bottom: 5px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-color: #FFFFFF;
+border-top-width: 0;
+}
+#ybvfnrcnjt .gt_heading {
+background-color: #FFFFFF;
+text-align: center;
+border-bottom-color: #FFFFFF;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#ybvfnrcnjt .gt_bottom_border {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#ybvfnrcnjt .gt_col_headings {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#ybvfnrcnjt .gt_col_heading {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 6px;
+padding-left: 5px;
+padding-right: 5px;
+overflow-x: hidden;
+}
+#ybvfnrcnjt .gt_column_spanner_outer {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+padding-top: 0;
+padding-bottom: 0;
+padding-left: 4px;
+padding-right: 4px;
+}
+#ybvfnrcnjt .gt_column_spanner_outer:first-child {
+padding-left: 0;
+}
+#ybvfnrcnjt .gt_column_spanner_outer:last-child {
+padding-right: 0;
+}
+#ybvfnrcnjt .gt_column_spanner {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 5px;
+overflow-x: hidden;
+display: inline-block;
+width: 100%;
+}
+#ybvfnrcnjt .gt_spanner_row {
+border-bottom-style: hidden;
+}
+#ybvfnrcnjt .gt_group_heading {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+text-align: left;
+}
+#ybvfnrcnjt .gt_empty_group_heading {
+padding: 0.5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: middle;
+}
+#ybvfnrcnjt .gt_from_md > :first-child {
+margin-top: 0;
+}
+#ybvfnrcnjt .gt_from_md > :last-child {
+margin-bottom: 0;
+}
+#ybvfnrcnjt .gt_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+margin: 10px;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+overflow-x: hidden;
+}
+#ybvfnrcnjt .gt_stub {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+}
+#ybvfnrcnjt .gt_stub_row_group {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+vertical-align: top;
+}
+#ybvfnrcnjt .gt_row_group_first td {
+border-top-width: 2px;
+}
+#ybvfnrcnjt .gt_row_group_first th {
+border-top-width: 2px;
+}
+#ybvfnrcnjt .gt_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#ybvfnrcnjt .gt_first_summary_row {
+border-top-style: solid;
+border-top-color: #D3D3D3;
+}
+#ybvfnrcnjt .gt_first_summary_row.thick {
+border-top-width: 2px;
+}
+#ybvfnrcnjt .gt_last_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#ybvfnrcnjt .gt_grand_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#ybvfnrcnjt .gt_first_grand_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-style: double;
+border-top-width: 6px;
+border-top-color: #D3D3D3;
+}
+#ybvfnrcnjt .gt_last_grand_summary_row_top {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: double;
+border-bottom-width: 6px;
+border-bottom-color: #D3D3D3;
+}
+#ybvfnrcnjt .gt_striped {
+background-color: rgba(128, 128, 128, 0.05);
+}
+#ybvfnrcnjt .gt_table_body {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#ybvfnrcnjt .gt_footnotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#ybvfnrcnjt .gt_footnote {
+margin: 0px;
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#ybvfnrcnjt .gt_sourcenotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#ybvfnrcnjt .gt_sourcenote {
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#ybvfnrcnjt .gt_left {
+text-align: left;
+}
+#ybvfnrcnjt .gt_center {
+text-align: center;
+}
+#ybvfnrcnjt .gt_right {
+text-align: right;
+font-variant-numeric: tabular-nums;
+}
+#ybvfnrcnjt .gt_font_normal {
+font-weight: normal;
+}
+#ybvfnrcnjt .gt_font_bold {
+font-weight: bold;
+}
+#ybvfnrcnjt .gt_font_italic {
+font-style: italic;
+}
+#ybvfnrcnjt .gt_super {
+font-size: 65%;
+}
+#ybvfnrcnjt .gt_footnote_marks {
+font-size: 75%;
+vertical-align: 0.4em;
+position: initial;
+}
+#ybvfnrcnjt .gt_asterisk {
+font-size: 100%;
+vertical-align: 0;
+}
+#ybvfnrcnjt .gt_indent_1 {
+text-indent: 5px;
+}
+#ybvfnrcnjt .gt_indent_2 {
+text-indent: 10px;
+}
+#ybvfnrcnjt .gt_indent_3 {
+text-indent: 15px;
+}
+#ybvfnrcnjt .gt_indent_4 {
+text-indent: 20px;
+}
+#ybvfnrcnjt .gt_indent_5 {
+text-indent: 25px;
+}
+#ybvfnrcnjt .katex-display {
+display: inline-flex !important;
+margin-bottom: 0.75em !important;
+}
+#ybvfnrcnjt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>OR</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span class="gt_from_md"><strong>p-value</strong></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">year</td>
+<td headers="estimate" class="gt_row gt_center">0.92</td>
+<td headers="conf.low" class="gt_row gt_center">0.88, 0.95</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">RELIG62_bl_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Catholic</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Protestant</td>
+<td headers="estimate" class="gt_row gt_center">0.74</td>
+<td headers="conf.low" class="gt_row gt_center">0.62, 0.89</td>
+<td headers="p.value" class="gt_row gt_center">0.002</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    3 Jewish</td>
+<td headers="estimate" class="gt_row gt_center">1.09</td>
+<td headers="conf.low" class="gt_row gt_center">0.74, 1.61</td>
+<td headers="p.value" class="gt_row gt_center">0.7</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    4 Other</td>
+<td headers="estimate" class="gt_row gt_center">0.51</td>
+<td headers="conf.low" class="gt_row gt_center">0.31, 0.83</td>
+<td headers="p.value" class="gt_row gt_center">0.007</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    5 Not religious</td>
+<td headers="estimate" class="gt_row gt_center">0.40</td>
+<td headers="conf.low" class="gt_row gt_center">0.29, 0.54</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">TEENRACE_bl_white</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 White</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Not white</td>
+<td headers="estimate" class="gt_row gt_center">0.81</td>
+<td headers="conf.low" class="gt_row gt_center">0.69, 0.96</td>
+<td headers="p.value" class="gt_row gt_center">0.013</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">TEENSEX_bl</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Male</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Female</td>
+<td headers="estimate" class="gt_row gt_center">0.92</td>
+<td headers="conf.low" class="gt_row gt_center">0.79, 1.06</td>
+<td headers="p.value" class="gt_row gt_center">0.2</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">AGECATS_bl</td>
+<td headers="estimate" class="gt_row gt_center">0.95</td>
+<td headers="conf.low" class="gt_row gt_center">0.90, 1.00</td>
+<td headers="p.value" class="gt_row gt_center">0.057</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PIMPREL_bl_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Extremely or very important</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Fairly or somewhat important</td>
+<td headers="estimate" class="gt_row gt_center">0.64</td>
+<td headers="conf.low" class="gt_row gt_center">0.53, 0.77</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    3 Not very or not at all important</td>
+<td headers="estimate" class="gt_row gt_center">0.66</td>
+<td headers="conf.low" class="gt_row gt_center">0.47, 0.92</td>
+<td headers="p.value" class="gt_row gt_center">0.015</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">FAITH1_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Extremely or very important</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Somewhat important</td>
+<td headers="estimate" class="gt_row gt_center">0.46</td>
+<td headers="conf.low" class="gt_row gt_center">0.33, 0.64</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    3 Not very or not at all important</td>
+<td headers="estimate" class="gt_row gt_center">0.16</td>
+<td headers="conf.low" class="gt_row gt_center">0.11, 0.23</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">GRACE_bl</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Yes, say grace</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 No, don&#39;t say grace</td>
+<td headers="estimate" class="gt_row gt_center">0.70</td>
+<td headers="conf.low" class="gt_row gt_center">0.60, 0.81</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">READBIBL_bl_binary</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Read text</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Never read text</td>
+<td headers="estimate" class="gt_row gt_center">0.67</td>
+<td headers="conf.low" class="gt_row gt_center">0.57, 0.79</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">year * FAITH1_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 2 Somewhat important</td>
+<td headers="estimate" class="gt_row gt_center">0.89</td>
+<td headers="conf.low" class="gt_row gt_center">0.84, 0.93</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 3 Not very or not at all important</td>
+<td headers="estimate" class="gt_row gt_center">0.77</td>
+<td headers="conf.low" class="gt_row gt_center">0.72, 0.83</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">OR = Odds Ratio, CI = Confidence Interval</span></td>
+    </tr>
+  </tfoot>
+</table>
 </div>
 
 

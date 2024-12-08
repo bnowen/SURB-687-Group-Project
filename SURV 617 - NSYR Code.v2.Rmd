@@ -574,7 +574,7 @@ marginal_model %>% tbl_regression(exponentiate = T)
 
 marginal_all <- geeglm(ATTREG ~ year + RELIG62_bl_r + year*RELIG62_bl_r +
                            TEENRACE_bl_white + year*TEENRACE_bl_white + 
-                 TEENSEX_bl + year*TEENSEX_bl + AGECATS_bl + year*AGECATS_bl +
+                 TEENSEX_bl + year*TEENSEX_bl + factor(AGECATS_bl) + year*factor(AGECATS_bl) +
                    PIMPREL_bl_r + 
                    FAITH1_r + PRAYALON_bl_binary + GRACE_bl +
                    READBIBL_bl_binary + 
@@ -593,7 +593,7 @@ marginal_all %>% tbl_regression(exponentiate = T)
 
 marginal_sig <- geeglm(ATTREG ~ year + RELIG62_bl_r + 
                            TEENRACE_bl_white +
-                         TEENSEX_bl + AGECATS_bl +
+                         TEENSEX_bl + factor(AGECATS_bl) +
                    PIMPREL_bl_r + 
                    FAITH1_r + GRACE_bl +
                    READBIBL_bl_binary + 
@@ -606,6 +606,23 @@ marginal_sig <- geeglm(ATTREG ~ year + RELIG62_bl_r +
 summary(marginal_sig)
 marginal_sig %>% tbl_regression()
 marginal_sig %>% tbl_regression(exponentiate = T)
+QIC(marginal_sig)
+
+marginal_sig_wo_grace_read <- geeglm(ATTREG ~ year + RELIG62_bl_r + 
+                           TEENRACE_bl_white +
+                         TEENSEX_bl + factor(AGECATS_bl) +
+                   PIMPREL_bl_r + 
+                   FAITH1_r +
+                   FAITH1_r*year,
+                 data=data,
+                    id=IDS,
+                 family=binomial("logit"),
+                 corstr = "exchangeable",
+                 na.action=na.omit)
+summary(marginal_sig_wo_grace_read)
+marginal_sig_wo_grace_read %>% tbl_regression()
+marginal_sig_wo_grace_read %>% tbl_regression(exponentiate = T)
+QIC(marginal_sig_wo_grace_read)
 ```
 
 

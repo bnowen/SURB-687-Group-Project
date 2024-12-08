@@ -2882,7 +2882,7 @@ height: 0px !important;
 </div>
 <pre class="r"><code>marginal_all &lt;- geeglm(ATTREG ~ year + RELIG62_bl_r + year*RELIG62_bl_r +
                            TEENRACE_bl_white + year*TEENRACE_bl_white + 
-                 TEENSEX_bl + year*TEENSEX_bl + AGECATS_bl + year*AGECATS_bl +
+                 TEENSEX_bl + year*TEENSEX_bl + factor(AGECATS_bl) + year*factor(AGECATS_bl) +
                    PIMPREL_bl_r + 
                    FAITH1_r + PRAYALON_bl_binary + GRACE_bl +
                    READBIBL_bl_binary + 
@@ -2900,75 +2900,88 @@ summary(marginal_all)</code></pre>
 ## Call:
 ## geeglm(formula = ATTREG ~ year + RELIG62_bl_r + year * RELIG62_bl_r + 
 ##     TEENRACE_bl_white + year * TEENRACE_bl_white + TEENSEX_bl + 
-##     year * TEENSEX_bl + AGECATS_bl + year * AGECATS_bl + PIMPREL_bl_r + 
-##     FAITH1_r + PRAYALON_bl_binary + GRACE_bl + READBIBL_bl_binary + 
-##     PIMPREL_bl_r * year + FAITH1_r * year + PRAYALON_bl_binary * 
-##     year + GRACE_bl * year + READBIBL_bl_binary * year, family = binomial(&quot;logit&quot;), 
-##     data = data, na.action = na.omit, id = IDS, corstr = &quot;exchangeable&quot;)
+##     year * TEENSEX_bl + factor(AGECATS_bl) + year * factor(AGECATS_bl) + 
+##     PIMPREL_bl_r + FAITH1_r + PRAYALON_bl_binary + GRACE_bl + 
+##     READBIBL_bl_binary + PIMPREL_bl_r * year + FAITH1_r * year + 
+##     PRAYALON_bl_binary * year + GRACE_bl * year + READBIBL_bl_binary * 
+##     year, family = binomial(&quot;logit&quot;), data = data, na.action = na.omit, 
+##     id = IDS, corstr = &quot;exchangeable&quot;)
 ## 
 ##  Coefficients:
-##                                                     Estimate  Std.err  Wald
-## (Intercept)                                          4.73857  0.76307 38.56
-## year                                                -0.18870  0.12609  2.24
-## RELIG62_bl_r2 Protestant                            -0.39772  0.17509  5.16
-## RELIG62_bl_r3 Jewish                                 0.17887  0.36865  0.24
-## RELIG62_bl_r4 Other                                 -0.79538  0.44157  3.24
-## RELIG62_bl_r5 Not religious                         -1.09441  0.29161 14.08
-## TEENRACE_bl_white2 Not white                        -0.41484  0.15275  7.38
-## TEENSEX_bl2 Female                                  -0.03445  0.13643  0.06
-## AGECATS_bl                                          -0.06815  0.04813  2.01
-## PIMPREL_bl_r2 Fairly or somewhat important          -0.43990  0.17287  6.48
-## PIMPREL_bl_r3 Not very or not at all important      -0.63306  0.30324  4.36
-## FAITH1_r2 Somewhat important                        -0.76066  0.17245 19.46
-## FAITH1_r3 Not very or not at all important          -1.81938  0.20257 80.67
-## PRAYALON_bl_binary2 Never pray                      -0.07519  0.25027  0.09
-## GRACE_bl2 No, don&#39;t say grace                       -0.50521  0.14646 11.90
-## READBIBL_bl_binary2 Never read text                 -0.56379  0.15544 13.16
-## year:RELIG62_bl_r2 Protestant                        0.01975  0.02921  0.46
-## year:RELIG62_bl_r3 Jewish                           -0.01476  0.06232  0.06
-## year:RELIG62_bl_r4 Other                             0.02384  0.06905  0.12
-## year:RELIG62_bl_r5 Not religious                     0.04003  0.05364  0.56
-## year:TEENRACE_bl_white2 Not white                    0.03888  0.02519  2.38
-## year:TEENSEX_bl2 Female                             -0.01194  0.02241  0.28
-## year:AGECATS_bl                                      0.00375  0.00794  0.22
-## year:PIMPREL_bl_r2 Fairly or somewhat important     -0.00319  0.03037  0.01
-## year:PIMPREL_bl_r3 Not very or not at all important  0.04560  0.05588  0.67
-## year:FAITH1_r2 Somewhat important                   -0.12262  0.02604 22.18
-## year:FAITH1_r3 Not very or not at all important     -0.26304  0.03742 49.41
-## year:PRAYALON_bl_binary2 Never pray                 -0.01141  0.04398  0.07
-## year:GRACE_bl2 No, don&#39;t say grace                   0.02811  0.02393  1.38
-## year:READBIBL_bl_binary2 Never read text             0.03627  0.02558  2.01
+##                                                     Estimate  Std.err   Wald
+## (Intercept)                                          3.79735  0.27764 187.06
+## year                                                -0.12299  0.04555   7.29
+## RELIG62_bl_r2 Protestant                            -0.39599  0.17517   5.11
+## RELIG62_bl_r3 Jewish                                 0.19029  0.37009   0.26
+## RELIG62_bl_r4 Other                                 -0.79581  0.44129   3.25
+## RELIG62_bl_r5 Not religious                         -1.10148  0.29205  14.22
+## TEENRACE_bl_white2 Not white                        -0.41288  0.15326   7.26
+## TEENSEX_bl2 Female                                  -0.03544  0.13639   0.07
+## factor(AGECATS_bl)14                                 0.02757  0.21657   0.02
+## factor(AGECATS_bl)15                                -0.00565  0.21388   0.00
+## factor(AGECATS_bl)16                                -0.26249  0.21626   1.47
+## factor(AGECATS_bl)17                                -0.18899  0.21807   0.75
+## PIMPREL_bl_r2 Fairly or somewhat important          -0.44048  0.17340   6.45
+## PIMPREL_bl_r3 Not very or not at all important      -0.63818  0.30178   4.47
+## FAITH1_r2 Somewhat important                        -0.76004  0.17241  19.43
+## FAITH1_r3 Not very or not at all important          -1.81153  0.20271  79.86
+## PRAYALON_bl_binary2 Never pray                      -0.05817  0.25168   0.05
+## GRACE_bl2 No, don&#39;t say grace                       -0.50392  0.14664  11.81
+## READBIBL_bl_binary2 Never read text                 -0.56875  0.15545  13.39
+## year:RELIG62_bl_r2 Protestant                        0.01992  0.02928   0.46
+## year:RELIG62_bl_r3 Jewish                           -0.01504  0.06226   0.06
+## year:RELIG62_bl_r4 Other                             0.02642  0.06868   0.15
+## year:RELIG62_bl_r5 Not religious                     0.03876  0.05366   0.52
+## year:TEENRACE_bl_white2 Not white                    0.03740  0.02538   2.17
+## year:TEENSEX_bl2 Female                             -0.01124  0.02245   0.25
+## year:factor(AGECATS_bl)14                           -0.01453  0.03552   0.17
+## year:factor(AGECATS_bl)15                           -0.03488  0.03477   1.01
+## year:factor(AGECATS_bl)16                            0.00162  0.03562   0.00
+## year:factor(AGECATS_bl)17                            0.00967  0.03630   0.07
+## year:PIMPREL_bl_r2 Fairly or somewhat important     -0.00482  0.03048   0.02
+## year:PIMPREL_bl_r3 Not very or not at all important  0.04881  0.05586   0.76
+## year:FAITH1_r2 Somewhat important                   -0.12279  0.02608  22.17
+## year:FAITH1_r3 Not very or not at all important     -0.26521  0.03751  49.98
+## year:PRAYALON_bl_binary2 Never pray                 -0.01353  0.04413   0.09
+## year:GRACE_bl2 No, don&#39;t say grace                   0.02764  0.02398   1.33
+## year:READBIBL_bl_binary2 Never read text             0.03700  0.02556   2.10
 ##                                                     Pr(&gt;|W|)    
-## (Intercept)                                          5.3e-10 ***
-## year                                                 0.13450    
-## RELIG62_bl_r2 Protestant                             0.02311 *  
-## RELIG62_bl_r3 Jewish                                 0.62754    
-## RELIG62_bl_r4 Other                                  0.07166 .  
-## RELIG62_bl_r5 Not religious                          0.00017 ***
-## TEENRACE_bl_white2 Not white                         0.00661 ** 
-## TEENSEX_bl2 Female                                   0.80063    
-## AGECATS_bl                                           0.15674    
-## PIMPREL_bl_r2 Fairly or somewhat important           0.01094 *  
-## PIMPREL_bl_r3 Not very or not at all important       0.03683 *  
+## (Intercept)                                          &lt; 2e-16 ***
+## year                                                 0.00693 ** 
+## RELIG62_bl_r2 Protestant                             0.02378 *  
+## RELIG62_bl_r3 Jewish                                 0.60713    
+## RELIG62_bl_r4 Other                                  0.07133 .  
+## RELIG62_bl_r5 Not religious                          0.00016 ***
+## TEENRACE_bl_white2 Not white                         0.00706 ** 
+## TEENSEX_bl2 Female                                   0.79501    
+## factor(AGECATS_bl)14                                 0.89871    
+## factor(AGECATS_bl)15                                 0.97892    
+## factor(AGECATS_bl)16                                 0.22483    
+## factor(AGECATS_bl)17                                 0.38614    
+## PIMPREL_bl_r2 Fairly or somewhat important           0.01108 *  
+## PIMPREL_bl_r3 Not very or not at all important       0.03446 *  
 ## FAITH1_r2 Somewhat important                         1.0e-05 ***
 ## FAITH1_r3 Not very or not at all important           &lt; 2e-16 ***
-## PRAYALON_bl_binary2 Never pray                       0.76383    
-## GRACE_bl2 No, don&#39;t say grace                        0.00056 ***
-## READBIBL_bl_binary2 Never read text                  0.00029 ***
-## year:RELIG62_bl_r2 Protestant                        0.49892    
-## year:RELIG62_bl_r3 Jewish                            0.81277    
-## year:RELIG62_bl_r4 Other                             0.72995    
-## year:RELIG62_bl_r5 Not religious                     0.45558    
-## year:TEENRACE_bl_white2 Not white                    0.12270    
-## year:TEENSEX_bl2 Female                              0.59424    
-## year:AGECATS_bl                                      0.63685    
-## year:PIMPREL_bl_r2 Fairly or somewhat important      0.91625    
-## year:PIMPREL_bl_r3 Not very or not at all important  0.41455    
+## PRAYALON_bl_binary2 Never pray                       0.81721    
+## GRACE_bl2 No, don&#39;t say grace                        0.00059 ***
+## READBIBL_bl_binary2 Never read text                  0.00025 ***
+## year:RELIG62_bl_r2 Protestant                        0.49632    
+## year:RELIG62_bl_r3 Jewish                            0.80915    
+## year:RELIG62_bl_r4 Other                             0.70045    
+## year:RELIG62_bl_r5 Not religious                     0.47010    
+## year:TEENRACE_bl_white2 Not white                    0.14059    
+## year:TEENSEX_bl2 Female                              0.61667    
+## year:factor(AGECATS_bl)14                            0.68263    
+## year:factor(AGECATS_bl)15                            0.31590    
+## year:factor(AGECATS_bl)16                            0.96363    
+## year:factor(AGECATS_bl)17                            0.79002    
+## year:PIMPREL_bl_r2 Fairly or somewhat important      0.87447    
+## year:PIMPREL_bl_r3 Not very or not at all important  0.38223    
 ## year:FAITH1_r2 Somewhat important                    2.5e-06 ***
-## year:FAITH1_r3 Not very or not at all important      2.1e-12 ***
-## year:PRAYALON_bl_binary2 Never pray                  0.79534    
-## year:GRACE_bl2 No, don&#39;t say grace                   0.24019    
-## year:READBIBL_bl_binary2 Never read text             0.15617    
+## year:FAITH1_r3 Not very or not at all important      1.5e-12 ***
+## year:PRAYALON_bl_binary2 Never pray                  0.75922    
+## year:GRACE_bl2 No, don&#39;t say grace                   0.24900    
+## year:READBIBL_bl_binary2 Never read text             0.14777    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -2976,7 +2989,7 @@ summary(marginal_all)</code></pre>
 ## Estimated Scale Parameters:
 ## 
 ##             Estimate Std.err
-## (Intercept)     0.98  0.0928
+## (Intercept)    0.978  0.0922
 ##   Link = identity 
 ## 
 ## Estimated Correlation Parameters:
@@ -3391,9 +3404,9 @@ height: 0px !important;
   </thead>
   <tbody class="gt_table_body">
     <tr><td headers="label" class="gt_row gt_left">year</td>
-<td headers="estimate" class="gt_row gt_center">-0.19</td>
-<td headers="conf.low" class="gt_row gt_center">-0.44, 0.06</td>
-<td headers="p.value" class="gt_row gt_center">0.13</td></tr>
+<td headers="estimate" class="gt_row gt_center">-0.12</td>
+<td headers="conf.low" class="gt_row gt_center">-0.21, -0.03</td>
+<td headers="p.value" class="gt_row gt_center">0.007</td></tr>
     <tr><td headers="label" class="gt_row gt_left">RELIG62_bl_r</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
 <td headers="conf.low" class="gt_row gt_center"><br /></td>
@@ -3405,18 +3418,18 @@ height: 0px !important;
     <tr><td headers="label" class="gt_row gt_left">    2 Protestant</td>
 <td headers="estimate" class="gt_row gt_center">-0.40</td>
 <td headers="conf.low" class="gt_row gt_center">-0.74, -0.05</td>
-<td headers="p.value" class="gt_row gt_center">0.023</td></tr>
+<td headers="p.value" class="gt_row gt_center">0.024</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    3 Jewish</td>
-<td headers="estimate" class="gt_row gt_center">0.18</td>
-<td headers="conf.low" class="gt_row gt_center">-0.54, 0.90</td>
+<td headers="estimate" class="gt_row gt_center">0.19</td>
+<td headers="conf.low" class="gt_row gt_center">-0.54, 0.92</td>
 <td headers="p.value" class="gt_row gt_center">0.6</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    4 Other</td>
 <td headers="estimate" class="gt_row gt_center">-0.80</td>
 <td headers="conf.low" class="gt_row gt_center">-1.7, 0.07</td>
-<td headers="p.value" class="gt_row gt_center">0.072</td></tr>
+<td headers="p.value" class="gt_row gt_center">0.071</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    5 Not religious</td>
 <td headers="estimate" class="gt_row gt_center">-1.1</td>
-<td headers="conf.low" class="gt_row gt_center">-1.7, -0.52</td>
+<td headers="conf.low" class="gt_row gt_center">-1.7, -0.53</td>
 <td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td headers="label" class="gt_row gt_left">TEENRACE_bl_white</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
@@ -3428,7 +3441,7 @@ height: 0px !important;
 <td headers="p.value" class="gt_row gt_center"><br /></td></tr>
     <tr><td headers="label" class="gt_row gt_left">    2 Not white</td>
 <td headers="estimate" class="gt_row gt_center">-0.41</td>
-<td headers="conf.low" class="gt_row gt_center">-0.71, -0.12</td>
+<td headers="conf.low" class="gt_row gt_center">-0.71, -0.11</td>
 <td headers="p.value" class="gt_row gt_center">0.007</td></tr>
     <tr><td headers="label" class="gt_row gt_left">TEENSEX_bl</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
@@ -3439,13 +3452,33 @@ height: 0px !important;
 <td headers="conf.low" class="gt_row gt_center">—</td>
 <td headers="p.value" class="gt_row gt_center"><br /></td></tr>
     <tr><td headers="label" class="gt_row gt_left">    2 Female</td>
-<td headers="estimate" class="gt_row gt_center">-0.03</td>
+<td headers="estimate" class="gt_row gt_center">-0.04</td>
 <td headers="conf.low" class="gt_row gt_center">-0.30, 0.23</td>
 <td headers="p.value" class="gt_row gt_center">0.8</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">AGECATS_bl</td>
-<td headers="estimate" class="gt_row gt_center">-0.07</td>
-<td headers="conf.low" class="gt_row gt_center">-0.16, 0.03</td>
+    <tr><td headers="label" class="gt_row gt_left">factor(AGECATS_bl)</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    13</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    14</td>
+<td headers="estimate" class="gt_row gt_center">0.03</td>
+<td headers="conf.low" class="gt_row gt_center">-0.40, 0.45</td>
+<td headers="p.value" class="gt_row gt_center">0.9</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    15</td>
+<td headers="estimate" class="gt_row gt_center">-0.01</td>
+<td headers="conf.low" class="gt_row gt_center">-0.42, 0.41</td>
+<td headers="p.value" class="gt_row gt_center">&gt;0.9</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    16</td>
+<td headers="estimate" class="gt_row gt_center">-0.26</td>
+<td headers="conf.low" class="gt_row gt_center">-0.69, 0.16</td>
 <td headers="p.value" class="gt_row gt_center">0.2</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    17</td>
+<td headers="estimate" class="gt_row gt_center">-0.19</td>
+<td headers="conf.low" class="gt_row gt_center">-0.62, 0.24</td>
+<td headers="p.value" class="gt_row gt_center">0.4</td></tr>
     <tr><td headers="label" class="gt_row gt_left">PIMPREL_bl_r</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
 <td headers="conf.low" class="gt_row gt_center"><br /></td>
@@ -3459,9 +3492,9 @@ height: 0px !important;
 <td headers="conf.low" class="gt_row gt_center">-0.78, -0.10</td>
 <td headers="p.value" class="gt_row gt_center">0.011</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    3 Not very or not at all important</td>
-<td headers="estimate" class="gt_row gt_center">-0.63</td>
-<td headers="conf.low" class="gt_row gt_center">-1.2, -0.04</td>
-<td headers="p.value" class="gt_row gt_center">0.037</td></tr>
+<td headers="estimate" class="gt_row gt_center">-0.64</td>
+<td headers="conf.low" class="gt_row gt_center">-1.2, -0.05</td>
+<td headers="p.value" class="gt_row gt_center">0.034</td></tr>
     <tr><td headers="label" class="gt_row gt_left">FAITH1_r</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
 <td headers="conf.low" class="gt_row gt_center"><br /></td>
@@ -3487,8 +3520,8 @@ height: 0px !important;
 <td headers="conf.low" class="gt_row gt_center">—</td>
 <td headers="p.value" class="gt_row gt_center"><br /></td></tr>
     <tr><td headers="label" class="gt_row gt_left">    2 Never pray</td>
-<td headers="estimate" class="gt_row gt_center">-0.08</td>
-<td headers="conf.low" class="gt_row gt_center">-0.57, 0.42</td>
+<td headers="estimate" class="gt_row gt_center">-0.06</td>
+<td headers="conf.low" class="gt_row gt_center">-0.55, 0.44</td>
 <td headers="p.value" class="gt_row gt_center">0.8</td></tr>
     <tr><td headers="label" class="gt_row gt_left">GRACE_bl</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
@@ -3499,7 +3532,7 @@ height: 0px !important;
 <td headers="conf.low" class="gt_row gt_center">—</td>
 <td headers="p.value" class="gt_row gt_center"><br /></td></tr>
     <tr><td headers="label" class="gt_row gt_left">    2 No, don&#39;t say grace</td>
-<td headers="estimate" class="gt_row gt_center">-0.51</td>
+<td headers="estimate" class="gt_row gt_center">-0.50</td>
 <td headers="conf.low" class="gt_row gt_center">-0.79, -0.22</td>
 <td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td headers="label" class="gt_row gt_left">READBIBL_bl_binary</td>
@@ -3511,7 +3544,7 @@ height: 0px !important;
 <td headers="conf.low" class="gt_row gt_center">—</td>
 <td headers="p.value" class="gt_row gt_center"><br /></td></tr>
     <tr><td headers="label" class="gt_row gt_left">    2 Never read text</td>
-<td headers="estimate" class="gt_row gt_center">-0.56</td>
+<td headers="estimate" class="gt_row gt_center">-0.57</td>
 <td headers="conf.low" class="gt_row gt_center">-0.87, -0.26</td>
 <td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td headers="label" class="gt_row gt_left">year * RELIG62_bl_r</td>
@@ -3523,16 +3556,16 @@ height: 0px !important;
 <td headers="conf.low" class="gt_row gt_center">-0.04, 0.08</td>
 <td headers="p.value" class="gt_row gt_center">0.5</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    year * 3 Jewish</td>
-<td headers="estimate" class="gt_row gt_center">-0.01</td>
+<td headers="estimate" class="gt_row gt_center">-0.02</td>
 <td headers="conf.low" class="gt_row gt_center">-0.14, 0.11</td>
 <td headers="p.value" class="gt_row gt_center">0.8</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    year * 4 Other</td>
-<td headers="estimate" class="gt_row gt_center">0.02</td>
+<td headers="estimate" class="gt_row gt_center">0.03</td>
 <td headers="conf.low" class="gt_row gt_center">-0.11, 0.16</td>
 <td headers="p.value" class="gt_row gt_center">0.7</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    year * 5 Not religious</td>
 <td headers="estimate" class="gt_row gt_center">0.04</td>
-<td headers="conf.low" class="gt_row gt_center">-0.07, 0.15</td>
+<td headers="conf.low" class="gt_row gt_center">-0.07, 0.14</td>
 <td headers="p.value" class="gt_row gt_center">0.5</td></tr>
     <tr><td headers="label" class="gt_row gt_left">year * TEENRACE_bl_white</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
@@ -3541,7 +3574,7 @@ height: 0px !important;
     <tr><td headers="label" class="gt_row gt_left">    year * 2 Not white</td>
 <td headers="estimate" class="gt_row gt_center">0.04</td>
 <td headers="conf.low" class="gt_row gt_center">-0.01, 0.09</td>
-<td headers="p.value" class="gt_row gt_center">0.12</td></tr>
+<td headers="p.value" class="gt_row gt_center">0.14</td></tr>
     <tr><td headers="label" class="gt_row gt_left">year * TEENSEX_bl</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
 <td headers="conf.low" class="gt_row gt_center"><br /></td>
@@ -3550,18 +3583,34 @@ height: 0px !important;
 <td headers="estimate" class="gt_row gt_center">-0.01</td>
 <td headers="conf.low" class="gt_row gt_center">-0.06, 0.03</td>
 <td headers="p.value" class="gt_row gt_center">0.6</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">year * AGECATS_bl</td>
+    <tr><td headers="label" class="gt_row gt_left">year * factor(AGECATS_bl)</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 14</td>
+<td headers="estimate" class="gt_row gt_center">-0.01</td>
+<td headers="conf.low" class="gt_row gt_center">-0.08, 0.06</td>
+<td headers="p.value" class="gt_row gt_center">0.7</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 15</td>
+<td headers="estimate" class="gt_row gt_center">-0.03</td>
+<td headers="conf.low" class="gt_row gt_center">-0.10, 0.03</td>
+<td headers="p.value" class="gt_row gt_center">0.3</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 16</td>
 <td headers="estimate" class="gt_row gt_center">0.00</td>
-<td headers="conf.low" class="gt_row gt_center">-0.01, 0.02</td>
-<td headers="p.value" class="gt_row gt_center">0.6</td></tr>
+<td headers="conf.low" class="gt_row gt_center">-0.07, 0.07</td>
+<td headers="p.value" class="gt_row gt_center">&gt;0.9</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 17</td>
+<td headers="estimate" class="gt_row gt_center">0.01</td>
+<td headers="conf.low" class="gt_row gt_center">-0.06, 0.08</td>
+<td headers="p.value" class="gt_row gt_center">0.8</td></tr>
     <tr><td headers="label" class="gt_row gt_left">year * PIMPREL_bl_r</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
 <td headers="conf.low" class="gt_row gt_center"><br /></td>
 <td headers="p.value" class="gt_row gt_center"><br /></td></tr>
     <tr><td headers="label" class="gt_row gt_left">    year * 2 Fairly or somewhat important</td>
 <td headers="estimate" class="gt_row gt_center">0.00</td>
-<td headers="conf.low" class="gt_row gt_center">-0.06, 0.06</td>
-<td headers="p.value" class="gt_row gt_center">&gt;0.9</td></tr>
+<td headers="conf.low" class="gt_row gt_center">-0.06, 0.05</td>
+<td headers="p.value" class="gt_row gt_center">0.9</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    year * 3 Not very or not at all important</td>
 <td headers="estimate" class="gt_row gt_center">0.05</td>
 <td headers="conf.low" class="gt_row gt_center">-0.06, 0.16</td>
@@ -3575,7 +3624,7 @@ height: 0px !important;
 <td headers="conf.low" class="gt_row gt_center">-0.17, -0.07</td>
 <td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    year * 3 Not very or not at all important</td>
-<td headers="estimate" class="gt_row gt_center">-0.26</td>
+<td headers="estimate" class="gt_row gt_center">-0.27</td>
 <td headers="conf.low" class="gt_row gt_center">-0.34, -0.19</td>
 <td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td headers="label" class="gt_row gt_left">year * PRAYALON_bl_binary</td>
@@ -3592,7 +3641,7 @@ height: 0px !important;
 <td headers="p.value" class="gt_row gt_center"><br /></td></tr>
     <tr><td headers="label" class="gt_row gt_left">    year * 2 No, don&#39;t say grace</td>
 <td headers="estimate" class="gt_row gt_center">0.03</td>
-<td headers="conf.low" class="gt_row gt_center">-0.02, 0.08</td>
+<td headers="conf.low" class="gt_row gt_center">-0.02, 0.07</td>
 <td headers="p.value" class="gt_row gt_center">0.2</td></tr>
     <tr><td headers="label" class="gt_row gt_left">year * READBIBL_bl_binary</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
@@ -3601,7 +3650,7 @@ height: 0px !important;
     <tr><td headers="label" class="gt_row gt_left">    year * 2 Never read text</td>
 <td headers="estimate" class="gt_row gt_center">0.04</td>
 <td headers="conf.low" class="gt_row gt_center">-0.01, 0.09</td>
-<td headers="p.value" class="gt_row gt_center">0.2</td></tr>
+<td headers="p.value" class="gt_row gt_center">0.15</td></tr>
   </tbody>
   
   <tfoot class="gt_footnotes">
@@ -4019,9 +4068,9 @@ height: 0px !important;
   </thead>
   <tbody class="gt_table_body">
     <tr><td headers="label" class="gt_row gt_left">year</td>
-<td headers="estimate" class="gt_row gt_center">0.83</td>
-<td headers="conf.low" class="gt_row gt_center">0.65, 1.06</td>
-<td headers="p.value" class="gt_row gt_center">0.13</td></tr>
+<td headers="estimate" class="gt_row gt_center">0.88</td>
+<td headers="conf.low" class="gt_row gt_center">0.81, 0.97</td>
+<td headers="p.value" class="gt_row gt_center">0.007</td></tr>
     <tr><td headers="label" class="gt_row gt_left">RELIG62_bl_r</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
 <td headers="conf.low" class="gt_row gt_center"><br /></td>
@@ -4033,15 +4082,15 @@ height: 0px !important;
     <tr><td headers="label" class="gt_row gt_left">    2 Protestant</td>
 <td headers="estimate" class="gt_row gt_center">0.67</td>
 <td headers="conf.low" class="gt_row gt_center">0.48, 0.95</td>
-<td headers="p.value" class="gt_row gt_center">0.023</td></tr>
+<td headers="p.value" class="gt_row gt_center">0.024</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    3 Jewish</td>
-<td headers="estimate" class="gt_row gt_center">1.20</td>
-<td headers="conf.low" class="gt_row gt_center">0.58, 2.46</td>
+<td headers="estimate" class="gt_row gt_center">1.21</td>
+<td headers="conf.low" class="gt_row gt_center">0.59, 2.50</td>
 <td headers="p.value" class="gt_row gt_center">0.6</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    4 Other</td>
 <td headers="estimate" class="gt_row gt_center">0.45</td>
 <td headers="conf.low" class="gt_row gt_center">0.19, 1.07</td>
-<td headers="p.value" class="gt_row gt_center">0.072</td></tr>
+<td headers="p.value" class="gt_row gt_center">0.071</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    5 Not religious</td>
 <td headers="estimate" class="gt_row gt_center">0.33</td>
 <td headers="conf.low" class="gt_row gt_center">0.19, 0.59</td>
@@ -4070,10 +4119,30 @@ height: 0px !important;
 <td headers="estimate" class="gt_row gt_center">0.97</td>
 <td headers="conf.low" class="gt_row gt_center">0.74, 1.26</td>
 <td headers="p.value" class="gt_row gt_center">0.8</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">AGECATS_bl</td>
-<td headers="estimate" class="gt_row gt_center">0.93</td>
-<td headers="conf.low" class="gt_row gt_center">0.85, 1.03</td>
+    <tr><td headers="label" class="gt_row gt_left">factor(AGECATS_bl)</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    13</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    14</td>
+<td headers="estimate" class="gt_row gt_center">1.03</td>
+<td headers="conf.low" class="gt_row gt_center">0.67, 1.57</td>
+<td headers="p.value" class="gt_row gt_center">0.9</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    15</td>
+<td headers="estimate" class="gt_row gt_center">0.99</td>
+<td headers="conf.low" class="gt_row gt_center">0.65, 1.51</td>
+<td headers="p.value" class="gt_row gt_center">&gt;0.9</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    16</td>
+<td headers="estimate" class="gt_row gt_center">0.77</td>
+<td headers="conf.low" class="gt_row gt_center">0.50, 1.18</td>
 <td headers="p.value" class="gt_row gt_center">0.2</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    17</td>
+<td headers="estimate" class="gt_row gt_center">0.83</td>
+<td headers="conf.low" class="gt_row gt_center">0.54, 1.27</td>
+<td headers="p.value" class="gt_row gt_center">0.4</td></tr>
     <tr><td headers="label" class="gt_row gt_left">PIMPREL_bl_r</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
 <td headers="conf.low" class="gt_row gt_center"><br /></td>
@@ -4088,8 +4157,8 @@ height: 0px !important;
 <td headers="p.value" class="gt_row gt_center">0.011</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    3 Not very or not at all important</td>
 <td headers="estimate" class="gt_row gt_center">0.53</td>
-<td headers="conf.low" class="gt_row gt_center">0.29, 0.96</td>
-<td headers="p.value" class="gt_row gt_center">0.037</td></tr>
+<td headers="conf.low" class="gt_row gt_center">0.29, 0.95</td>
+<td headers="p.value" class="gt_row gt_center">0.034</td></tr>
     <tr><td headers="label" class="gt_row gt_left">FAITH1_r</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
 <td headers="conf.low" class="gt_row gt_center"><br /></td>
@@ -4115,8 +4184,8 @@ height: 0px !important;
 <td headers="conf.low" class="gt_row gt_center">—</td>
 <td headers="p.value" class="gt_row gt_center"><br /></td></tr>
     <tr><td headers="label" class="gt_row gt_left">    2 Never pray</td>
-<td headers="estimate" class="gt_row gt_center">0.93</td>
-<td headers="conf.low" class="gt_row gt_center">0.57, 1.51</td>
+<td headers="estimate" class="gt_row gt_center">0.94</td>
+<td headers="conf.low" class="gt_row gt_center">0.58, 1.55</td>
 <td headers="p.value" class="gt_row gt_center">0.8</td></tr>
     <tr><td headers="label" class="gt_row gt_left">GRACE_bl</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
@@ -4128,7 +4197,7 @@ height: 0px !important;
 <td headers="p.value" class="gt_row gt_center"><br /></td></tr>
     <tr><td headers="label" class="gt_row gt_left">    2 No, don&#39;t say grace</td>
 <td headers="estimate" class="gt_row gt_center">0.60</td>
-<td headers="conf.low" class="gt_row gt_center">0.45, 0.80</td>
+<td headers="conf.low" class="gt_row gt_center">0.45, 0.81</td>
 <td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td headers="label" class="gt_row gt_left">READBIBL_bl_binary</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
@@ -4155,12 +4224,12 @@ height: 0px !important;
 <td headers="conf.low" class="gt_row gt_center">0.87, 1.11</td>
 <td headers="p.value" class="gt_row gt_center">0.8</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    year * 4 Other</td>
-<td headers="estimate" class="gt_row gt_center">1.02</td>
-<td headers="conf.low" class="gt_row gt_center">0.89, 1.17</td>
+<td headers="estimate" class="gt_row gt_center">1.03</td>
+<td headers="conf.low" class="gt_row gt_center">0.90, 1.17</td>
 <td headers="p.value" class="gt_row gt_center">0.7</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    year * 5 Not religious</td>
 <td headers="estimate" class="gt_row gt_center">1.04</td>
-<td headers="conf.low" class="gt_row gt_center">0.94, 1.16</td>
+<td headers="conf.low" class="gt_row gt_center">0.94, 1.15</td>
 <td headers="p.value" class="gt_row gt_center">0.5</td></tr>
     <tr><td headers="label" class="gt_row gt_left">year * TEENRACE_bl_white</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
@@ -4169,7 +4238,7 @@ height: 0px !important;
     <tr><td headers="label" class="gt_row gt_left">    year * 2 Not white</td>
 <td headers="estimate" class="gt_row gt_center">1.04</td>
 <td headers="conf.low" class="gt_row gt_center">0.99, 1.09</td>
-<td headers="p.value" class="gt_row gt_center">0.12</td></tr>
+<td headers="p.value" class="gt_row gt_center">0.14</td></tr>
     <tr><td headers="label" class="gt_row gt_left">year * TEENSEX_bl</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
 <td headers="conf.low" class="gt_row gt_center"><br /></td>
@@ -4178,10 +4247,26 @@ height: 0px !important;
 <td headers="estimate" class="gt_row gt_center">0.99</td>
 <td headers="conf.low" class="gt_row gt_center">0.95, 1.03</td>
 <td headers="p.value" class="gt_row gt_center">0.6</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">year * AGECATS_bl</td>
+    <tr><td headers="label" class="gt_row gt_left">year * factor(AGECATS_bl)</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 14</td>
+<td headers="estimate" class="gt_row gt_center">0.99</td>
+<td headers="conf.low" class="gt_row gt_center">0.92, 1.06</td>
+<td headers="p.value" class="gt_row gt_center">0.7</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 15</td>
+<td headers="estimate" class="gt_row gt_center">0.97</td>
+<td headers="conf.low" class="gt_row gt_center">0.90, 1.03</td>
+<td headers="p.value" class="gt_row gt_center">0.3</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 16</td>
 <td headers="estimate" class="gt_row gt_center">1.00</td>
-<td headers="conf.low" class="gt_row gt_center">0.99, 1.02</td>
-<td headers="p.value" class="gt_row gt_center">0.6</td></tr>
+<td headers="conf.low" class="gt_row gt_center">0.93, 1.07</td>
+<td headers="p.value" class="gt_row gt_center">&gt;0.9</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 17</td>
+<td headers="estimate" class="gt_row gt_center">1.01</td>
+<td headers="conf.low" class="gt_row gt_center">0.94, 1.08</td>
+<td headers="p.value" class="gt_row gt_center">0.8</td></tr>
     <tr><td headers="label" class="gt_row gt_left">year * PIMPREL_bl_r</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
 <td headers="conf.low" class="gt_row gt_center"><br /></td>
@@ -4189,7 +4274,7 @@ height: 0px !important;
     <tr><td headers="label" class="gt_row gt_left">    year * 2 Fairly or somewhat important</td>
 <td headers="estimate" class="gt_row gt_center">1.00</td>
 <td headers="conf.low" class="gt_row gt_center">0.94, 1.06</td>
-<td headers="p.value" class="gt_row gt_center">&gt;0.9</td></tr>
+<td headers="p.value" class="gt_row gt_center">0.9</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    year * 3 Not very or not at all important</td>
 <td headers="estimate" class="gt_row gt_center">1.05</td>
 <td headers="conf.low" class="gt_row gt_center">0.94, 1.17</td>
@@ -4212,7 +4297,7 @@ height: 0px !important;
 <td headers="p.value" class="gt_row gt_center"><br /></td></tr>
     <tr><td headers="label" class="gt_row gt_left">    year * 2 Never pray</td>
 <td headers="estimate" class="gt_row gt_center">0.99</td>
-<td headers="conf.low" class="gt_row gt_center">0.91, 1.08</td>
+<td headers="conf.low" class="gt_row gt_center">0.90, 1.08</td>
 <td headers="p.value" class="gt_row gt_center">0.8</td></tr>
     <tr><td headers="label" class="gt_row gt_left">year * GRACE_bl</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
@@ -4229,7 +4314,7 @@ height: 0px !important;
     <tr><td headers="label" class="gt_row gt_left">    year * 2 Never read text</td>
 <td headers="estimate" class="gt_row gt_center">1.04</td>
 <td headers="conf.low" class="gt_row gt_center">0.99, 1.09</td>
-<td headers="p.value" class="gt_row gt_center">0.2</td></tr>
+<td headers="p.value" class="gt_row gt_center">0.15</td></tr>
   </tbody>
   
   <tfoot class="gt_footnotes">
@@ -4241,7 +4326,7 @@ height: 0px !important;
 </div>
 <pre class="r"><code>marginal_sig &lt;- geeglm(ATTREG ~ year + RELIG62_bl_r + 
                            TEENRACE_bl_white +
-                         TEENSEX_bl + AGECATS_bl +
+                         TEENSEX_bl + factor(AGECATS_bl) +
                    PIMPREL_bl_r + 
                    FAITH1_r + GRACE_bl +
                    READBIBL_bl_binary + 
@@ -4255,47 +4340,53 @@ summary(marginal_sig)</code></pre>
 <pre><code>## 
 ## Call:
 ## geeglm(formula = ATTREG ~ year + RELIG62_bl_r + TEENRACE_bl_white + 
-##     TEENSEX_bl + AGECATS_bl + PIMPREL_bl_r + FAITH1_r + GRACE_bl + 
-##     READBIBL_bl_binary + FAITH1_r * year, family = binomial(&quot;logit&quot;), 
+##     TEENSEX_bl + factor(AGECATS_bl) + PIMPREL_bl_r + FAITH1_r + 
+##     GRACE_bl + READBIBL_bl_binary + FAITH1_r * year, family = binomial(&quot;logit&quot;), 
 ##     data = data, na.action = na.omit, id = IDS, corstr = &quot;exchangeable&quot;)
 ## 
 ##  Coefficients:
-##                                                 Estimate Std.err  Wald Pr(&gt;|W|)
-## (Intercept)                                       4.2253  0.4260 98.38  &lt; 2e-16
-## year                                             -0.0875  0.0196 19.97  7.9e-06
-## RELIG62_bl_r2 Protestant                         -0.2986  0.0956  9.76   0.0018
-## RELIG62_bl_r3 Jewish                              0.0895  0.1975  0.21   0.6504
-## RELIG62_bl_r4 Other                              -0.6784  0.2529  7.20   0.0073
-## RELIG62_bl_r5 Not religious                      -0.9255  0.1594 33.72  6.4e-09
-## TEENRACE_bl_white2 Not white                     -0.2085  0.0835  6.24   0.0125
-## TEENSEX_bl2 Female                               -0.0870  0.0738  1.39   0.2385
-## AGECATS_bl                                       -0.0500  0.0262  3.63   0.0566
-## PIMPREL_bl_r2 Fairly or somewhat important       -0.4512  0.0959 22.15  2.5e-06
-## PIMPREL_bl_r3 Not very or not at all important   -0.4163  0.1717  5.88   0.0153
-## FAITH1_r2 Somewhat important                     -0.7822  0.1680 21.68  3.2e-06
-## FAITH1_r3 Not very or not at all important       -1.8632  0.1904 95.77  &lt; 2e-16
-## GRACE_bl2 No, don&#39;t say grace                    -0.3605  0.0790 20.80  5.1e-06
-## READBIBL_bl_binary2 Never read text              -0.3956  0.0815 23.57  1.2e-06
-## year:FAITH1_r2 Somewhat important                -0.1204  0.0252 22.88  1.7e-06
-## year:FAITH1_r3 Not very or not at all important  -0.2580  0.0351 54.18  1.8e-13
-##                                                    
-## (Intercept)                                     ***
-## year                                            ***
-## RELIG62_bl_r2 Protestant                        ** 
-## RELIG62_bl_r3 Jewish                               
-## RELIG62_bl_r4 Other                             ** 
-## RELIG62_bl_r5 Not religious                     ***
-## TEENRACE_bl_white2 Not white                    *  
-## TEENSEX_bl2 Female                                 
-## AGECATS_bl                                      .  
-## PIMPREL_bl_r2 Fairly or somewhat important      ***
-## PIMPREL_bl_r3 Not very or not at all important  *  
-## FAITH1_r2 Somewhat important                    ***
-## FAITH1_r3 Not very or not at all important      ***
-## GRACE_bl2 No, don&#39;t say grace                   ***
-## READBIBL_bl_binary2 Never read text             ***
-## year:FAITH1_r2 Somewhat important               ***
-## year:FAITH1_r3 Not very or not at all important ***
+##                                                 Estimate Std.err   Wald
+## (Intercept)                                       3.6057  0.1824 390.95
+## year                                             -0.0874  0.0196  19.93
+## RELIG62_bl_r2 Protestant                         -0.2985  0.0955   9.77
+## RELIG62_bl_r3 Jewish                              0.0993  0.1985   0.25
+## RELIG62_bl_r4 Other                              -0.6707  0.2536   6.99
+## RELIG62_bl_r5 Not religious                      -0.9379  0.1597  34.49
+## TEENRACE_bl_white2 Not white                     -0.2141  0.0838   6.54
+## TEENSEX_bl2 Female                               -0.0836  0.0739   1.28
+## factor(AGECATS_bl)14                             -0.0441  0.1167   0.14
+## factor(AGECATS_bl)15                             -0.1865  0.1149   2.63
+## factor(AGECATS_bl)16                             -0.2592  0.1165   4.95
+## factor(AGECATS_bl)17                             -0.1379  0.1203   1.31
+## PIMPREL_bl_r2 Fairly or somewhat important       -0.4580  0.0960  22.76
+## PIMPREL_bl_r3 Not very or not at all important   -0.4093  0.1714   5.70
+## FAITH1_r2 Somewhat important                     -0.7811  0.1679  21.63
+## FAITH1_r3 Not very or not at all important       -1.8652  0.1907  95.66
+## GRACE_bl2 No, don&#39;t say grace                    -0.3609  0.0792  20.80
+## READBIBL_bl_binary2 Never read text              -0.3973  0.0815  23.76
+## year:FAITH1_r2 Somewhat important                -0.1206  0.0252  22.97
+## year:FAITH1_r3 Not very or not at all important  -0.2581  0.0351  54.06
+##                                                 Pr(&gt;|W|)    
+## (Intercept)                                      &lt; 2e-16 ***
+## year                                             8.0e-06 ***
+## RELIG62_bl_r2 Protestant                          0.0018 ** 
+## RELIG62_bl_r3 Jewish                              0.6168    
+## RELIG62_bl_r4 Other                               0.0082 ** 
+## RELIG62_bl_r5 Not religious                      4.3e-09 ***
+## TEENRACE_bl_white2 Not white                      0.0106 *  
+## TEENSEX_bl2 Female                                0.2579    
+## factor(AGECATS_bl)14                              0.7053    
+## factor(AGECATS_bl)15                              0.1048    
+## factor(AGECATS_bl)16                              0.0261 *  
+## factor(AGECATS_bl)17                              0.2518    
+## PIMPREL_bl_r2 Fairly or somewhat important       1.8e-06 ***
+## PIMPREL_bl_r3 Not very or not at all important    0.0170 *  
+## FAITH1_r2 Somewhat important                     3.3e-06 ***
+## FAITH1_r3 Not very or not at all important       &lt; 2e-16 ***
+## GRACE_bl2 No, don&#39;t say grace                    5.1e-06 ***
+## READBIBL_bl_binary2 Never read text              1.1e-06 ***
+## year:FAITH1_r2 Somewhat important                1.6e-06 ***
+## year:FAITH1_r3 Not very or not at all important  1.9e-13 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -4303,7 +4394,7 @@ summary(marginal_sig)</code></pre>
 ## Estimated Scale Parameters:
 ## 
 ##             Estimate Std.err
-## (Intercept)    0.983   0.094
+## (Intercept)     0.98  0.0927
 ##   Link = identity 
 ## 
 ## Estimated Correlation Parameters:
@@ -4734,16 +4825,16 @@ height: 0px !important;
 <td headers="conf.low" class="gt_row gt_center">-0.49, -0.11</td>
 <td headers="p.value" class="gt_row gt_center">0.002</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    3 Jewish</td>
-<td headers="estimate" class="gt_row gt_center">0.09</td>
-<td headers="conf.low" class="gt_row gt_center">-0.30, 0.48</td>
-<td headers="p.value" class="gt_row gt_center">0.7</td></tr>
+<td headers="estimate" class="gt_row gt_center">0.10</td>
+<td headers="conf.low" class="gt_row gt_center">-0.29, 0.49</td>
+<td headers="p.value" class="gt_row gt_center">0.6</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    4 Other</td>
-<td headers="estimate" class="gt_row gt_center">-0.68</td>
-<td headers="conf.low" class="gt_row gt_center">-1.2, -0.18</td>
-<td headers="p.value" class="gt_row gt_center">0.007</td></tr>
+<td headers="estimate" class="gt_row gt_center">-0.67</td>
+<td headers="conf.low" class="gt_row gt_center">-1.2, -0.17</td>
+<td headers="p.value" class="gt_row gt_center">0.008</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    5 Not religious</td>
-<td headers="estimate" class="gt_row gt_center">-0.93</td>
-<td headers="conf.low" class="gt_row gt_center">-1.2, -0.61</td>
+<td headers="estimate" class="gt_row gt_center">-0.94</td>
+<td headers="conf.low" class="gt_row gt_center">-1.3, -0.62</td>
 <td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td headers="label" class="gt_row gt_left">TEENRACE_bl_white</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
@@ -4755,8 +4846,8 @@ height: 0px !important;
 <td headers="p.value" class="gt_row gt_center"><br /></td></tr>
     <tr><td headers="label" class="gt_row gt_left">    2 Not white</td>
 <td headers="estimate" class="gt_row gt_center">-0.21</td>
-<td headers="conf.low" class="gt_row gt_center">-0.37, -0.04</td>
-<td headers="p.value" class="gt_row gt_center">0.013</td></tr>
+<td headers="conf.low" class="gt_row gt_center">-0.38, -0.05</td>
+<td headers="p.value" class="gt_row gt_center">0.011</td></tr>
     <tr><td headers="label" class="gt_row gt_left">TEENSEX_bl</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
 <td headers="conf.low" class="gt_row gt_center"><br /></td>
@@ -4766,13 +4857,33 @@ height: 0px !important;
 <td headers="conf.low" class="gt_row gt_center">—</td>
 <td headers="p.value" class="gt_row gt_center"><br /></td></tr>
     <tr><td headers="label" class="gt_row gt_left">    2 Female</td>
-<td headers="estimate" class="gt_row gt_center">-0.09</td>
+<td headers="estimate" class="gt_row gt_center">-0.08</td>
 <td headers="conf.low" class="gt_row gt_center">-0.23, 0.06</td>
-<td headers="p.value" class="gt_row gt_center">0.2</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">AGECATS_bl</td>
-<td headers="estimate" class="gt_row gt_center">-0.05</td>
-<td headers="conf.low" class="gt_row gt_center">-0.10, 0.00</td>
-<td headers="p.value" class="gt_row gt_center">0.057</td></tr>
+<td headers="p.value" class="gt_row gt_center">0.3</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">factor(AGECATS_bl)</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    13</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    14</td>
+<td headers="estimate" class="gt_row gt_center">-0.04</td>
+<td headers="conf.low" class="gt_row gt_center">-0.27, 0.18</td>
+<td headers="p.value" class="gt_row gt_center">0.7</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    15</td>
+<td headers="estimate" class="gt_row gt_center">-0.19</td>
+<td headers="conf.low" class="gt_row gt_center">-0.41, 0.04</td>
+<td headers="p.value" class="gt_row gt_center">0.10</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    16</td>
+<td headers="estimate" class="gt_row gt_center">-0.26</td>
+<td headers="conf.low" class="gt_row gt_center">-0.49, -0.03</td>
+<td headers="p.value" class="gt_row gt_center">0.026</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    17</td>
+<td headers="estimate" class="gt_row gt_center">-0.14</td>
+<td headers="conf.low" class="gt_row gt_center">-0.37, 0.10</td>
+<td headers="p.value" class="gt_row gt_center">0.3</td></tr>
     <tr><td headers="label" class="gt_row gt_left">PIMPREL_bl_r</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
 <td headers="conf.low" class="gt_row gt_center"><br /></td>
@@ -4782,13 +4893,13 @@ height: 0px !important;
 <td headers="conf.low" class="gt_row gt_center">—</td>
 <td headers="p.value" class="gt_row gt_center"><br /></td></tr>
     <tr><td headers="label" class="gt_row gt_left">    2 Fairly or somewhat important</td>
-<td headers="estimate" class="gt_row gt_center">-0.45</td>
-<td headers="conf.low" class="gt_row gt_center">-0.64, -0.26</td>
+<td headers="estimate" class="gt_row gt_center">-0.46</td>
+<td headers="conf.low" class="gt_row gt_center">-0.65, -0.27</td>
 <td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    3 Not very or not at all important</td>
-<td headers="estimate" class="gt_row gt_center">-0.42</td>
-<td headers="conf.low" class="gt_row gt_center">-0.75, -0.08</td>
-<td headers="p.value" class="gt_row gt_center">0.015</td></tr>
+<td headers="estimate" class="gt_row gt_center">-0.41</td>
+<td headers="conf.low" class="gt_row gt_center">-0.75, -0.07</td>
+<td headers="p.value" class="gt_row gt_center">0.017</td></tr>
     <tr><td headers="label" class="gt_row gt_left">FAITH1_r</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
 <td headers="conf.low" class="gt_row gt_center"><br /></td>
@@ -5274,15 +5385,15 @@ height: 0px !important;
 <td headers="conf.low" class="gt_row gt_center">0.62, 0.89</td>
 <td headers="p.value" class="gt_row gt_center">0.002</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    3 Jewish</td>
-<td headers="estimate" class="gt_row gt_center">1.09</td>
-<td headers="conf.low" class="gt_row gt_center">0.74, 1.61</td>
-<td headers="p.value" class="gt_row gt_center">0.7</td></tr>
+<td headers="estimate" class="gt_row gt_center">1.10</td>
+<td headers="conf.low" class="gt_row gt_center">0.75, 1.63</td>
+<td headers="p.value" class="gt_row gt_center">0.6</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    4 Other</td>
 <td headers="estimate" class="gt_row gt_center">0.51</td>
-<td headers="conf.low" class="gt_row gt_center">0.31, 0.83</td>
-<td headers="p.value" class="gt_row gt_center">0.007</td></tr>
+<td headers="conf.low" class="gt_row gt_center">0.31, 0.84</td>
+<td headers="p.value" class="gt_row gt_center">0.008</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    5 Not religious</td>
-<td headers="estimate" class="gt_row gt_center">0.40</td>
+<td headers="estimate" class="gt_row gt_center">0.39</td>
 <td headers="conf.low" class="gt_row gt_center">0.29, 0.54</td>
 <td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td headers="label" class="gt_row gt_left">TEENRACE_bl_white</td>
@@ -5295,8 +5406,8 @@ height: 0px !important;
 <td headers="p.value" class="gt_row gt_center"><br /></td></tr>
     <tr><td headers="label" class="gt_row gt_left">    2 Not white</td>
 <td headers="estimate" class="gt_row gt_center">0.81</td>
-<td headers="conf.low" class="gt_row gt_center">0.69, 0.96</td>
-<td headers="p.value" class="gt_row gt_center">0.013</td></tr>
+<td headers="conf.low" class="gt_row gt_center">0.69, 0.95</td>
+<td headers="p.value" class="gt_row gt_center">0.011</td></tr>
     <tr><td headers="label" class="gt_row gt_left">TEENSEX_bl</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
 <td headers="conf.low" class="gt_row gt_center"><br /></td>
@@ -5307,12 +5418,32 @@ height: 0px !important;
 <td headers="p.value" class="gt_row gt_center"><br /></td></tr>
     <tr><td headers="label" class="gt_row gt_left">    2 Female</td>
 <td headers="estimate" class="gt_row gt_center">0.92</td>
-<td headers="conf.low" class="gt_row gt_center">0.79, 1.06</td>
-<td headers="p.value" class="gt_row gt_center">0.2</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">AGECATS_bl</td>
-<td headers="estimate" class="gt_row gt_center">0.95</td>
-<td headers="conf.low" class="gt_row gt_center">0.90, 1.00</td>
-<td headers="p.value" class="gt_row gt_center">0.057</td></tr>
+<td headers="conf.low" class="gt_row gt_center">0.80, 1.06</td>
+<td headers="p.value" class="gt_row gt_center">0.3</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">factor(AGECATS_bl)</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    13</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    14</td>
+<td headers="estimate" class="gt_row gt_center">0.96</td>
+<td headers="conf.low" class="gt_row gt_center">0.76, 1.20</td>
+<td headers="p.value" class="gt_row gt_center">0.7</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    15</td>
+<td headers="estimate" class="gt_row gt_center">0.83</td>
+<td headers="conf.low" class="gt_row gt_center">0.66, 1.04</td>
+<td headers="p.value" class="gt_row gt_center">0.10</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    16</td>
+<td headers="estimate" class="gt_row gt_center">0.77</td>
+<td headers="conf.low" class="gt_row gt_center">0.61, 0.97</td>
+<td headers="p.value" class="gt_row gt_center">0.026</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    17</td>
+<td headers="estimate" class="gt_row gt_center">0.87</td>
+<td headers="conf.low" class="gt_row gt_center">0.69, 1.10</td>
+<td headers="p.value" class="gt_row gt_center">0.3</td></tr>
     <tr><td headers="label" class="gt_row gt_left">PIMPREL_bl_r</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
 <td headers="conf.low" class="gt_row gt_center"><br /></td>
@@ -5322,13 +5453,13 @@ height: 0px !important;
 <td headers="conf.low" class="gt_row gt_center">—</td>
 <td headers="p.value" class="gt_row gt_center"><br /></td></tr>
     <tr><td headers="label" class="gt_row gt_left">    2 Fairly or somewhat important</td>
-<td headers="estimate" class="gt_row gt_center">0.64</td>
-<td headers="conf.low" class="gt_row gt_center">0.53, 0.77</td>
+<td headers="estimate" class="gt_row gt_center">0.63</td>
+<td headers="conf.low" class="gt_row gt_center">0.52, 0.76</td>
 <td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    3 Not very or not at all important</td>
 <td headers="estimate" class="gt_row gt_center">0.66</td>
-<td headers="conf.low" class="gt_row gt_center">0.47, 0.92</td>
-<td headers="p.value" class="gt_row gt_center">0.015</td></tr>
+<td headers="conf.low" class="gt_row gt_center">0.47, 0.93</td>
+<td headers="p.value" class="gt_row gt_center">0.017</td></tr>
     <tr><td headers="label" class="gt_row gt_left">FAITH1_r</td>
 <td headers="estimate" class="gt_row gt_center"><br /></td>
 <td headers="conf.low" class="gt_row gt_center"><br /></td>
@@ -5342,7 +5473,7 @@ height: 0px !important;
 <td headers="conf.low" class="gt_row gt_center">0.33, 0.64</td>
 <td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    3 Not very or not at all important</td>
-<td headers="estimate" class="gt_row gt_center">0.16</td>
+<td headers="estimate" class="gt_row gt_center">0.15</td>
 <td headers="conf.low" class="gt_row gt_center">0.11, 0.23</td>
 <td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
     <tr><td headers="label" class="gt_row gt_left">GRACE_bl</td>
@@ -5390,6 +5521,1156 @@ height: 0px !important;
   </tfoot>
 </table>
 </div>
+<pre class="r"><code>QIC(marginal_sig)</code></pre>
+<pre><code>##       QIC      QICu Quasi Lik       CIC    params      QICC 
+##    4907.1    4904.8   -2432.4      21.2      20.0    4907.5</code></pre>
+<pre class="r"><code>marginal_sig_wo_grace_read &lt;- geeglm(ATTREG ~ year + RELIG62_bl_r + 
+                           TEENRACE_bl_white +
+                         TEENSEX_bl + factor(AGECATS_bl) +
+                   PIMPREL_bl_r + 
+                   FAITH1_r +
+                   FAITH1_r*year,
+                 data=data,
+                    id=IDS,
+                 family=binomial(&quot;logit&quot;),
+                 corstr = &quot;exchangeable&quot;,
+                 na.action=na.omit)
+summary(marginal_sig_wo_grace_read)</code></pre>
+<pre><code>## 
+## Call:
+## geeglm(formula = ATTREG ~ year + RELIG62_bl_r + TEENRACE_bl_white + 
+##     TEENSEX_bl + factor(AGECATS_bl) + PIMPREL_bl_r + FAITH1_r + 
+##     FAITH1_r * year, family = binomial(&quot;logit&quot;), data = data, 
+##     na.action = na.omit, id = IDS, corstr = &quot;exchangeable&quot;)
+## 
+##  Coefficients:
+##                                                 Estimate Std.err   Wald
+## (Intercept)                                       3.3565  0.1800 347.80
+## year                                             -0.0872  0.0196  19.85
+## RELIG62_bl_r2 Protestant                         -0.1688  0.0930   3.30
+## RELIG62_bl_r3 Jewish                             -0.0399  0.1952   0.04
+## RELIG62_bl_r4 Other                              -0.6701  0.2444   7.52
+## RELIG62_bl_r5 Not religious                      -0.9583  0.1589  36.35
+## TEENRACE_bl_white2 Not white                     -0.1912  0.0834   5.26
+## TEENSEX_bl2 Female                               -0.0989  0.0732   1.83
+## factor(AGECATS_bl)14                             -0.0974  0.1158   0.71
+## factor(AGECATS_bl)15                             -0.2233  0.1144   3.81
+## factor(AGECATS_bl)16                             -0.3064  0.1154   7.05
+## factor(AGECATS_bl)17                             -0.2035  0.1190   2.93
+## PIMPREL_bl_r2 Fairly or somewhat important       -0.5677  0.0932  37.10
+## PIMPREL_bl_r3 Not very or not at all important   -0.5401  0.1708  10.01
+## FAITH1_r2 Somewhat important                     -0.8787  0.1672  27.60
+## FAITH1_r3 Not very or not at all important       -2.0826  0.1869 124.12
+## year:FAITH1_r2 Somewhat important                -0.1177  0.0250  22.11
+## year:FAITH1_r3 Not very or not at all important  -0.2471  0.0348  50.56
+##                                                 Pr(&gt;|W|)    
+## (Intercept)                                      &lt; 2e-16 ***
+## year                                             8.4e-06 ***
+## RELIG62_bl_r2 Protestant                          0.0695 .  
+## RELIG62_bl_r3 Jewish                              0.8380    
+## RELIG62_bl_r4 Other                               0.0061 ** 
+## RELIG62_bl_r5 Not religious                      1.6e-09 ***
+## TEENRACE_bl_white2 Not white                      0.0218 *  
+## TEENSEX_bl2 Female                                0.1765    
+## factor(AGECATS_bl)14                              0.4003    
+## factor(AGECATS_bl)15                              0.0510 .  
+## factor(AGECATS_bl)16                              0.0079 ** 
+## factor(AGECATS_bl)17                              0.0872 .  
+## PIMPREL_bl_r2 Fairly or somewhat important       1.1e-09 ***
+## PIMPREL_bl_r3 Not very or not at all important    0.0016 ** 
+## FAITH1_r2 Somewhat important                     1.5e-07 ***
+## FAITH1_r3 Not very or not at all important       &lt; 2e-16 ***
+## year:FAITH1_r2 Somewhat important                2.6e-06 ***
+## year:FAITH1_r3 Not very or not at all important  1.2e-12 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation structure = exchangeable 
+## Estimated Scale Parameters:
+## 
+##             Estimate Std.err
+## (Intercept)    0.988  0.0893
+##   Link = identity 
+## 
+## Estimated Correlation Parameters:
+##       Estimate Std.err
+## alpha        0       0
+## Number of clusters:   5822  Maximum cluster size: 1</code></pre>
+<pre class="r"><code>marginal_sig_wo_grace_read %&gt;% tbl_regression()</code></pre>
+<div id="qwoalfiwbs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qwoalfiwbs table {
+font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+#qwoalfiwbs thead, #qwoalfiwbs tbody, #qwoalfiwbs tfoot, #qwoalfiwbs tr, #qwoalfiwbs td, #qwoalfiwbs th {
+border-style: none;
+}
+#qwoalfiwbs p {
+margin: 0;
+padding: 0;
+}
+#qwoalfiwbs .gt_table {
+display: table;
+border-collapse: collapse;
+line-height: normal;
+margin-left: auto;
+margin-right: auto;
+color: #333333;
+font-size: 16px;
+font-weight: normal;
+font-style: normal;
+background-color: #FFFFFF;
+width: auto;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #A8A8A8;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #A8A8A8;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+}
+#qwoalfiwbs .gt_caption {
+padding-top: 4px;
+padding-bottom: 4px;
+}
+#qwoalfiwbs .gt_title {
+color: #333333;
+font-size: 125%;
+font-weight: initial;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-color: #FFFFFF;
+border-bottom-width: 0;
+}
+#qwoalfiwbs .gt_subtitle {
+color: #333333;
+font-size: 85%;
+font-weight: initial;
+padding-top: 3px;
+padding-bottom: 5px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-color: #FFFFFF;
+border-top-width: 0;
+}
+#qwoalfiwbs .gt_heading {
+background-color: #FFFFFF;
+text-align: center;
+border-bottom-color: #FFFFFF;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#qwoalfiwbs .gt_bottom_border {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#qwoalfiwbs .gt_col_headings {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#qwoalfiwbs .gt_col_heading {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 6px;
+padding-left: 5px;
+padding-right: 5px;
+overflow-x: hidden;
+}
+#qwoalfiwbs .gt_column_spanner_outer {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+padding-top: 0;
+padding-bottom: 0;
+padding-left: 4px;
+padding-right: 4px;
+}
+#qwoalfiwbs .gt_column_spanner_outer:first-child {
+padding-left: 0;
+}
+#qwoalfiwbs .gt_column_spanner_outer:last-child {
+padding-right: 0;
+}
+#qwoalfiwbs .gt_column_spanner {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 5px;
+overflow-x: hidden;
+display: inline-block;
+width: 100%;
+}
+#qwoalfiwbs .gt_spanner_row {
+border-bottom-style: hidden;
+}
+#qwoalfiwbs .gt_group_heading {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+text-align: left;
+}
+#qwoalfiwbs .gt_empty_group_heading {
+padding: 0.5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: middle;
+}
+#qwoalfiwbs .gt_from_md > :first-child {
+margin-top: 0;
+}
+#qwoalfiwbs .gt_from_md > :last-child {
+margin-bottom: 0;
+}
+#qwoalfiwbs .gt_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+margin: 10px;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+overflow-x: hidden;
+}
+#qwoalfiwbs .gt_stub {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+}
+#qwoalfiwbs .gt_stub_row_group {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+vertical-align: top;
+}
+#qwoalfiwbs .gt_row_group_first td {
+border-top-width: 2px;
+}
+#qwoalfiwbs .gt_row_group_first th {
+border-top-width: 2px;
+}
+#qwoalfiwbs .gt_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#qwoalfiwbs .gt_first_summary_row {
+border-top-style: solid;
+border-top-color: #D3D3D3;
+}
+#qwoalfiwbs .gt_first_summary_row.thick {
+border-top-width: 2px;
+}
+#qwoalfiwbs .gt_last_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#qwoalfiwbs .gt_grand_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#qwoalfiwbs .gt_first_grand_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-style: double;
+border-top-width: 6px;
+border-top-color: #D3D3D3;
+}
+#qwoalfiwbs .gt_last_grand_summary_row_top {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: double;
+border-bottom-width: 6px;
+border-bottom-color: #D3D3D3;
+}
+#qwoalfiwbs .gt_striped {
+background-color: rgba(128, 128, 128, 0.05);
+}
+#qwoalfiwbs .gt_table_body {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#qwoalfiwbs .gt_footnotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#qwoalfiwbs .gt_footnote {
+margin: 0px;
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#qwoalfiwbs .gt_sourcenotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#qwoalfiwbs .gt_sourcenote {
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#qwoalfiwbs .gt_left {
+text-align: left;
+}
+#qwoalfiwbs .gt_center {
+text-align: center;
+}
+#qwoalfiwbs .gt_right {
+text-align: right;
+font-variant-numeric: tabular-nums;
+}
+#qwoalfiwbs .gt_font_normal {
+font-weight: normal;
+}
+#qwoalfiwbs .gt_font_bold {
+font-weight: bold;
+}
+#qwoalfiwbs .gt_font_italic {
+font-style: italic;
+}
+#qwoalfiwbs .gt_super {
+font-size: 65%;
+}
+#qwoalfiwbs .gt_footnote_marks {
+font-size: 75%;
+vertical-align: 0.4em;
+position: initial;
+}
+#qwoalfiwbs .gt_asterisk {
+font-size: 100%;
+vertical-align: 0;
+}
+#qwoalfiwbs .gt_indent_1 {
+text-indent: 5px;
+}
+#qwoalfiwbs .gt_indent_2 {
+text-indent: 10px;
+}
+#qwoalfiwbs .gt_indent_3 {
+text-indent: 15px;
+}
+#qwoalfiwbs .gt_indent_4 {
+text-indent: 20px;
+}
+#qwoalfiwbs .gt_indent_5 {
+text-indent: 25px;
+}
+#qwoalfiwbs .katex-display {
+display: inline-flex !important;
+margin-bottom: 0.75em !important;
+}
+#qwoalfiwbs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>log(OR)</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span class="gt_from_md"><strong>p-value</strong></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">year</td>
+<td headers="estimate" class="gt_row gt_center">-0.09</td>
+<td headers="conf.low" class="gt_row gt_center">-0.13, -0.05</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">RELIG62_bl_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Catholic</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Protestant</td>
+<td headers="estimate" class="gt_row gt_center">-0.17</td>
+<td headers="conf.low" class="gt_row gt_center">-0.35, 0.01</td>
+<td headers="p.value" class="gt_row gt_center">0.069</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    3 Jewish</td>
+<td headers="estimate" class="gt_row gt_center">-0.04</td>
+<td headers="conf.low" class="gt_row gt_center">-0.42, 0.34</td>
+<td headers="p.value" class="gt_row gt_center">0.8</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    4 Other</td>
+<td headers="estimate" class="gt_row gt_center">-0.67</td>
+<td headers="conf.low" class="gt_row gt_center">-1.1, -0.19</td>
+<td headers="p.value" class="gt_row gt_center">0.006</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    5 Not religious</td>
+<td headers="estimate" class="gt_row gt_center">-0.96</td>
+<td headers="conf.low" class="gt_row gt_center">-1.3, -0.65</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">TEENRACE_bl_white</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 White</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Not white</td>
+<td headers="estimate" class="gt_row gt_center">-0.19</td>
+<td headers="conf.low" class="gt_row gt_center">-0.35, -0.03</td>
+<td headers="p.value" class="gt_row gt_center">0.022</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">TEENSEX_bl</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Male</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Female</td>
+<td headers="estimate" class="gt_row gt_center">-0.10</td>
+<td headers="conf.low" class="gt_row gt_center">-0.24, 0.04</td>
+<td headers="p.value" class="gt_row gt_center">0.2</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">factor(AGECATS_bl)</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    13</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    14</td>
+<td headers="estimate" class="gt_row gt_center">-0.10</td>
+<td headers="conf.low" class="gt_row gt_center">-0.32, 0.13</td>
+<td headers="p.value" class="gt_row gt_center">0.4</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    15</td>
+<td headers="estimate" class="gt_row gt_center">-0.22</td>
+<td headers="conf.low" class="gt_row gt_center">-0.45, 0.00</td>
+<td headers="p.value" class="gt_row gt_center">0.051</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    16</td>
+<td headers="estimate" class="gt_row gt_center">-0.31</td>
+<td headers="conf.low" class="gt_row gt_center">-0.53, -0.08</td>
+<td headers="p.value" class="gt_row gt_center">0.008</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    17</td>
+<td headers="estimate" class="gt_row gt_center">-0.20</td>
+<td headers="conf.low" class="gt_row gt_center">-0.44, 0.03</td>
+<td headers="p.value" class="gt_row gt_center">0.087</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PIMPREL_bl_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Extremely or very important</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Fairly or somewhat important</td>
+<td headers="estimate" class="gt_row gt_center">-0.57</td>
+<td headers="conf.low" class="gt_row gt_center">-0.75, -0.39</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    3 Not very or not at all important</td>
+<td headers="estimate" class="gt_row gt_center">-0.54</td>
+<td headers="conf.low" class="gt_row gt_center">-0.87, -0.21</td>
+<td headers="p.value" class="gt_row gt_center">0.002</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">FAITH1_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Extremely or very important</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Somewhat important</td>
+<td headers="estimate" class="gt_row gt_center">-0.88</td>
+<td headers="conf.low" class="gt_row gt_center">-1.2, -0.55</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    3 Not very or not at all important</td>
+<td headers="estimate" class="gt_row gt_center">-2.1</td>
+<td headers="conf.low" class="gt_row gt_center">-2.4, -1.7</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">year * FAITH1_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 2 Somewhat important</td>
+<td headers="estimate" class="gt_row gt_center">-0.12</td>
+<td headers="conf.low" class="gt_row gt_center">-0.17, -0.07</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 3 Not very or not at all important</td>
+<td headers="estimate" class="gt_row gt_center">-0.25</td>
+<td headers="conf.low" class="gt_row gt_center">-0.32, -0.18</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">OR = Odds Ratio, CI = Confidence Interval</span></td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+<pre class="r"><code>marginal_sig_wo_grace_read %&gt;% tbl_regression(exponentiate = T)</code></pre>
+<div id="tcwalrqoji" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tcwalrqoji table {
+font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+#tcwalrqoji thead, #tcwalrqoji tbody, #tcwalrqoji tfoot, #tcwalrqoji tr, #tcwalrqoji td, #tcwalrqoji th {
+border-style: none;
+}
+#tcwalrqoji p {
+margin: 0;
+padding: 0;
+}
+#tcwalrqoji .gt_table {
+display: table;
+border-collapse: collapse;
+line-height: normal;
+margin-left: auto;
+margin-right: auto;
+color: #333333;
+font-size: 16px;
+font-weight: normal;
+font-style: normal;
+background-color: #FFFFFF;
+width: auto;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #A8A8A8;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #A8A8A8;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+}
+#tcwalrqoji .gt_caption {
+padding-top: 4px;
+padding-bottom: 4px;
+}
+#tcwalrqoji .gt_title {
+color: #333333;
+font-size: 125%;
+font-weight: initial;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-color: #FFFFFF;
+border-bottom-width: 0;
+}
+#tcwalrqoji .gt_subtitle {
+color: #333333;
+font-size: 85%;
+font-weight: initial;
+padding-top: 3px;
+padding-bottom: 5px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-color: #FFFFFF;
+border-top-width: 0;
+}
+#tcwalrqoji .gt_heading {
+background-color: #FFFFFF;
+text-align: center;
+border-bottom-color: #FFFFFF;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#tcwalrqoji .gt_bottom_border {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#tcwalrqoji .gt_col_headings {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#tcwalrqoji .gt_col_heading {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 6px;
+padding-left: 5px;
+padding-right: 5px;
+overflow-x: hidden;
+}
+#tcwalrqoji .gt_column_spanner_outer {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+padding-top: 0;
+padding-bottom: 0;
+padding-left: 4px;
+padding-right: 4px;
+}
+#tcwalrqoji .gt_column_spanner_outer:first-child {
+padding-left: 0;
+}
+#tcwalrqoji .gt_column_spanner_outer:last-child {
+padding-right: 0;
+}
+#tcwalrqoji .gt_column_spanner {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 5px;
+overflow-x: hidden;
+display: inline-block;
+width: 100%;
+}
+#tcwalrqoji .gt_spanner_row {
+border-bottom-style: hidden;
+}
+#tcwalrqoji .gt_group_heading {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+text-align: left;
+}
+#tcwalrqoji .gt_empty_group_heading {
+padding: 0.5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: middle;
+}
+#tcwalrqoji .gt_from_md > :first-child {
+margin-top: 0;
+}
+#tcwalrqoji .gt_from_md > :last-child {
+margin-bottom: 0;
+}
+#tcwalrqoji .gt_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+margin: 10px;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+overflow-x: hidden;
+}
+#tcwalrqoji .gt_stub {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+}
+#tcwalrqoji .gt_stub_row_group {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+vertical-align: top;
+}
+#tcwalrqoji .gt_row_group_first td {
+border-top-width: 2px;
+}
+#tcwalrqoji .gt_row_group_first th {
+border-top-width: 2px;
+}
+#tcwalrqoji .gt_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#tcwalrqoji .gt_first_summary_row {
+border-top-style: solid;
+border-top-color: #D3D3D3;
+}
+#tcwalrqoji .gt_first_summary_row.thick {
+border-top-width: 2px;
+}
+#tcwalrqoji .gt_last_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#tcwalrqoji .gt_grand_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#tcwalrqoji .gt_first_grand_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-style: double;
+border-top-width: 6px;
+border-top-color: #D3D3D3;
+}
+#tcwalrqoji .gt_last_grand_summary_row_top {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: double;
+border-bottom-width: 6px;
+border-bottom-color: #D3D3D3;
+}
+#tcwalrqoji .gt_striped {
+background-color: rgba(128, 128, 128, 0.05);
+}
+#tcwalrqoji .gt_table_body {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#tcwalrqoji .gt_footnotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#tcwalrqoji .gt_footnote {
+margin: 0px;
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#tcwalrqoji .gt_sourcenotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#tcwalrqoji .gt_sourcenote {
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#tcwalrqoji .gt_left {
+text-align: left;
+}
+#tcwalrqoji .gt_center {
+text-align: center;
+}
+#tcwalrqoji .gt_right {
+text-align: right;
+font-variant-numeric: tabular-nums;
+}
+#tcwalrqoji .gt_font_normal {
+font-weight: normal;
+}
+#tcwalrqoji .gt_font_bold {
+font-weight: bold;
+}
+#tcwalrqoji .gt_font_italic {
+font-style: italic;
+}
+#tcwalrqoji .gt_super {
+font-size: 65%;
+}
+#tcwalrqoji .gt_footnote_marks {
+font-size: 75%;
+vertical-align: 0.4em;
+position: initial;
+}
+#tcwalrqoji .gt_asterisk {
+font-size: 100%;
+vertical-align: 0;
+}
+#tcwalrqoji .gt_indent_1 {
+text-indent: 5px;
+}
+#tcwalrqoji .gt_indent_2 {
+text-indent: 10px;
+}
+#tcwalrqoji .gt_indent_3 {
+text-indent: 15px;
+}
+#tcwalrqoji .gt_indent_4 {
+text-indent: 20px;
+}
+#tcwalrqoji .gt_indent_5 {
+text-indent: 25px;
+}
+#tcwalrqoji .katex-display {
+display: inline-flex !important;
+margin-bottom: 0.75em !important;
+}
+#tcwalrqoji div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class="gt_from_md"><strong>Characteristic</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class="gt_from_md"><strong>OR</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class="gt_from_md"><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span class="gt_from_md"><strong>p-value</strong></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">year</td>
+<td headers="estimate" class="gt_row gt_center">0.92</td>
+<td headers="conf.low" class="gt_row gt_center">0.88, 0.95</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">RELIG62_bl_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Catholic</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Protestant</td>
+<td headers="estimate" class="gt_row gt_center">0.84</td>
+<td headers="conf.low" class="gt_row gt_center">0.70, 1.01</td>
+<td headers="p.value" class="gt_row gt_center">0.069</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    3 Jewish</td>
+<td headers="estimate" class="gt_row gt_center">0.96</td>
+<td headers="conf.low" class="gt_row gt_center">0.66, 1.41</td>
+<td headers="p.value" class="gt_row gt_center">0.8</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    4 Other</td>
+<td headers="estimate" class="gt_row gt_center">0.51</td>
+<td headers="conf.low" class="gt_row gt_center">0.32, 0.83</td>
+<td headers="p.value" class="gt_row gt_center">0.006</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    5 Not religious</td>
+<td headers="estimate" class="gt_row gt_center">0.38</td>
+<td headers="conf.low" class="gt_row gt_center">0.28, 0.52</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">TEENRACE_bl_white</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 White</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Not white</td>
+<td headers="estimate" class="gt_row gt_center">0.83</td>
+<td headers="conf.low" class="gt_row gt_center">0.70, 0.97</td>
+<td headers="p.value" class="gt_row gt_center">0.022</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">TEENSEX_bl</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Male</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Female</td>
+<td headers="estimate" class="gt_row gt_center">0.91</td>
+<td headers="conf.low" class="gt_row gt_center">0.78, 1.05</td>
+<td headers="p.value" class="gt_row gt_center">0.2</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">factor(AGECATS_bl)</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    13</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    14</td>
+<td headers="estimate" class="gt_row gt_center">0.91</td>
+<td headers="conf.low" class="gt_row gt_center">0.72, 1.14</td>
+<td headers="p.value" class="gt_row gt_center">0.4</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    15</td>
+<td headers="estimate" class="gt_row gt_center">0.80</td>
+<td headers="conf.low" class="gt_row gt_center">0.64, 1.00</td>
+<td headers="p.value" class="gt_row gt_center">0.051</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    16</td>
+<td headers="estimate" class="gt_row gt_center">0.74</td>
+<td headers="conf.low" class="gt_row gt_center">0.59, 0.92</td>
+<td headers="p.value" class="gt_row gt_center">0.008</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    17</td>
+<td headers="estimate" class="gt_row gt_center">0.82</td>
+<td headers="conf.low" class="gt_row gt_center">0.65, 1.03</td>
+<td headers="p.value" class="gt_row gt_center">0.087</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PIMPREL_bl_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Extremely or very important</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Fairly or somewhat important</td>
+<td headers="estimate" class="gt_row gt_center">0.57</td>
+<td headers="conf.low" class="gt_row gt_center">0.47, 0.68</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    3 Not very or not at all important</td>
+<td headers="estimate" class="gt_row gt_center">0.58</td>
+<td headers="conf.low" class="gt_row gt_center">0.42, 0.81</td>
+<td headers="p.value" class="gt_row gt_center">0.002</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">FAITH1_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1 Extremely or very important</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2 Somewhat important</td>
+<td headers="estimate" class="gt_row gt_center">0.42</td>
+<td headers="conf.low" class="gt_row gt_center">0.30, 0.58</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    3 Not very or not at all important</td>
+<td headers="estimate" class="gt_row gt_center">0.12</td>
+<td headers="conf.low" class="gt_row gt_center">0.09, 0.18</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">year * FAITH1_r</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 2 Somewhat important</td>
+<td headers="estimate" class="gt_row gt_center">0.89</td>
+<td headers="conf.low" class="gt_row gt_center">0.85, 0.93</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    year * 3 Not very or not at all important</td>
+<td headers="estimate" class="gt_row gt_center">0.78</td>
+<td headers="conf.low" class="gt_row gt_center">0.73, 0.84</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class="gt_from_md">OR = Odds Ratio, CI = Confidence Interval</span></td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+<pre class="r"><code>QIC(marginal_sig_wo_grace_read)</code></pre>
+<pre><code>##       QIC      QICu Quasi Lik       CIC    params      QICC 
+##    4955.4    4953.8   -2458.9      18.8      18.0    4955.7</code></pre>
 
 
 

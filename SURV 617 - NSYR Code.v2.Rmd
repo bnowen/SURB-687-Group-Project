@@ -1,7 +1,8 @@
 ---
-title: "SURV 617 Religion Data"
+title: "SURV 617 Final Project Code"
 output: html_document
-date: "2024-11-10"
+date: "2024-12-09"
+authors: "Molly Fisch-Friedman, Sean Johnson, and Brittany Owen"
 ---
 
 ```{r setup, include=FALSE}
@@ -590,6 +591,7 @@ marginal_all <- geeglm(ATTREG ~ year + RELIG62_bl_r + year*RELIG62_bl_r +
 summary(marginal_all)
 marginal_all %>% tbl_regression()
 marginal_all %>% tbl_regression(exponentiate = T)
+QIC(marginal_all)
 
 marginal_sig <- geeglm(ATTREG ~ year + RELIG62_bl_r + 
                            TEENRACE_bl_white +
